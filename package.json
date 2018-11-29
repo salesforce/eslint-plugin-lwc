@@ -1,0 +1,72 @@
+{
+  "name": "@lwc/eslint-plugin-lwc",
+  "version": "0.5.2",
+  "license": "MIT",
+  "description": "Official ESLint rules for LWC",
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "lwc",
+    "salesforce"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "format": "prettier --write --ignore-path .gitignore \"**/*.{js,md}\"",
+    "lint": "eslint lib/ test/",
+    "test": "nyc mocha"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.9.0",
+    "husky": "^1.1.4",
+    "lint-staged": "^8.0.4",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "prettier": "^1.15.2"
+  },
+  "peerDependencies": {
+    "eslint": ">=5.0.0",
+    "babel-eslint": ">=10.0.0"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/salesforce/eslint-plugin-lwc.git"
+  },  
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ],
+    "*.{js,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 95,
+    "statements": 95,
+    "functions": 95,
+    "reporter": [
+      "html",
+      "text"
+    ]
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}

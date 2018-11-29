@@ -1,0 +1,3 @@
+--recursive
+--reporter dot
+--slow 150
