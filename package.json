@@ -1,6 +1,6 @@
 {
   "name": "@lwc/eslint-plugin-lwc",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "license": "MIT",
   "description": "Official ESLint rules for LWC",
   "keywords": [
@@ -25,13 +25,13 @@
     "prettier": "^1.15.2"
   },
   "peerDependencies": {
-    "eslint": ">=5.0.0",
-    "babel-eslint": ">=10.0.0"
+    "babel-eslint": ">=10.0.0",
+    "eslint": ">=5.0.0"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/salesforce/eslint-plugin-lwc.git"
-  },  
+    "type": "git",
+    "url": "https://github.com/salesforce/eslint-plugin-lwc.git"
+  },
   "engines": {
     "node": ">=8.0.0"
   },
