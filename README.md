@@ -10,7 +10,7 @@ $ npm install eslint babel-eslint @lwc/eslint-plugin-lwc --save-dev
 
 ## Usage
 
-Add `lwc` to the `plugins` section of your configuration. Then configure the desire rules in the `rules` sections. Some of the syntax used in LWC components are not yet stage 4 (eg. decorators), and the out of the box parser from ESLint doesn't support those syntax yet. In order to parse the LWC files properly, it is required to set the `parser` field to `babel-eslint` for now.
+Add `lwc` to the `plugins` section of your configuration. Then configure the desire rules in the `rules` sections. Some of the syntax used in LWC components are not yet stage 4 (eg. decorators), and the out of the box parser from ESLint doesn't support this syntax yet. In order to parse the LWC files properly it is required to set the `parser` field to `babel-eslint`.
 
 Example of `.eslintrc`:
 
