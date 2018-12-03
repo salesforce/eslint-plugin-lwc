@@ -1,8 +1,8 @@
 # Restrict usage of `innerHTML` (no-inner-html)
 
-Usage of innerHTML poses a potential security concern and may allow malicious
-javascript to unintentionally execute. If setting plain text, use
-`Node.textContent`. If interacting with DOM nodes, use the native DOM APIs.
+Using of innerHTML poses a potential security concern and may allow malicious
+javascript to unintentionally execute. Instead, use
+`Node.textContent` to set plain text. To interact with DOM nodes, use the native DOM APIs.
 
 ## Rule details
 
