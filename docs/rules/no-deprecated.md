@@ -1,6 +1,6 @@
 # Disallow usage of deprecated LWC APIs (no-deprecated)
 
-Several methods and lifecycle hooks were deprecated between versions of LWC. This rule warns you if you try to use a deprecated method.
+This method of lifecycle hook is deprecated.
 
 ## Rule details
 

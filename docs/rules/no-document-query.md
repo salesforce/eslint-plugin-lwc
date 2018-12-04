@@ -1,6 +1,6 @@
 # Disallow DOM query at the document level (no-document-query)
 
-Querying the DOM at the `document` level is unsafe in LWC. When the native Shadow DOM is not enabled, querying the DOM from the `document` level will return all the matching nodes. LWC overrides selector methods to return a subset of the node depending on a target Shadow DOM. Because of the performance implications, LWC can't globally patch query methods. 
+Querying the DOM at the document level is unsafe in LWC because it returns all matching nodes. LWC doesn't use native Shadow DOM, it overrides selector methods. Because of the performance implications, LWC can't globally override query methods
 
 The following methods are restricted by this rule:
 

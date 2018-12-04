@@ -1,6 +1,6 @@
-# Disallow usage of the async-await syntax (no-async-await)
+# Disallow use of the async-await syntax (no-async-await)
 
-The [async-await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax was introduced in ECMAScript 2017. Since this syntax is invalid on older browsers, it needs to get transpiled down to ES5. Async-await gives the illusion of synchronicity while manipulating asynchronous primitives and can cause performance issues. Use a standard promise-chain instead.
+The [async-await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax was introduced in ES8. In old browsers, this syntax is transpiled down to ES5, which can cause performance issues if the code is executed many times. To ensure that code performs well even in old browsers, use a standard promise chain instead.
 
 
 ## Rule details
