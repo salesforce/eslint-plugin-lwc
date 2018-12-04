@@ -49,7 +49,7 @@ For more details about configuration please refer to the dedicated section in th
 
 ### Compat performance
 
-Older browsers like IE11 run LWC in compatibility mode. For more information about browser performance, please refer to [Supported Browsers](https://github.com/salesforce/eslint-plugin-lwc/pull/5#discussion_r238756228) in the Lightning Web Components Developer Guide.
+Older browsers like IE11 run LWC in compatibility mode. For more information about browser performance, please refer to [Supported Browsers](http://component-library-dev.herokuapp.com/docs/component-library/documentation/lwc/lwc.get_started_supported_browsers) in the Lightning Web Components Developer Guide.
 
 | Rule ID                                                    | Description                                 |
 | ---------------------------------------------------------- | ------------------------------------------- |
