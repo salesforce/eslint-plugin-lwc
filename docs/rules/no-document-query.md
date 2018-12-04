@@ -1,6 +1,6 @@
 # Disallow DOM query at the document level (no-document-query)
 
-Querying the DOM at the document level is unsafe in LWC because it returns all matching nodes. LWC doesn't use native Shadow DOM, it overrides selector methods. Because of the performance implications, LWC can't globally override query methods
+Querying the DOM at the document level is unsafe in LWC because these APIs don't yet follow Shadow DOM semantics and allow access to elements that should not be accessible. To future-proof your component, avoid using these APIs and instead use `this.querySelector` and `this.template.querySelector`. 
 
 The following methods are restricted by this rule:
 
