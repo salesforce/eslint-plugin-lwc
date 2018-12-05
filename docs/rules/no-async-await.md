@@ -2,7 +2,6 @@
 
 The [async-await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) syntax was introduced in ES8. In old browsers, this syntax is transpiled down to ES5, which can cause performance issues if the code is executed many times. To ensure that code performs well even in old browsers, use a standard promise chain instead.
 
-
 ## Rule details
 
 Example of **incorrect** code:
