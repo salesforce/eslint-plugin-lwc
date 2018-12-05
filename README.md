@@ -49,6 +49,8 @@ For more details about configuration please refer to the dedicated section in th
 
 ### Compat performance
 
+Older browsers like IE11 run LWC in compatibility mode. For more information about browser performance, please refer to [Supported Browsers](http://developer.salesforce.com/docs/component-library/documentation/lwc/lwc.get_started_supported_browsers) in the Lightning Web Components Developer Guide.
+
 | Rule ID                                                    | Description                                 |
 | ---------------------------------------------------------- | ------------------------------------------- |
 | [lwc/no-async-await](./docs/rules/no-async-await.md)       | disallow usage of the async-await syntax    |

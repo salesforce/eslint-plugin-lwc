@@ -1,6 +1,6 @@
 # Restrict usage of async operations (no-async-operation)
 
-In most of the cases, asynchronous operations are not necessary. The usage of asynchronous operations are often misused and exhibit most of the time a misunderstanding of the component life-cycle. On top of this async operations makes it harder to track page performance.
+Asynchronous operations make it difficult to track page performance. In most cases, you can use a lifecycle hook instead.
 
 ## Rule details
 
