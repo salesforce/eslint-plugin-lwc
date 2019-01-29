@@ -1,6 +1,6 @@
 # Validate that `key` property cannot be decorated with @api (valid-api)
 
-This rule checks whether `api` is applied to `key` property.
+The `key` property is special to LWC and is used internally during component lifecycle. As a result, when `key` is used as a public property, its value is never passed down from parent to a child which results in incorrect behavior. Refrain from decorating `key` with @api.
 
 ## Rule details
 

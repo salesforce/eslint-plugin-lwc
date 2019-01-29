@@ -14,7 +14,32 @@ const rule = require('../../../lib/rules/no-key-as-public-prop');
 const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 
 ruleTester.run('valid-api', rule, {
-    valid: [],
+    valid: [
+        {
+            code: `import { api } from 'lwc';
+            class Foo {
+                key;
+            }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+            class Foo {
+                key = {};
+            }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+            class Foo {
+                key = 1;
+            }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+            class Foo {
+                key = "";
+            }`,
+        },
+    ],
     invalid: [
         {
             code: `import { api } from 'lwc';
