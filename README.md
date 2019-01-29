@@ -32,13 +32,14 @@ For more details about configuration please refer to the dedicated section in th
 
 ### LWC
 
-| Rule ID                                                    | Description                              |
-| ---------------------------------------------------------- | ---------------------------------------- |
-| [lwc/no-deprecated](./docs/rules/no-deprecated.md)         | disallow usage of deprecated LWC APIs    |
-| [lwc/valid-api](./docs/rules/valid-api.md)                 | validate `api` decorator usage           |
-| [lwc/valid-track](./docs/rules/valid-track.md)             | validate `track` decorator usage         |
-| [lwc/valid-wire](./docs/rules/valid-wire.md)               | validate `wire` decorator usage          |
-| [lwc/no-document-query](./docs/rules/no-document-query.md) | Disallow DOM query at the document level |
+| Rule ID                                                            | Description                              |
+| ------------------------------------------------------------------ | ---------------------------------------- |
+| [lwc/no-deprecated](./docs/rules/no-deprecated.md)                 | disallow usage of deprecated LWC APIs    |
+| [lwc/valid-api](./docs/rules/valid-api.md)                         | validate `api` decorator usage           |
+| [lwc/valid-track](./docs/rules/valid-track.md)                     | validate `track` decorator usage         |
+| [lwc/valid-wire](./docs/rules/valid-wire.md)                       | validate `wire` decorator usage          |
+| [lwc/no-document-query](./docs/rules/no-document-query.md)         | Disallow DOM query at the document level |
+| [lwc/no-key-as-public-prop](./docs/rules/no-key-as-public-prop.md) | disallow @api on `key` property          |
 
 ### Best practices
 
