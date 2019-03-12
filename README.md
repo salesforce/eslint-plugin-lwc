@@ -32,28 +32,29 @@ For more details about configuration please refer to the dedicated section in th
 
 ### LWC
 
-| Rule ID                                                    | Description                              |
-| ---------------------------------------------------------- | ---------------------------------------- |
-| [lwc/no-deprecated](./docs/rules/no-deprecated.md)         | disallow usage of deprecated LWC APIs    |
-| [lwc/valid-api](./docs/rules/valid-api.md)                 | validate `api` decorator usage           |
-| [lwc/valid-track](./docs/rules/valid-track.md)             | validate `track` decorator usage         |
-| [lwc/valid-wire](./docs/rules/valid-wire.md)               | validate `wire` decorator usage          |
-| [lwc/no-document-query](./docs/rules/no-document-query.md) | Disallow DOM query at the document level |
+| Rule ID                                                                    | Description                                 | Fixable |
+| -------------------------------------------------------------------------- | ------------------------------------------- | ------- |
+| [lwc/no-deprecated](./docs/rules/no-deprecated.md)                         | disallow usage of deprecated LWC APIs       |         |
+| [lwc/valid-api](./docs/rules/valid-api.md)                                 | validate `api` decorator usage              |         |
+| [lwc/valid-track](./docs/rules/valid-track.md)                             | validate `track` decorator usage            |         |
+| [lwc/valid-wire](./docs/rules/valid-wire.md)                               | validate `wire` decorator usage             |         |
+| [lwc/no-document-query](./docs/rules/no-document-query.md)                 | Disallow DOM query at the document level    |         |
+| [lwc/consistent-component-name](./docs/rules/consistent-component-name.md) | ensure component class name match file name | 🔧      |
 
 ### Best practices
 
-| Rule ID                                                            | Description                        |
-| ------------------------------------------------------------------ | ---------------------------------- |
-| [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md) | disallow duplicate class members   |
-| [lwc/no-inner-html](./docs/rules/no-inner-html.md)                 | disallow usage of `innerHTML`      |
-| [lwc/no-async-operation](./docs/rules/no-async-operation.md)       | restrict usage of async operations |
+| Rule ID                                                            | Description                        | Fixable |
+| ------------------------------------------------------------------ | ---------------------------------- | ------- |
+| [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md) | disallow duplicate class members   |         |
+| [lwc/no-inner-html](./docs/rules/no-inner-html.md)                 | disallow usage of `innerHTML`      |         |
+| [lwc/no-async-operation](./docs/rules/no-async-operation.md)       | restrict usage of async operations |         |
 
 ### Compat performance
 
 Older browsers like IE11 run LWC in compatibility mode. For more information about browser performance, please refer to [Supported Browsers](http://developer.salesforce.com/docs/component-library/documentation/lwc/lwc.get_started_supported_browsers) in the Lightning Web Components Developer Guide.
 
-| Rule ID                                                    | Description                                 |
-| ---------------------------------------------------------- | ------------------------------------------- |
-| [lwc/no-async-await](./docs/rules/no-async-await.md)       | disallow usage of the async-await syntax    |
-| [lwc/no-for-of](./docs/rules/no-for-of.md)                 | disallow usage of the for-of syntax         |
-| [lwc/no-rest-parameter](./docs/rules/no-rest-parameter.md) | disallow usage of the rest parameter syntax |
+| Rule ID                                                    | Description                                 | Fixable |
+| ---------------------------------------------------------- | ------------------------------------------- | ------- |
+| [lwc/no-async-await](./docs/rules/no-async-await.md)       | disallow usage of the async-await syntax    |         |
+| [lwc/no-for-of](./docs/rules/no-for-of.md)                 | disallow usage of the for-of syntax         |         |
+| [lwc/no-rest-parameter](./docs/rules/no-rest-parameter.md) | disallow usage of the rest parameter syntax |         |
