@@ -42,10 +42,11 @@ For more details about configuration please refer to the dedicated section in th
 
 ### Best practices
 
-| Rule ID                                                      | Description                        |
-| ------------------------------------------------------------ | ---------------------------------- |
-| [lwc/no-inner-html](./docs/rules/no-inner-html.md)           | disallow usage of `innerHTML`      |
-| [lwc/no-async-operation](./docs/rules/no-async-operation.md) | restrict usage of async operations |
+| Rule ID                                                            | Description                        |
+| ------------------------------------------------------------------ | ---------------------------------- |
+| [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md) | disallow duplicate class members   |
+| [lwc/no-inner-html](./docs/rules/no-inner-html.md)                 | disallow usage of `innerHTML`      |
+| [lwc/no-async-operation](./docs/rules/no-async-operation.md)       | restrict usage of async operations |
 
 ### Compat performance
 
