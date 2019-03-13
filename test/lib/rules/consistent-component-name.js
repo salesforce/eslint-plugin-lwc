@@ -51,7 +51,7 @@ ruleTester.run('consistent-class-name', rule, {
         },
         {
             code: `export default class ComplexName extends LightningElement {}`,
-            filename: 'SuperComplexName.js',
+            filename: 'superComplexName.js',
             errors: [
                 {
                     column: 16,
@@ -60,6 +60,18 @@ ruleTester.run('consistent-class-name', rule, {
                 },
             ],
             output: 'export default class SuperComplexName extends LightningElement {}',
+        },
+        {
+            code: `export default class complexName extends LightningElement {}`,
+            filename: 'complexName.js',
+            errors: [
+                {
+                    column: 16,
+                    type: 'ClassDeclaration',
+                    message: 'Lightning component class should be named "ComplexName".',
+                },
+            ],
+            output: 'export default class ComplexName extends LightningElement {}',
         },
     ],
 });
