@@ -32,15 +32,15 @@ For more details about configuration please refer to the dedicated section in th
 
 ### LWC
 
-| Rule ID                                                                                      | Description                                                       | Fixable |
-| -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------- |
-| [lwc/no-deprecated](./docs/rules/no-deprecated.md)                                           | disallow usage of deprecated LWC APIs                             |         |
-| [lwc/valid-api](./docs/rules/valid-api.md)                                                   | validate `api` decorator usage                                    |         |
-| [lwc/valid-track](./docs/rules/valid-track.md)                                               | validate `track` decorator usage                                  |         |
-| [lwc/valid-wire](./docs/rules/valid-wire.md)                                                 | validate `wire` decorator usage                                   |         |
-| [lwc/no-document-query](./docs/rules/no-document-query.md)                                   | Disallow DOM query at the document level                          |         |
-| [lwc/consistent-component-name](./docs/rules/consistent-component-name.md)                   | ensure component class name matches file name                     | 🔧      |
-| [lwc/no-leading-uppercase-char-api-name](./docs/rules/no-leading-uppercase-char-api-name.md) | ensure public property doesn't start with an upper-case character |         |
+| Rule ID                                                                            | Description                                                       | Fixable |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------- |
+| [lwc/no-deprecated](./docs/rules/no-deprecated.md)                                 | disallow usage of deprecated LWC APIs                             |         |
+| [lwc/valid-api](./docs/rules/valid-api.md)                                         | validate `api` decorator usage                                    |         |
+| [lwc/valid-track](./docs/rules/valid-track.md)                                     | validate `track` decorator usage                                  |         |
+| [lwc/valid-wire](./docs/rules/valid-wire.md)                                       | validate `wire` decorator usage                                   |         |
+| [lwc/no-document-query](./docs/rules/no-document-query.md)                         | Disallow DOM query at the document level                          |         |
+| [lwc/consistent-component-name](./docs/rules/consistent-component-name.md)         | ensure component class name matches file name                     | 🔧      |
+| [lwc/no-leading-uppercase-api-name](./docs/rules/no-leading-uppercase-api-name.md) | ensure public property doesn't start with an upper-case character |         |
 
 ### Best practices
 

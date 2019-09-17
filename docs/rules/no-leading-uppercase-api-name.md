@@ -1,4 +1,4 @@
-# Validate property syntax to ensure it doesn't start with an upper-case character (no-leading-uppercase-char-api-name)
+# Validate property syntax to ensure it doesn't start with an upper-case character (no-leading-uppercase-api-name)
 
 This rule ensures that a public property doesn't start with an upper-case character.
 

@@ -9,11 +9,11 @@
 const { RuleTester } = require('eslint');
 
 const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-leading-uppercase-char-api-name');
+const rule = require('../../../lib/rules/no-leading-uppercase-api-name');
 
 const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 
-ruleTester.run('no-leading-uppercase-char-api-name', rule, {
+ruleTester.run('no-leading-uppercase-api-name', rule, {
     valid: [
         {
             code: `import { api } from 'lwc';
