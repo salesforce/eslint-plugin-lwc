@@ -10,7 +10,7 @@ const { RuleTester } = require('eslint');
 const rule = require('../../../lib/rules/no-rest-parameter');
 
 const config = {
-    parser: 'babel-eslint',
+    parser: require.resolve('babel-eslint'),
     parserOptions: {
         ecmaVersion: 7,
         sourceType: 'module',
