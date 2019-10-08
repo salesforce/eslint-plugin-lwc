@@ -7,17 +7,11 @@
 'use strict';
 
 const { RuleTester } = require('eslint');
+
+const { ESLINT_TEST_CONFIG } = require('../shared');
 const rule = require('../../../lib/rules/no-rest-parameter');
 
-const config = {
-    parser: require.resolve('babel-eslint'),
-    parserOptions: {
-        ecmaVersion: 7,
-        sourceType: 'module',
-    },
-};
-
-const ruleTester = new RuleTester(config);
+const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 
 ruleTester.run('no-rest-parameter', rule, {
     valid: [
