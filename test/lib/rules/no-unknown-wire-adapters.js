@@ -55,6 +55,20 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
         },
         {
             code: `import { wire } from 'lwc';
+            import { getFoo as getBar } from 'adapter';
+
+            class Test {
+                @wire(getBar)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: 'adapter', identifier: 'getFoo' }],
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
             import getFoo from 'adapter';
 
             class Test {
