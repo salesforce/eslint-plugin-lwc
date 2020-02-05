@@ -41,6 +41,7 @@ For more details about configuration please refer to the dedicated section in th
 | [lwc/no-document-query](./docs/rules/no-document-query.md)                         | Disallow DOM query at the document level                          |         |
 | [lwc/consistent-component-name](./docs/rules/consistent-component-name.md)         | ensure component class name matches file name                     | 🔧      |
 | [lwc/no-leading-uppercase-api-name](./docs/rules/no-leading-uppercase-api-name.md) | ensure public property doesn't start with an upper-case character |         |
+| [lwc/no-unknown-wire-adapters](./docs/rules/no-unknown-wire-adapters.md)           | TODO                                                              |         |
 
 ### Best practices
 
