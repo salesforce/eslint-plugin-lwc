@@ -38,6 +38,7 @@ For more details about configuration please refer to the dedicated section in th
 | [lwc/no-deprecated](./docs/rules/no-deprecated.md)                                 | disallow usage of deprecated LWC APIs                             |         |
 | [lwc/no-document-query](./docs/rules/no-document-query.md)                         | disallow DOM query at the document level                          |         |
 | [lwc/no-leading-uppercase-api-name](./docs/rules/no-leading-uppercase-api-name.md) | ensure public property doesn't start with an upper-case character |         |
+| [lwc/no-unexpected-wire-adapter-usages](./docs/rules/no-unexpected-wire-adapter-usages.md) | TODO                                                              |         |
 | [lwc/no-unknown-wire-adapters](./docs/rules/no-unknown-wire-adapters.md)           | disallow usage of unknown wire adapters                           |         |
 | [lwc/valid-api](./docs/rules/valid-api.md)                                         | validate `api` decorator usage                                    |         |
 | [lwc/valid-track](./docs/rules/valid-track.md)                                     | validate `track` decorator usage                                  |         |

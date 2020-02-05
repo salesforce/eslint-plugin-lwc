@@ -9,11 +9,11 @@
 const { RuleTester } = require('eslint');
 
 const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-rest-parameter');
+const rule = require('../../../lib/rules/no-unexpected-wire-adapter-usages');
 
 const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 
-ruleTester.run('no-unexpected-wire-adapter-usage', rule, {
+ruleTester.run('no-unexpected-wire-adapter-usages', rule, {
     valid: [
         {
             code: `import { wire } from 'lwc';
@@ -57,8 +57,32 @@ ruleTester.run('no-unexpected-wire-adapter-usage', rule, {
                 },
             ],
         },
+        {
+            code: `import { getBar } from 'adapter';
+            getBar();`,
+            options: [
+                {
+                    adapters: [{ module: 'adapter', identifier: 'getFoo' }],
+                },
+            ],
+        },
     ],
     invalid: [
+        {
+            code: `import { getFoo } from 'adapter';
+            getFoo();`,
+            options: [
+                {
+                    adapters: [{ module: 'adapter', identifier: 'getFoo' }],
+                },
+            ],
+            errors: [
+                {
+                    message:
+                        '"getFoo" is a wire adapter and can only be used via the @wire decorator.',
+                },
+            ],
+        },
         {
             code: `import { getFoo } from 'adapter';
             const getBar = getFoo;`,
@@ -69,7 +93,8 @@ ruleTester.run('no-unexpected-wire-adapter-usage', rule, {
             ],
             errors: [
                 {
-                    message: 'TODO',
+                    message:
+                        '"getFoo" is a wire adapter and can only be used via the @wire decorator.',
                 },
             ],
         },
@@ -83,7 +108,8 @@ ruleTester.run('no-unexpected-wire-adapter-usage', rule, {
             ],
             errors: [
                 {
-                    message: 'TODO',
+                    message:
+                        '"getFoo" is a wire adapter and can only be used via the @wire decorator.',
                 },
             ],
         },
@@ -97,7 +123,8 @@ ruleTester.run('no-unexpected-wire-adapter-usage', rule, {
             ],
             errors: [
                 {
-                    message: 'TODO',
+                    message:
+                        '"getFoo" is a wire adapter and can only be used via the @wire decorator.',
                 },
             ],
         },
@@ -111,7 +138,8 @@ ruleTester.run('no-unexpected-wire-adapter-usage', rule, {
             ],
             errors: [
                 {
-                    message: 'TODO',
+                    message:
+                        '"getFoo" is a wire adapter and can only be used via the @wire decorator.',
                 },
             ],
         },
@@ -130,33 +158,8 @@ ruleTester.run('no-unexpected-wire-adapter-usage', rule, {
             ],
             errors: [
                 {
-                    message: 'TODO',
-                },
-            ],
-        },
-        {
-            code: `export { getFoo } from 'adapter';`,
-            options: [
-                {
-                    adapters: [{ module: 'adapter', identifier: 'getFoo' }],
-                },
-            ],
-            errors: [
-                {
-                    message: 'TODO',
-                },
-            ],
-        },
-        {
-            code: `export { default } from 'adapter';`,
-            options: [
-                {
-                    adapters: [{ module: 'adapter', identifier: 'default' }],
-                },
-            ],
-            errors: [
-                {
-                    message: 'TODO',
+                    message:
+                        '"getFoo" is a wire adapter and can only be used via the @wire decorator.',
                 },
             ],
         },
