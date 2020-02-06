@@ -66,6 +66,16 @@ ruleTester.run('no-unexpected-wire-adapter-usages', rule, {
                 },
             ],
         },
+        {
+            // Caveat: namespace imports
+            code: `import * as adapters from 'adapter';
+            adapters.getFoo();`,
+            options: [
+                {
+                    adapters: [{ module: 'adapter', identifier: 'getFoo' }],
+                },
+            ],
+        },
     ],
     invalid: [
         {
@@ -100,7 +110,7 @@ ruleTester.run('no-unexpected-wire-adapter-usages', rule, {
         },
         {
             code: `import { getFoo } from 'adapter';
-            method(getFoo);`,
+            wire(getFoo);`,
             options: [
                 {
                     adapters: [{ module: 'adapter', identifier: 'getFoo' }],
@@ -148,7 +158,7 @@ ruleTester.run('no-unexpected-wire-adapter-usages', rule, {
             import { getFoo } from 'adapter';
 
             class Test {
-                @wire(getFoo, getFoo)
+                @wire({}, getFoo)
                 wiredProp;
             }`,
             options: [
