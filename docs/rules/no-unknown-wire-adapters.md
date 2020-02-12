@@ -4,7 +4,7 @@ This rule offers a way to restrict the usage of unexpected wire adapters. It can
 
 ## Rule details
 
-This rule can be configured as followed:
+This rule can be configured as follows:
 
 ```js
 {
