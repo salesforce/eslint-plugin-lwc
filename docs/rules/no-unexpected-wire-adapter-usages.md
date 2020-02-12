@@ -1,10 +1,10 @@
 ## Enforce wire adapters to be used with `wire` decorator (no-unexpected-wire-adapter-usages)
 
-This rule offers a way to enforce that wire adapters are using along with `wire` decorator. This prevents for example wire adapter: imperative invocation, reassignment, ...
+This rule offers a way to enforce that wire adapters are only used in the `wire` decorator. It prevents imperative invocation, reassignment, and so on.
 
 ### Rule details
 
-This rule can be configured as followed:
+This rule can be configured as follows:
 
 ```js
 {
