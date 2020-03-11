@@ -33,7 +33,7 @@ function buildCases({ targets, methods, handlers }) {
 const basicValidCases = buildCases({
     targets: [null, 'document', 'window'],
     methods: ['addEventListener', 'removeEventListener'],
-    handlers: ['', 'handleTest', 'this.handleTest', "getListener('test')"],
+    handlers: ['', 'undefined', 'null', 'handleTest', 'this.handleTest', "getListener('test')"],
 });
 
 const basicInvalidCases = buildCases({
