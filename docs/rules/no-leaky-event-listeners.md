@@ -1,6 +1,6 @@
 ## Prevent event listeners from leaking memory (no-leaky-event-listeners)
 
-It is extremely easy to leak event listeners. In most of the cases, not only the event handler leaks, but also all the object capture into closure. This rules prevents common patterns associated with event listener leaking.
+It is extremely easy to leak event listeners. In most of the cases the event handler leaks as well as all the objects captured in the closure. This rules prevents common patterns associated with event listener leaking.
 
 ### Rule details
 
@@ -24,7 +24,7 @@ export default class Test extends LightningElement {
 }
 ```
 
-In the code above the event listener will leak because invoking `Function.prototype.bind()` on a method returns a new method with a bound `this` value. Since the component doesn't have a reference to the newly created function, the added event listener can't be removed later on. In this case, since the `this` value is trapped into the generated function, each newly created component will be kept in memory.
+In the code above the event listener will leak because invoking `Function.prototype.bind()` on a method returns a new method. Since the component doesn't have a reference to the newly created function, the added event listener can't be subsequently removed. Also, the `this` value is closured into the generated function so the component is kept in memory.
 
 Example of **correct** code:
 
@@ -44,4 +44,4 @@ export default class Test extends LightningElement {
 }
 ```
 
-In the example above we were able to get rid of the `Function.prototype.bind()` by using a class field associated with an arrow function. The `this` value uses in the arrow function body will always be the component instance.
+In the example above we were able to get rid of the `Function.prototype.bind()` by using a class field associated with an arrow function. The `this` value used in the arrow function body will always be the component instance.
