@@ -13,7 +13,17 @@ const rule = require('../../../lib/rules/no-leaky-event-listeners');
 
 const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 
-function buildCases({ targets, methods, handlers }) {
+function buildCases({ handlers }) {
+    const targets = [
+        null,
+        'document',
+        'window',
+        'document.body',
+        'document.querySelector("#modal")',
+        'document.body.children[0]',
+    ];
+    const methods = ['addEventListener', 'removeEventListener'];
+
     const cases = [];
 
     for (const target of targets) {
@@ -31,14 +41,10 @@ function buildCases({ targets, methods, handlers }) {
 }
 
 const basicValidCases = buildCases({
-    targets: [null, 'document', 'window'],
-    methods: ['addEventListener', 'removeEventListener'],
     handlers: ['', 'undefined', 'null', 'handleTest', 'this.handleTest', "getListener('test')"],
 });
 
 const basicInvalidCases = buildCases({
-    targets: [null, 'document', 'window'],
-    methods: ['addEventListener', 'removeEventListener'],
     handlers: ['function() { return handleTest(); }', '() => handleTest', 'handleTest.bind(this)'],
 }).map(entry => {
     return {
@@ -69,10 +75,20 @@ ruleTester.run('no-leaky-event-listeners', rule, {
             `,
         },
 
-        // Unknown EventTarget.
+        // Unknown root object.
         {
             code: `
                 foo.addEventListener('test', () => handleTest());
+            `,
+        },
+        {
+            code: `
+                this.addEventListener('test', () => handleTest());
+            `,
+        },
+        {
+            code: `
+                (condition ? document : window).foo.addEventListener('test', () => handleTest());
             `,
         },
     ],
