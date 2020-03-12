@@ -28,6 +28,10 @@ Example of `.eslintrc`:
 
 For more details about configuration please refer to the dedicated section in the ESLint documentation: https://eslint.org/docs/user-guide/configuring
 
+## Configurations
+
+To choose from three configuration settings, install the [`eslint-config-lwc`](https://github.com/salesforce/eslint-config-lwc) sharable configuration package.
+
 ## Rules
 
 ### LWC
