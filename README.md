@@ -51,11 +51,12 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 
 ### Best practices
 
-| Rule ID                                                            | Description                        | Fixable |
-| ------------------------------------------------------------------ | ---------------------------------- | ------- |
-| [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md) | disallow duplicate class members   |         |
-| [lwc/no-inner-html](./docs/rules/no-inner-html.md)                 | disallow usage of `innerHTML`      |         |
-| [lwc/no-async-operation](./docs/rules/no-async-operation.md)       | restrict usage of async operations |         |
+| Rule ID                                                                  | Description                                 | Fixable |
+| ------------------------------------------------------------------------ | ------------------------------------------- | ------- |
+| [lwc/no-async-operation](./docs/rules/no-async-operation.md)             | restrict usage of async operations          |         |
+| [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md)       | disallow duplicate class members            |         |
+| [lwc/no-inner-html](./docs/rules/no-inner-html.md)                       | disallow usage of `innerHTML`               |         |
+| [lwc/no-leaky-event-listeners](./docs/rules/no-leaky-event-listeners.md) | prevent event listeners from leaking memory |         |
 
 ### Compat performance
 
