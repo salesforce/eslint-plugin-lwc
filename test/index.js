@@ -20,7 +20,7 @@ const DOC_FILES = fs.readdirSync(path.resolve(__dirname, '../docs/rules'));
 const README_CONTENT = fs.readFileSync(path.resolve(__dirname, '../README.md'), 'utf-8');
 
 describe('rules exports', () => {
-    RULE_FILES.forEach(ruleFile => {
+    RULE_FILES.forEach((ruleFile) => {
         const ruleName = path.basename(ruleFile, '.js');
 
         it(`should export "${ruleFile}"`, () => {
@@ -34,7 +34,7 @@ describe('rules exports', () => {
 });
 
 describe('rules documentation', () => {
-    RULE_FILES.forEach(ruleFile => {
+    RULE_FILES.forEach((ruleFile) => {
         const ruleName = path.basename(ruleFile, '.js');
 
         it(`should have a documentation file for "${ruleName}"`, () => {
