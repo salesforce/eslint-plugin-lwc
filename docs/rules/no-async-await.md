@@ -17,6 +17,6 @@ Example of **correct** code:
 
 ```js
 function fetchJSON(url) {
-    return fetch(url).then(res => res.json());
+    return fetch(url).then((res) => res.json());
 }
 ```

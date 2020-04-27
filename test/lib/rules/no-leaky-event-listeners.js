@@ -46,7 +46,7 @@ const basicValidCases = buildCases({
 
 const basicInvalidCases = buildCases({
     handlers: ['function() { return handleTest(); }', '() => handleTest', 'handleTest.bind(this)'],
-}).map(entry => {
+}).map((entry) => {
     return {
         ...entry,
         errors: [
