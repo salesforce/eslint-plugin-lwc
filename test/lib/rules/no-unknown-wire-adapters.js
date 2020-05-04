@@ -122,6 +122,42 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 },
             ],
         },
+        {
+            code: `import { wire } from 'lwc';
+            import { apexMethod } from '@salesforce/apex/Namespace.Classname.apexMethodReference';
+
+            class Test {
+                @wire(apexMethod)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [],
+                    supportedNamespaces: ['@salesforce/apex/'],
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { getFoo } from 'adapterFoo';
+            import { apexMethod } from '@salesforce/apex/Namespace.Classname.apexMethodReference';
+
+            class Test {
+                @wire(apexMethod)
+                wiredProp;
+                
+                @wire(getFoo)
+                wiredFoo;
+            }`,
+            options: [
+                {
+                    adapters: [
+                        { module: 'adapterFoo', identifier: 'getFoo' },
+                    ],
+                    supportedNamespaces: ['@salesforce/apex/'],
+                },
+            ],
+        },
     ],
     invalid: [
         {
@@ -195,6 +231,25 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message: '"getFoo" from "adapter" is not a known adapter.',
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import startRequest from '@salesforce/apexContinuation/SampleContinuationClass.startRequest';
+
+            class Test {
+                @wire(startRequest) wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: 'adapter', identifier: 'getBar' }],
+                    supportedNamespaces: ['@salesforce/apex/'],
+                },
+            ],
+            errors: [
+                {
+                    message: '"default" from "@salesforce/apexContinuation/SampleContinuationClass.startRequest" is not a known adapter.',
                 },
             ],
         },
