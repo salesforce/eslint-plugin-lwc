@@ -72,5 +72,8 @@
     "tabWidth": 4,
     "singleQuote": true,
     "trailingComma": "all"
+  },
+  "dependencies": {
+    "minimatch": "^3.0.4"
   }
 }

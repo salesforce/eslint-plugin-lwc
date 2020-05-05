@@ -14,17 +14,21 @@ This rule can be configured as follows:
 
         // for modules exporting wire adapters using default exports
         { module: '<module name>', identifier: 'default' },
+
+        // to match multiple adapters, use glob patterns
+        { module: '<module name glob pattern>', identifier: '<adapter identifier glob pattern>' },
     ];
 }
 ```
 
-Any usage of the `@wire` decorator will be flagged as an error unless a list of known adapters has been provided or the adapter is imported from a supported namespace.
+Any usage of the `@wire` decorator will be flagged as an error unless a list of known adapters has been provided.
 
 ```js
-/*eslint lwc/no-unexpected-wire-adapters: ["error", {"adapters": [{"module": "myAdapters", "identifier": "fooAdapter"}], "supportedNamespaces: ["@salesforce/apex/"]}]*/
+/*eslint lwc/no-unexpected-wire-adapters: ["error", {"adapters": [{"module": "myAdapters", "identifier": "fooAdapter"}, {"module": "@salesforce/apex/*", "identifier": "*"}]}]*/
 
 import { LightningElement, wire } from 'lwc';
 import { apexMethod } from '@salesforce/apex/Namespace.Classname.apexMethodReference';
+import { otherApexMethod } from '@salesforce/apex/Namespace/Classname.apexMethodReference';
 import defaultAdapter, { fooAdapter, barAdapter } from 'myAdapters';
 
 export default class Example extends LightningElement {
@@ -37,7 +41,10 @@ export default class Example extends LightningElement {
     @wire(defaultAdapter) // invalid, missing adapter in config: {"module": "myAdapters", "identifier": "default"}
     default;
  
-    @wire(apexMethod) // valid, @salesforce/apex/ is a supported namespace.
+    @wire(apexMethod) // valid
     apexMethodResult;
+
+    @wire(otherApexMethod) // invalid, does not match "@salesforce/apex/*" glob pattern
+    otherApexMethodResult;
 }
 ```

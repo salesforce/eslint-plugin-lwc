@@ -132,8 +132,9 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             }`,
             options: [
                 {
-                    adapters: [],
-                    supportedNamespaces: ['@salesforce/apex/'],
+                    adapters: [
+                        { module: '@salesforce/apex/*', identifier: '*' },
+                    ],
                 },
             ],
         },
@@ -153,10 +154,25 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 {
                     adapters: [
                         { module: 'adapterFoo', identifier: 'getFoo' },
+                        { module: '@salesforce/apex/*', identifier: '*' },
                     ],
-                    supportedNamespaces: ['@salesforce/apex/'],
                 },
             ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import startRequest from '@salesforce/apexContinuation/SampleContinuationClass.startRequest';
+
+            class Test {
+                @wire(startRequest) wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [
+                        { module: '@salesforce/**', identifier: '*' },
+                    ],
+                },
+            ]
         },
     ],
     invalid: [
@@ -234,6 +250,112 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 },
             ],
         },
+        // verify matches is not using includes.
+        {
+            code: `import { wire } from 'lwc';
+            import { getPost } from 'adapter';
+
+            class Test {
+                @wire(getPost) wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: 'adapter', identifier: 'getPosts' }],
+                },
+            ],
+            errors: [
+                {
+                    message: '"getPost" from "adapter" is not a known adapter.',
+                },
+            ],
+        },
+        // code sensitive.
+        {
+            code: `import { wire } from 'lwc';
+            import { getFoo } from 'adapter';
+
+            class Test {
+                @wire(getFoo) wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: 'adapter', identifier: 'getfoo' }],
+                },
+            ],
+            errors: [
+                {
+                    message: '"getFoo" from "adapter" is not a known adapter.',
+                },
+            ],
+        },
+        // matches multiple module, but not identifier
+        {
+            code: `import { wire } from 'lwc';
+            import { apexMethod } from '@salesforce/apex/Namespace.Classname.apexMethodReference';
+
+            class Test {
+                @wire(apexMethod)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [
+                        { module: '@salesforce/apex/*', identifier: 'default' },
+                    ],
+                },
+            ],
+            errors: [
+                {
+                    message: '"apexMethod" from "@salesforce/apex/Namespace.Classname.apexMethodReference" is not a known adapter.',
+                },
+            ],
+        },
+        // matches multiple identifiers, but only one module.
+        {
+            code: `import { wire } from 'lwc';
+            import { apexMethod } from '@salesforce/apex/Namespace.Classname.apexMethodReference';
+            import { fooMethod } from '@salesforce/apex/Foo.Namespace';
+
+            class Test {
+                @wire(apexMethod)
+                wiredProp;
+                
+                @wire(fooMethod)
+                wiredValue;
+            }`,
+            options: [
+                {
+                    adapters: [
+                        { module: '@salesforce/apex/Foo.Namespace', identifier: '*' },
+                    ],
+                },
+            ],
+            errors: [
+                {
+                    message: '"apexMethod" from "@salesforce/apex/Namespace.Classname.apexMethodReference" is not a known adapter.',
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import startRequest from '@salesforce/apex/Continuation/SampleContinuationClass.startRequest';
+
+            class Test {
+                @wire(startRequest) wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [
+                        { module: '@salesforce/apex/*', identifier: '*' },
+                    ],
+                },
+            ],
+            errors: [
+                {
+                    message: '"default" from "@salesforce/apex/Continuation/SampleContinuationClass.startRequest" is not a known adapter.',
+                },
+            ],
+        },
         {
             code: `import { wire } from 'lwc';
             import startRequest from '@salesforce/apexContinuation/SampleContinuationClass.startRequest';
@@ -243,8 +365,9 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             }`,
             options: [
                 {
-                    adapters: [{ module: 'adapter', identifier: 'getBar' }],
-                    supportedNamespaces: ['@salesforce/apex/'],
+                    adapters: [
+                        { module: '@salesforce/apex*', identifier: '*' },
+                    ],
                 },
             ],
             errors: [
