@@ -24,6 +24,9 @@
     "nyc": "^15.0.1",
     "prettier": "^2.0.5"
   },
+  "dependencies": {
+    "minimatch": "^3.0.4"
+  },
   "peerDependencies": {
     "babel-eslint": ">=10.0.0",
     "eslint": ">=6.0.0"
@@ -72,8 +75,5 @@
     "tabWidth": 4,
     "singleQuote": true,
     "trailingComma": "all"
-  },
-  "dependencies": {
-    "minimatch": "^3.0.4"
   }
 }
