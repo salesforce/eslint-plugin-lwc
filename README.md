@@ -67,3 +67,11 @@ Older browsers like IE11 run LWC in compatibility mode. For more information abo
 | [lwc/no-async-await](./docs/rules/no-async-await.md)       | disallow usage of the async-await syntax    |         |
 | [lwc/no-for-of](./docs/rules/no-for-of.md)                 | disallow usage of the for-of syntax         |         |
 | [lwc/no-rest-parameter](./docs/rules/no-rest-parameter.md) | disallow usage of the rest parameter syntax |         |
+
+### Locker vNext best practices
+
+| Rule ID                                                             | Description                       | Fixable |
+| ------------------------------------------------------------------- | --------------------------------- | ------- |
+| [locker/no-document-location](./docs/rules/no-document-location.md) | prevent `document.location` usage | 🔧      |
+| [locker/no-dynamic-import](./docs/rules/no-dynamic-import.md)       | disallow dynamic import           |         |
+| [locker/no-window-top](./docs/rules/no-window-top.md)               | prevent `window.top` usage        | 🔧      |
