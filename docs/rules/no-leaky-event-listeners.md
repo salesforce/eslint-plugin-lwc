@@ -11,13 +11,14 @@ import { LightningElement } from 'lwc';
 
 export default class Test extends LightningElement {
     connectedCallback() {
-        window.addEventListener('test', handleTest.bind(this));
+        window.addEventListener('test', this.handleTest.bind(this));
         //                              ^ Event listener will leak.
     }
 
     disconnectedCallback() {
-        window.removeEventListener('test', handleTest.bind(this));
-        //                                 ^ Event listener will leak.
+        window.removeEventListener('test', this.handleTest.bind(this));
+        //                                 ^ The original event listener will not be removed because
+        //                                   invoking .bind() returns a branch new function.
     }
 
     handleTest() {}
