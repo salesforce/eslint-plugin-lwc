@@ -40,7 +40,7 @@ export default class Example extends LightningElement {
 
     @wire(defaultAdapter) // invalid, missing adapter in config: {"module": "myAdapters", "identifier": "default"}
     default;
- 
+
     @wire(apexMethod) // valid
     apexMethodResult;
 

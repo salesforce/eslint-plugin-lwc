@@ -132,9 +132,7 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             }`,
             options: [
                 {
-                    adapters: [
-                        { module: '@salesforce/apex/*', identifier: '*' },
-                    ],
+                    adapters: [{ module: '@salesforce/apex/*', identifier: '*' }],
                 },
             ],
         },
@@ -168,11 +166,9 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             }`,
             options: [
                 {
-                    adapters: [
-                        { module: '@salesforce/**', identifier: '*' },
-                    ],
+                    adapters: [{ module: '@salesforce/**', identifier: '*' }],
                 },
-            ]
+            ],
         },
     ],
     invalid: [
@@ -299,14 +295,13 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             }`,
             options: [
                 {
-                    adapters: [
-                        { module: '@salesforce/apex/*', identifier: 'default' },
-                    ],
+                    adapters: [{ module: '@salesforce/apex/*', identifier: 'default' }],
                 },
             ],
             errors: [
                 {
-                    message: '"apexMethod" from "@salesforce/apex/Namespace.Classname.apexMethodReference" is not a known adapter.',
+                    message:
+                        '"apexMethod" from "@salesforce/apex/Namespace.Classname.apexMethodReference" is not a known adapter.',
                 },
             ],
         },
@@ -325,14 +320,13 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             }`,
             options: [
                 {
-                    adapters: [
-                        { module: '@salesforce/apex/Foo.Namespace', identifier: '*' },
-                    ],
+                    adapters: [{ module: '@salesforce/apex/Foo.Namespace', identifier: '*' }],
                 },
             ],
             errors: [
                 {
-                    message: '"apexMethod" from "@salesforce/apex/Namespace.Classname.apexMethodReference" is not a known adapter.',
+                    message:
+                        '"apexMethod" from "@salesforce/apex/Namespace.Classname.apexMethodReference" is not a known adapter.',
                 },
             ],
         },
@@ -345,14 +339,13 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             }`,
             options: [
                 {
-                    adapters: [
-                        { module: '@salesforce/apex/*', identifier: '*' },
-                    ],
+                    adapters: [{ module: '@salesforce/apex/*', identifier: '*' }],
                 },
             ],
             errors: [
                 {
-                    message: '"default" from "@salesforce/apex/Continuation/SampleContinuationClass.startRequest" is not a known adapter.',
+                    message:
+                        '"default" from "@salesforce/apex/Continuation/SampleContinuationClass.startRequest" is not a known adapter.',
                 },
             ],
         },
@@ -365,14 +358,13 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             }`,
             options: [
                 {
-                    adapters: [
-                        { module: '@salesforce/apex*', identifier: '*' },
-                    ],
+                    adapters: [{ module: '@salesforce/apex*', identifier: '*' }],
                 },
             ],
             errors: [
                 {
-                    message: '"default" from "@salesforce/apexContinuation/SampleContinuationClass.startRequest" is not a known adapter.',
+                    message:
+                        '"default" from "@salesforce/apexContinuation/SampleContinuationClass.startRequest" is not a known adapter.',
                 },
             ],
         },
