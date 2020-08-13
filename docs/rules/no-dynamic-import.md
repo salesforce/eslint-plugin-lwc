@@ -1,7 +1,6 @@
 # Disallow dynamic import (no-dynamic-import)
 
-Lighting Locker vNext may prohibit [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Dynamic_Imports). To prevent code from breaking
-[script injection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#Dynamically_importing_scripts) should be used instead.
+Lighting Locker vNext may prohibit [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Dynamic_Imports). To prevent code from breaking [script injection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#Dynamically_importing_scripts) should be used instead.
 
 ## Rule details
 

@@ -1,6 +1,6 @@
 ## Disallow usage of unknown wire adapters (no-unknown-wire-adapters)
 
-This rule offers a way to restrict the usage of unknown wire adapters. It can be used to ensure that all wired properties are statically analyzable in order to support use cases such as prefetching and offline.
+It can be used to ensure that all wired properties are statically analyzable in order to support use cases such as prefetching and offline.
 
 ## Rule details
 
@@ -40,7 +40,7 @@ export default class Example extends LightningElement {
 
     @wire(defaultAdapter) // invalid, missing adapter in config: {"module": "myAdapters", "identifier": "default"}
     default;
- 
+
     @wire(apexMethod) // valid
     apexMethodResult;
 

@@ -1,7 +1,6 @@
 # Disallow window.top use (no-window-top)
 
-The value of `window.top` in Lightning Locker vNext is `null`. To prevent
-code from breaking assume sandboxed code is executing in the topmost window.
+The value of `window.top` in Lightning Locker vNext is `null`. To prevent code from breaking assume sandboxed code is executing in the topmost window.
 
 The following `window.top` references are prohibited or fixable to `window`:
 

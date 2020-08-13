@@ -1,6 +1,10 @@
 # Validate `wire` decorator usage (valid-wire)
 
-This rule checks whether every `wire` decorator is valid.
+The following restriction applies to `wire` decorator:
+
+-   The `wire` decorator can only be applied to class fields and class methods.
+-   The first argument of `wire` must be an identifier.
+-   The second argument of `wire` is optional. If it is present, it must be an object literal.
 
 ## Rule details
 
