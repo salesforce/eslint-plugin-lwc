@@ -1,8 +1,13 @@
-version: 2
-jobs:
+version: 2.1
+
+jobs: 
   build:
     docker:
       - image: circleci/node
+
+    parameters:
+      eslint:
+        type: string
 
     steps:
       - checkout
@@ -13,6 +18,7 @@ jobs:
           - v1-dependencies-
 
       - run: yarn install --frozen-lock
+      - run: yarn add --dev eslint@<< parameters.eslint >>
 
       - save_cache:
           paths:
@@ -22,3 +28,12 @@ jobs:
       - run: yarn format:check
       - run: yarn lint
       - run: yarn test
+
+workflows:
+  build:
+    jobs:
+      - build:
+          name: build-eslint-v<<matrix.eslint>>
+          matrix:
+            parameters:
+              eslint: ["6", "7"]
