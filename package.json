@@ -12,6 +12,7 @@
   "main": "lib/index.js",
   "scripts": {
     "format": "prettier --write --ignore-path .gitignore \"**/*.{js,md}\"",
+    "format:check": "prettier --check --ignore-path .gitignore \"**/*.{js,md}\"",
     "lint": "eslint lib/ test/",
     "test": "nyc mocha"
   },
