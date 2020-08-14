@@ -1,6 +1,6 @@
 # Suggest usage of `CustomEvent` over `Event` constructor (prefer-custom-event)
 
-`CustomEvent` is a standard `Event` that can also carry any data. The main added benefit of creating an event using the `CustomEvent` constructor over `Event` is that the `detail` property carrying the data is readonly.
+`CustomEvent` is a type of DOM `Event` that can also carry any data. The main benefit of creating an event using the `CustomEvent` constructor over `Event` is that the `detail` property carrying the data is readonly.
 
 ```js
 const evt1 = new CustomEvent('test', { detail: 'original' });
