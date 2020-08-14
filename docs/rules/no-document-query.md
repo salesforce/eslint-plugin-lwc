@@ -1,6 +1,6 @@
 # Disallow DOM query at the document level (no-document-query)
 
-Querying the DOM at the document level is unsafe in LWC when running with synthetic shadow. Because these APIs don't follow Shadow DOM semantics and allow access to elements that should not be accessible. To future-proof your component, avoid using these APIs and instead use `this.querySelector` and `this.template.querySelector`.
+When running with synthetic shadow, it isn't safe to query the DOM at the document level. Document-level APIs don't follow shadow DOM semantics and allow access to elements that shouldn't be accessible. To future-proof your component, avoid using these APIs and instead use `this.querySelector` and `this.template.querySelector`.
 
 The following methods are restricted by this rule:
 

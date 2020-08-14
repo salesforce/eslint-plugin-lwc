@@ -1,6 +1,6 @@
 ## Enforce wire adapters to be used with `wire` decorator (no-unexpected-wire-adapter-usages)
 
-With the [wire reform](https://rfcs.lwc.dev/rfcs/lwc/0000-wire-reform), all the wire adapters can now be invoked programmatically. Ensuring that wire adapters are consumed via the `wire` decorator ensures that their consumption is statically analyzable.
+Due to the [wire reform](https://rfcs.lwc.dev/rfcs/lwc/0000-wire-reform), all wire adapters can be invoked programmatically. Ensuring that wire adapters are consumed via the `wire` decorator ensures that their consumption is statically analyzable.
 
 ### Rule details
 

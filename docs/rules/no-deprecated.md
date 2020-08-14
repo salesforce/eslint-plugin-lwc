@@ -1,6 +1,6 @@
 # Disallow usage of deprecated LWC APIs (no-deprecated)
 
-The following LWC lifecycle hook have been deprecated and removed:
+The following LWC lifecycle hooks have been deprecated and removed:
 
 -   `attributeChangedCallback`
 -   `observeAttribute`

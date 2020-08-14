@@ -1,8 +1,7 @@
 # Validate `track` decorator usage (valid-track)
 
-The following restriction applies to `track` decorator:
 
--   The `track` decorator can only be applied to class fields.
+Apply the `@track` decorator to class fields only.
 
 ## Rule details
 

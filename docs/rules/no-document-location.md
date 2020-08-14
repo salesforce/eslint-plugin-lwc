@@ -1,8 +1,8 @@
 # Disallow document.location (no-document-location)
 
-The value of `document.location` in Lightning Locker vNext is `null`. To prevent code from breaking `window.location` should be used.
+The value of `document.location` in Lightning Locker vNext is `null`. To prevent code from breaking, use `window.location`.
 
-The following `document.location` references are prohibited or fixable to `window.location`:
+Replace these references with `window.location`:
 
 -   `document.location`
 -   `window.document.location`
