@@ -319,5 +319,13 @@ ruleTester.run('no-window-top', rule, {
             `,
             errors,
         },
+        {
+            code: `top;`,
+            env: {
+                browser: true,
+            },
+            output: `window;`,
+            errors,
+        },
     ],
 });

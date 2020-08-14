@@ -130,5 +130,13 @@ ruleTester.run('no-document-location', rule, {
             `,
             errors,
         },
+        {
+            code: `document.location;`,
+            env: {
+                browser: true,
+            },
+            output: `window.location;`,
+            errors,
+        },
     ],
 });

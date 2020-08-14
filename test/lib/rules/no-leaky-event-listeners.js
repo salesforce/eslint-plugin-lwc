@@ -92,5 +92,21 @@ ruleTester.run('no-leaky-event-listeners', rule, {
             `,
         },
     ],
-    invalid: basicInvalidCases,
+    invalid: [
+        ...basicInvalidCases,
+
+        {
+            code: `
+                addEventListener('test', () => handleTest());
+            `,
+            env: {
+                browser: true,
+            },
+            errors: [
+                {
+                    message: /^Event listener will leak\./,
+                },
+            ],
+        },
+    ],
 });
