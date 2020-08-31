@@ -1,6 +1,6 @@
 ## Disallow usage of unknown wire adapters (no-unknown-wire-adapters)
 
-It can be used to ensure that all wired properties are statically analyzable in order to support use cases such as prefetching and offline.
+To support use cases such as prefetching and offline, all wired properties must be statically analyzable, which means that all wire adapters must be known.
 
 ## Rule details
 

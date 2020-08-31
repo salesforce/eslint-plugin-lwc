@@ -1,6 +1,6 @@
 # Validate property syntax to ensure it doesn't start with an upper-case character (no-leading-uppercase-api-name)
 
-It's a best practice to start public property names with a lowercase character. If a public property name starts with an uppercase character, to reference it in a template you must use [a special syntax](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.js_props_names). Convert the leading uppercase character to lowercase and prefix it with a hyphen (`-`). For example, to reference the `Upper` public property in a template, use the `-upper` attribute.
+It's a best practice to start a public property name with a lowercase character. If a public property name starts with an uppercase character, to reference it in a template you must use [a special syntax](https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.js_props_names). Convert the leading uppercase character to lowercase and prefix it with a hyphen (`-`). For example, to reference the `Upper` public property in a template, use the `-upper` attribute.
 
 ## Rule details
 
