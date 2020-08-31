@@ -1,6 +1,12 @@
-# Validate `api` decorator usage (valid-api)
+# Validate `@api` decorator usage (valid-api)
 
-This rule checks whether every `api` decorator is valid.
+The following restrictions apply to the `@api` decorator:
+
+-   Apply to class fields and class methods only.
+-   Fields and methods should be unique per class.
+-   Fields and methods can't start with `on`. The `on` prefix is reserved to bind event handlers.
+-   Fields and methods can't start with `data`, `slot` or `part`. These names are reserved by LWC.
+-   Boolean properties must be initialized with `false`. By initializing a public property to `true`, the consumer component can't set its value to `false` via the template.
 
 ## Rule details
 

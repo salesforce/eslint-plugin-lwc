@@ -1,6 +1,7 @@
 # Validate `track` decorator usage (valid-track)
 
-This rule checks whether every `track` decorator is valid.
+
+Apply the `@track` decorator to class fields only.
 
 ## Rule details
 
