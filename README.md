@@ -4,7 +4,7 @@
 
 ## Installation
 
-```
+```bash
 $ npm install eslint babel-eslint @lwc/eslint-plugin-lwc --save-dev
 ```
 
