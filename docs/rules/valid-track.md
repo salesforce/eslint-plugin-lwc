@@ -1,6 +1,5 @@
 # Validate `track` decorator usage (valid-track)
 
-
 Apply the `@track` decorator to class fields only.
 
 ## Rule details
