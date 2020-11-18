@@ -30,16 +30,13 @@ ruleTester.run('no-aura-localization-service', rule, {
         {
             code: `numberFormatInstance = new LocalizerImpl.NumberFormat(locale, options);`,
         },
-        {
-            code: `$A.localizationService.parseBigDecimal()`,
-        },
     ],
     invalid: [
         {
             code: `$A.localizationService.formatDateTimeUTC()`,
             errors: [
                 {
-                    message: 'Disallow usage of "$A.localizationService" methods.',
+                    message: 'Disallow usage of "$A.localizationService".',
                 },
             ],
         },
@@ -47,7 +44,15 @@ ruleTester.run('no-aura-localization-service', rule, {
             code: `$A.localizationService.parseDateTime()`,
             errors: [
                 {
-                    message: 'Disallow usage of "$A.localizationService" methods.',
+                    message: 'Disallow usage of "$A.localizationService".',
+                },
+            ],
+        },
+        {
+            code: `$A.localizationService.parseBigDecimal()`,
+            errors: [
+                {
+                    message: 'Disallow usage of "$A.localizationService".',
                 },
             ],
         },
