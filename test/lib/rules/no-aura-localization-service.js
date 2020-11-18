@@ -56,5 +56,21 @@ ruleTester.run('no-aura-localization-service', rule, {
                 },
             ],
         },
+        {
+            code: `return $A.localizationService;`,
+            errors: [
+                {
+                    message: 'Disallow usage of "$A.localizationService".',
+                },
+            ],
+        },
+        {
+            code: `return window.$A !== undefined && window.$A.localizationService;`,
+            errors: [
+                {
+                    message: 'Disallow usage of "$A.localizationService".',
+                },
+            ],
+        },
     ],
 });
