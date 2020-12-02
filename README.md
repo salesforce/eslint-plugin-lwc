@@ -36,18 +36,19 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 
 ### LWC
 
-| Rule ID                                                                                    | Description                                                       | Fixable |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | ------- |
-| [lwc/consistent-component-name](./docs/rules/consistent-component-name.md)                 | ensure component class name matches file name                     | 🔧      |
-| [lwc/no-api-reassignments](./docs/rules/no-api-reassignments.md)                           | prevent public property reassignments                             |         |
-| [lwc/no-deprecated](./docs/rules/no-deprecated.md)                                         | disallow usage of deprecated LWC APIs                             |         |
-| [lwc/no-document-query](./docs/rules/no-document-query.md)                                 | disallow DOM query at the document level                          |         |
-| [lwc/no-leading-uppercase-api-name](./docs/rules/no-leading-uppercase-api-name.md)         | ensure public property doesn't start with an upper-case character |         |
-| [lwc/no-unexpected-wire-adapter-usages](./docs/rules/no-unexpected-wire-adapter-usages.md) | enforce wire adapters to be used with `wire` decorator            |         |
-| [lwc/no-unknown-wire-adapters](./docs/rules/no-unknown-wire-adapters.md)                   | disallow usage of unknown wire adapters                           |         |
-| [lwc/valid-api](./docs/rules/valid-api.md)                                                 | validate `api` decorator usage                                    |         |
-| [lwc/valid-track](./docs/rules/valid-track.md)                                             | validate `track` decorator usage                                  |         |
-| [lwc/valid-wire](./docs/rules/valid-wire.md)                                               | validate `wire` decorator usage                                   |         |
+| Rule ID                                                                                                      | Description                                                                     | Fixable |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- | ------- |
+| [lwc/consistent-component-name](./docs/rules/consistent-component-name.md)                                   | ensure component class name matches file name                                   | 🔧      |
+| [lwc/no-api-reassignments](./docs/rules/no-api-reassignments.md)                                             | prevent public property reassignments                                           |         |
+| [lwc/no-deprecated](./docs/rules/no-deprecated.md)                                                           | disallow usage of deprecated LWC APIs                                           |         |
+| [lwc/no-document-query](./docs/rules/no-document-query.md)                                                   | disallow DOM query at the document level                                        |         |
+| [lwc/no-leading-uppercase-api-name](./docs/rules/no-leading-uppercase-api-name.md)                           | ensure public property doesn't start with an upper-case character               |         |
+| [lwc/no-unexpected-wire-adapter-usages](./docs/rules/no-unexpected-wire-adapter-usages.md)                   | enforce wire adapters to be used with `wire` decorator                          |         |
+| [lwc/no-unknown-wire-adapters](./docs/rules/no-unknown-wire-adapters.md)                                     | disallow usage of unknown wire adapters                                         |         |
+| [lwc/no-uppercase-with-underscore-property-name](./docs/rules/no-uppercase-with-underscore-property-name.md) | ensure public property doesn't contain both upper-case and underscore character |         |
+| [lwc/valid-api](./docs/rules/valid-api.md)                                                                   | validate `api` decorator usage                                                  |         |
+| [lwc/valid-track](./docs/rules/valid-track.md)                                                               | validate `track` decorator usage                                                |         |
+| [lwc/valid-wire](./docs/rules/valid-wire.md)                                                                 | validate `wire` decorator usage                                                 |         |
 
 ### Best practices
 
