@@ -7,6 +7,7 @@ The following restrictions apply to the `@api` decorator:
 -   Fields and methods can't start with `on`. The `on` prefix is reserved to bind event handlers.
 -   Fields and methods can't start with `data`, `slot` or `part`. These names are reserved by LWC.
 -   Boolean properties must be initialized with `false`. By initializing a public property to `true`, the consumer component can't set its value to `false` via the template.
+-   Fields and methods can't contain both uppercase and underscore characters.
 
 ## Rule details
 
@@ -37,6 +38,13 @@ class Foo {
     foo = 1;
     @api
     foo = 2;
+}
+
+class Foo {
+    @api
+    Foo_;
+    @api
+    fO_o;
 }
 ```
 

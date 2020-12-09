@@ -68,6 +68,25 @@ ruleTester.run('valid-api', rule, {
             @api onChange() {}
         }`,
         },
+        /* no mix of uppercase and underscore characters */
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api bar_foo() {}
+        }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api barFoo() {}
+        }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api foobar() {}
+        }`,
+        },
     ],
     invalid: [
         {
@@ -206,6 +225,67 @@ ruleTester.run('valid-api', rule, {
                 @api foo() {}
             }`,
             errors: [{ message: '"foo" has already been declared as a public property.' }],
+        },
+        /* no mix of uppercase and underscore characters */
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api bar_Foo() {};
+        }`,
+            errors: [
+                {
+                    message:
+                        'Avoid using both uppercase and underscores in property names: "bar_Foo"',
+                },
+            ],
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api _barFoo() {}
+        }`,
+            errors: [
+                {
+                    message:
+                        'Avoid using both uppercase and underscores in property names: "_barFoo"',
+                },
+            ],
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api _barfoO() {}
+        }`,
+            errors: [
+                {
+                    message:
+                        'Avoid using both uppercase and underscores in property names: "_barfoO"',
+                },
+            ],
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api Foo_bar() {}
+        }`,
+            errors: [
+                {
+                    message:
+                        'Avoid using both uppercase and underscores in property names: "Foo_bar"',
+                },
+            ],
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api Foobar_() {}
+        }`,
+            errors: [
+                {
+                    message:
+                        'Avoid using both uppercase and underscores in property names: "Foobar_"',
+                },
+            ],
         },
     ],
 });
