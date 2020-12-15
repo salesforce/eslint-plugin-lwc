@@ -10,6 +10,9 @@
         "ecmaVersion": 9
     },
     "rules": {
-        "strict": ["error", "global"]
+        "strict": ["error", "global"],
+        "valid-api": ["error", {
+            "dissallowUnderscoreUppercaseMix": false
+        }]
     }
 }
