@@ -84,7 +84,7 @@ class Foo {
 
 ### `disallowUnderscoreUppercaseMix`
 
-This property controls is if the rule should allow or not public properties and methods with mixed upper case and underscore character. It is not recommended to mix uppercase and underscore characters for public properties because those properties can't be referenced from the template.
+This property controls whether the rule allows the name of a public property or method to contain both uppercase and underscore characters. Mixing uppercase and underscore characters in public properties isn't recommended, because those properties can't be referenced from the template.
 
 By default, this property is set to `false`.
 
