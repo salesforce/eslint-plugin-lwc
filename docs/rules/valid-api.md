@@ -7,7 +7,6 @@ The following restrictions apply to the `@api` decorator:
 -   Fields and methods can't start with `on`. The `on` prefix is reserved to bind event handlers.
 -   Fields and methods can't start with `data`, `slot` or `part`. These names are reserved by LWC.
 -   Boolean properties must be initialized with `false`. By initializing a public property to `true`, the consumer component can't set its value to `false` via the template.
--   Fields and methods can't contain both uppercase and underscore characters.
 
 ## Rule details
 
@@ -39,13 +38,6 @@ class Foo {
     @api
     foo = 2;
 }
-
-class Foo {
-    @api
-    Foo_;
-    @api
-    fO_o;
-}
 ```
 
 Example of **correct** code:
@@ -73,5 +65,40 @@ class Foo {
 class Foo {
     @api
     foo() {}
+}
+```
+
+## Options
+
+```json
+{
+    "type": "object",
+    "properties": {
+        "disallowUnderscoreUppercaseMix": {
+            "type": "boolean"
+        }
+    },
+    "additionalProperties": false
+}
+```
+
+### `disallowUnderscoreUppercaseMix`
+
+This property controls whether the rule allows the name of a public property or method to contain both uppercase and underscore characters. Mixing uppercase and underscore characters in public properties isn't recommended, because those properties can't be referenced from the template.
+
+By default, this property is set to `false`.
+
+Example of **incorrect** code:
+
+```js
+/* eslint lwc/valid-api: ["error", { "disallowUnderscoreUppercaseMix": true }] */
+import { api } from 'lwc';
+
+class Foo {
+    @api
+    Foo_;
+
+    @api
+    fO_o;
 }
 ```
