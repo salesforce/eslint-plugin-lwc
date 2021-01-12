@@ -345,7 +345,7 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message:
-                        '"default" from "@salesforce/apex/Continuation/SampleContinuationClass.startRequest" is not a known adapter.',
+                        '"default" from "@salesforce/apex/Continuation/SampleContinuationClass.startRequest" (imported as "startRequest") is not a known adapter.',
                 },
             ],
         },
@@ -364,7 +364,7 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message:
-                        '"default" from "@salesforce/apexContinuation/SampleContinuationClass.startRequest" is not a known adapter.',
+                        '"default" from "@salesforce/apexContinuation/SampleContinuationClass.startRequest" (imported as "startRequest") is not a known adapter.',
                 },
             ],
         },
