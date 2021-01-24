@@ -45,14 +45,10 @@ describe('rules documentation', () => {
         });
 
         it(`should have an entry in README.md for "${ruleName}"`, () => {
-            const lockerLink = README_CONTENT.includes(
-                `| [locker/${ruleName}](./docs/rules/${ruleName}.md)`,
+            assert(
+                README_CONTENT.includes(`| [lwc/${ruleName}](./docs/rules/${ruleName}.md)`),
+                `Rule "${ruleName}" is not listed in the README.md.`,
             );
-            const lwcLink = README_CONTENT.includes(
-                `| [lwc/${ruleName}](./docs/rules/${ruleName}.md)`,
-            );
-
-            assert(lockerLink || lwcLink, `Rule "${ruleName}" is not listed in the README.md.`);
         });
 
         it(`it should have a documentation url for "${ruleName}"`, () => {
