@@ -1,8 +1,8 @@
-# Prefer usage of `@salesforce/localizerjs` functions over use of `$A.localizationService` (no-aura-localization-service)
+# Prefer usage of `@salesforce/i18n-service` functions over use of `$A.localizationService` (no-aura-localization-service)
 
 The use of `$A.localizationService` for formatting and parsing date, time and numbers is deprecated.
 
-You should be using the `@salesforce/localizerjs` methods instead.
+You should be using the `@salesforce/i18n-service` methods instead.
 
 Usage of `$A.localizationService` methods like below prohibited:
 
@@ -24,7 +24,7 @@ return window.$A !== undefined && window.$A.localizationService;
 Example of **correct** code:
 
 ```js
-import { getDateTimeFormat, getNumberFormat } from '@salesforce/localizer';
+import { getDateTimeFormat, getNumberFormat } from '@salesforce/i18n-service';
 
 var numberFormatter = getNumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
 var dateFormatter = getDateTimeFormat('fi', { year: 'numeric', month: 'long', day: 'numeric' });

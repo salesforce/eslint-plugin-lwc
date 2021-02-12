@@ -9,11 +9,11 @@
 const { RuleTester } = require('eslint');
 
 const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/prefer-localizer');
+const rule = require('../../../lib/rules/prefer-i18n-service');
 
 const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 
-ruleTester.run('prefer-localizer', rule, {
+ruleTester.run('prefer-i18n-service', rule, {
     valid: [
         {
             code: `getNumberFormat('de-DE', { style: 'currency', currency: 'EUR' });`,
@@ -54,7 +54,8 @@ ruleTester.run('prefer-localizer', rule, {
                   });`,
             errors: [
                 {
-                    message: 'Prefer using "@salesforce/localizerjs" over directly calling "Intl".',
+                    message:
+                        'Prefer using "@salesforce/i18n-service" over directly calling "Intl".',
                 },
             ],
         },
@@ -65,7 +66,8 @@ ruleTester.run('prefer-localizer', rule, {
             },
             errors: [
                 {
-                    message: 'Prefer using "@salesforce/localizerjs" over directly calling "Intl".',
+                    message:
+                        'Prefer using "@salesforce/i18n-service" over directly calling "Intl".',
                 },
             ],
         },
@@ -76,7 +78,8 @@ ruleTester.run('prefer-localizer', rule, {
             },
             errors: [
                 {
-                    message: 'Prefer using "@salesforce/localizerjs" over directly calling "Intl".',
+                    message:
+                        'Prefer using "@salesforce/i18n-service" over directly calling "Intl".',
                 },
             ],
         },
@@ -88,7 +91,8 @@ ruleTester.run('prefer-localizer', rule, {
                 });`,
             errors: [
                 {
-                    message: 'Prefer using "@salesforce/localizerjs" over directly calling "Intl".',
+                    message:
+                        'Prefer using "@salesforce/i18n-service" over directly calling "Intl".',
                 },
             ],
         },

@@ -16,13 +16,13 @@ const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 ruleTester.run('no-moment', rule, {
     valid: [
         {
-            code: `import { getDateTimeFormat, getNumberFormat } from '@salesforce/localizer';`,
+            code: `import { getDateTimeFormat, getNumberFormat } from '@salesforce/i18n-service';`,
         },
         {
-            code: `import localizer from '@salesforce/localizer';`,
+            code: `import localizer from '@salesforce/i18n-service';`,
         },
         {
-            code: `var localizer = require('localizer');`,
+            code: `var localizer = require('i18n-service');`,
         },
         {
             code: `var moment = require('not-moment');`,

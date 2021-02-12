@@ -2,7 +2,7 @@
 
 The use of `moment` library is not recommended because it has bad performance and is large in size.
 
-You should be using the `@salesforce/localizerjs` methods instead.
+You should be using the `@salesforce/i18n-service` methods instead.
 
 Usage of following `moment` imports are detected:
 
@@ -25,5 +25,5 @@ import moment from 'moment';
 Example of **correct** code:
 
 ```js
-import { getDateTimeFormat, getNumberFormat } from '@salesforce/localizer';
+import { getDateTimeFormat, getNumberFormat } from '@salesforce/i18n-service';
 ```
