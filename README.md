@@ -68,3 +68,11 @@ Older browsers like IE11 run LWC in compatibility mode. For more information abo
 | [lwc/no-async-await](./docs/rules/no-async-await.md)       | disallow usage of the async-await syntax    |         |
 | [lwc/no-for-of](./docs/rules/no-for-of.md)                 | disallow usage of the for-of syntax         |         |
 | [lwc/no-rest-parameter](./docs/rules/no-rest-parameter.md) | disallow usage of the rest parameter syntax |         |
+
+### Internationalization rules
+
+| Rule ID                                                                          | Description                                                             | Fixable |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------- |
+| [lwc/no-aura-localization-service](./docs/rules/no-aura-localization-service.md) | prevent usage of `$A.localizationService`                               |         |
+| [lwc/no-moment](./docs/rules/no-moment.md)                                       | prevent usage of `moment` library                                       |         |
+| [lwc/prefer-i18n-service](./docs/rules/prefer-i18n-service.md)                   | suggest usage of `@salesforce/i18n-service` over direct calls to `Intl` |         |
