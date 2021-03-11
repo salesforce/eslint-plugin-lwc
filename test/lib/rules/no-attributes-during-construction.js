@@ -69,6 +69,39 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 }
             `,
         },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    get role() {}
+                    constructor() {
+                        this.role = 'test';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    set hidden(val) {}
+                    constructor() {
+                        this.hidden = 'test';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                const foo = {};
+                class Test extends LightningElement {
+                    constructor() {
+                        foo.hidden = 'test';
+                    }
+                }
+            `,
+        },
     ],
     invalid: [
         {

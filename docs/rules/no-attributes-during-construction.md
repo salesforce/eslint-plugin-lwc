@@ -1,15 +1,14 @@
-# Disallow attributes during construction (no-attributes-during-construction)
+# Disallow setting attributes during construction (no-attributes-during-construction)
 
 The `LightningElement` base class extended by LWC component classes defines several properties that, when set,
-causes its custom element to gain attributes. By
-[specification](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance), custom element
-constructors must not cause the custom element to gain attributes.
+renders attributes on its custom element. This behavior mimics the native browser behavior.
 
-This rule prevents set operations in the constructor method that violate this restriction. It only knows about
-`LightningElement` properties that implement this behavior. It will not detect custom properties that set attributes
-during construction time.
+By [specification](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance), custom
+element constructors must not cause the custom element to gain attributes. This rule prevents set operations in the
+constructor method that violate this restriction.
 
-A few examples of such properties are `hidden`, `id`, `role`, `tabIndex`, and `title`.
+This rule only knows about `LightningElement` properties that implement this behavior (e.g., `hidden`, `id`, `role`,
+`tabIndex`, `title`, etc) and will not detect custom implementations that may set attributes during construction time.
 
 ## Rule details
 

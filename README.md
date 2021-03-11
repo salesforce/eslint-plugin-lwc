@@ -42,7 +42,7 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/no-api-reassignments](./docs/rules/no-api-reassignments.md)                           | prevent public property reassignments                             |         |
 | [lwc/no-deprecated](./docs/rules/no-deprecated.md)                                         | disallow usage of deprecated LWC APIs                             |         |
 | [lwc/no-document-query](./docs/rules/no-document-query.md)                                 | disallow DOM query at the document level                          |         |
-| [lwc/no-attributes-during-construction](./docs/rules/no-attributes-during-construction.md) | disallow attributes during construction                           |         |
+| [lwc/no-attributes-during-construction](./docs/rules/no-attributes-during-construction.md) | disallow setting attributes during construction                   |         |
 | [lwc/no-leading-uppercase-api-name](./docs/rules/no-leading-uppercase-api-name.md)         | ensure public property doesn't start with an upper-case character |         |
 | [lwc/no-unexpected-wire-adapter-usages](./docs/rules/no-unexpected-wire-adapter-usages.md) | enforce wire adapters to be used with `wire` decorator            |         |
 | [lwc/no-unknown-wire-adapters](./docs/rules/no-unknown-wire-adapters.md)                   | disallow usage of unknown wire adapters                           |         |
