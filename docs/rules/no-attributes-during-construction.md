@@ -1,11 +1,11 @@
 # Disallow setting attributes during construction (no-attributes-during-construction)
 
-The `LightningElement` base class extended by LWC component classes defines several properties that, when set,
-renders attributes on its custom element. This behavior mimics the native browser behavior.
+The `LightningElement` base class extended by LWC component classes defines several properties that, when set, renders
+attributes on its host element. This behavior mimics the native browser behavior.
 
-By [specification](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance), custom
-element constructors must not cause the custom element to gain attributes. This rule prevents set operations in the
-constructor method that violate this restriction.
+By [specification](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance), constructors
+must not cause the host element to gain attributes. This rule prevents set operations in the constructor method that
+violate this restriction.
 
 ## Caveats
 
