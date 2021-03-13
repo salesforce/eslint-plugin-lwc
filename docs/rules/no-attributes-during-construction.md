@@ -21,6 +21,7 @@ export default class Test extends LightningElement {
     }
 
     constructor() {
+        super();
         this.foo = 'this causes the element to gain the foo attribute during construction';
     }
 }
@@ -35,6 +36,7 @@ class Base extends LightningElement {}
 
 export default class Test extends Base {
     constructor() {
+        super();
         this.title = 'this causes the element to gain the foo attribute during construction';
     }
 }
@@ -52,6 +54,7 @@ import { LightningElement } from 'lwc';
 
 export default class Test extends LightningElement {
     constructor() {
+        super();
         this.title = 'this causes the element to gain the title attribute during construction';
     }
 }
@@ -81,6 +84,7 @@ export default class Test extends LightningElement {
     title = 'this custom property overrides the one in LightningElement';
 
     constructor() {
+        super();
         this.title =
             'this does not cause the element to gain the title attribute during construction';
     }

@@ -20,6 +20,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 class LightningElement {}
                 class Test extends LightningElement {
                     constructor() {
+                        super();
                         this.tabIndex = '0';
                     }
                 }
@@ -31,6 +32,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 class Test extends LightningElement {
                     tabIndex;
                     constructor() {
+                        super();
                         this.tabIndex = '0';
                     }
                 }
@@ -42,6 +44,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 class Test extends Component {
                     title;
                     constructor() {
+                        super();
                         this.title = 'test';
                     }
                 }
@@ -53,6 +56,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 class Test extends LightningElement {
                     ariaDescribedBy = 'foo';
                     constructor() {
+                        super();
                         this.ariaDescribedBy = 'test';
                     }
                 }
@@ -64,6 +68,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 class Test extends LightningElement {
                     @track role = [];
                     constructor() {
+                        super();
                         this.role = ['test'];
                     }
                 }
@@ -75,6 +80,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 class Test extends LightningElement {
                     get role() {}
                     constructor() {
+                        super();
                         this.role = 'test';
                     }
                 }
@@ -86,6 +92,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 class Test extends LightningElement {
                     set hidden(val) {}
                     constructor() {
+                        super();
                         this.hidden = 'test';
                     }
                 }
@@ -122,6 +129,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 import { LightningElement } from 'lwc';
                 class Test extends LightningElement {
                     constructor() {
+                        super();
                         this.tabIndex = '0';
                     }
                 }
@@ -132,7 +140,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                         'Invariant violation: Setting "tabIndex" in the constructor results in a rendered attribute during construction. Change the name of this property, move this assignment to another lifecycle method, or override the default behavior by defining "tabIndex" as a property on the class.',
                     type: 'AssignmentExpression',
                     column: 25,
-                    line: 5,
+                    line: 6,
                 },
             ],
         },
@@ -141,6 +149,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 import { LightningElement as Component } from 'lwc';
                 class Test extends Component {
                     constructor() {
+                        super();
                         this.title = 'test';
                     }
                 }
@@ -151,7 +160,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                         'Invariant violation: Setting "title" in the constructor results in a rendered attribute during construction. Change the name of this property, move this assignment to another lifecycle method, or override the default behavior by defining "title" as a property on the class.',
                     type: 'AssignmentExpression',
                     column: 25,
-                    line: 5,
+                    line: 6,
                 },
             ],
         },
@@ -160,6 +169,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 import { LightningElement } from 'lwc';
                 class Test extends LightningElement {
                     constructor() {
+                        super();
                         this.ariaDescribedBy = 'test';
                     }
                 }
@@ -170,7 +180,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                         'Invariant violation: Setting "ariaDescribedBy" in the constructor results in a rendered attribute during construction. Change the name of this property, move this assignment to another lifecycle method, or override the default behavior by defining "ariaDescribedBy" as a property on the class.',
                     type: 'AssignmentExpression',
                     column: 25,
-                    line: 5,
+                    line: 6,
                 },
             ],
         },
@@ -179,6 +189,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 import { track, LightningElement } from 'lwc';
                 class Test extends LightningElement {
                     constructor() {
+                        super();
                         this.role = ['test'];
                     }
                 }
@@ -189,7 +200,7 @@ ruleTester.run('no-attributes-during-construction', rule, {
                         'Invariant violation: Setting "role" in the constructor results in a rendered attribute during construction. Change the name of this property, move this assignment to another lifecycle method, or override the default behavior by defining "role" as a property on the class.',
                     type: 'AssignmentExpression',
                     column: 25,
-                    line: 5,
+                    line: 6,
                 },
             ],
         },
