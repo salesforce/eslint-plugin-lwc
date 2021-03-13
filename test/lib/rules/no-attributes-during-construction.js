@@ -97,7 +97,20 @@ ruleTester.run('no-attributes-during-construction', rule, {
                 const foo = {};
                 class Test extends LightningElement {
                     constructor() {
+                        super();
                         foo.hidden = 'test';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { api } from 'lwc';
+                import MyLightningElement from './my-lightning-element';
+                class Test extends MyLightningElement {
+                    constructor() {
+                        super();
+                        this.title = 'test';
                     }
                 }
             `,
