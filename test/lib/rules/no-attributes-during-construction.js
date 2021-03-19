@@ -17,6 +17,19 @@ ruleTester.run('no-attributes-during-construction', rule, {
     valid: [
         {
             code: `
+                import { LightningElement } from 'lwc';
+                let tabIndex;
+                class Test extends LightningElement {
+                    tabIndex = '-1';
+                    constructor() {
+                        super();
+                        tabIndex = '0';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
                 class LightningElement {}
                 class Test extends LightningElement {
                     constructor() {
