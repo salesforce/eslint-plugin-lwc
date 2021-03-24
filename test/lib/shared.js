@@ -7,10 +7,14 @@
 'use strict';
 
 const ESLINT_TEST_CONFIG = {
-    parser: require.resolve('babel-eslint'),
+    parser: require.resolve('@babel/eslint-parser'),
     parserOptions: {
-        ecmaVersion: 7,
-        sourceType: 'module',
+        requireConfigFile: false,
+        babelOptions: {
+            parserOpts: {
+                plugins: ['classProperties', ['decorators', { decoratorsBeforeExport: false }]],
+            },
+        },
     },
 };
 

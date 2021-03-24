@@ -5,19 +5,29 @@
 ## Installation
 
 ```
-$ npm install eslint babel-eslint @lwc/eslint-plugin-lwc --save-dev
+$ npm install eslint @babel/core @babel/eslint-parser @lwc/eslint-plugin-lwc --save-dev
 ```
 
 ## Usage
 
-Add `lwc` to the `plugins` section of your configuration. Then configure the desired rules in the `rules` sections. Some of the syntax used in Lightning Web Components is not yet stage 4 (eg. decorators), and the out-of-the-box parser from ESLint doesn't support this syntax yet. In order to parse the LWC files properly, set the `parser` field to `babel-eslint`.
+Add `@lwc/eslint-plugin-lwc` to the `plugins` section of your configuration. Then configure the desired rules in the `rules` sections. Some of the syntax used in Lightning Web Components is not yet stage 4 (eg. class fields or decorators), and the out-of-the-box parser from ESLint doesn't support this syntax yet. In order to parse the LWC files properly, set the `parser` field to [`@babel/eslint-parser`](https://github.com/babel/babel/tree/main/eslint/babel-eslint-parser).
 
 Example of `.eslintrc`:
 
 ```json
 {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "requireConfigFile": false,
+        "babelOptions": {
+            "parserOpts": {
+                "plugins": ["classProperties", ["decorators", { "decoratorsBeforeExport": false }]]
+            }
+        }
+    },
+
     "plugins": ["@lwc/eslint-plugin-lwc"],
+
     "rules": {
         "@lwc/lwc/no-deprecated": "error",
         "@lwc/lwc/valid-api": "error",
