@@ -182,6 +182,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message: '"getFoo" is not a known adapter.',
+                    line: 4,
+                    column: 23,
                 },
             ],
         },
@@ -211,6 +213,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message: '"getFoo" is not a known adapter.',
+                    line: 5,
+                    column: 23,
                 },
             ],
         },
@@ -225,6 +229,33 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message: '"getFoo" from "adapter" is not a known adapter.',
+                    line: 5,
+                    column: 23,
+                },
+            ],
+        },
+        // reports multiple occurrences
+        {
+            code: `import { wire } from 'lwc';
+            import { getFoo } from 'adapter';
+
+            class Test {
+                @wire(getFoo) wiredProp;
+                
+                @wire(getFoo)
+                wiredMethod() {}
+            }`,
+            options: DEFAULT_OPTIONS,
+            errors: [
+                {
+                    message: '"getFoo" from "adapter" is not a known adapter.',
+                    line: 5,
+                    column: 23,
+                },
+                {
+                    message: '"getFoo" from "adapter" is not a known adapter.',
+                    line: 7,
+                    column: 23,
                 },
             ],
         },
@@ -243,6 +274,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message: '"getFoo" from "adapter" is not a known adapter.',
+                    line: 5,
+                    column: 23,
                 },
             ],
         },
@@ -262,6 +295,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message: '"getPost" from "adapter" is not a known adapter.',
+                    line: 5,
+                    column: 23,
                 },
             ],
         },
@@ -281,6 +316,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
             errors: [
                 {
                     message: '"getFoo" from "adapter" is not a known adapter.',
+                    line: 5,
+                    column: 23,
                 },
             ],
         },
@@ -302,6 +339,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 {
                     message:
                         '"apexMethod" from "@salesforce/apex/Namespace.Classname.apexMethodReference" is not a known adapter.',
+                    line: 5,
+                    column: 23,
                 },
             ],
         },
@@ -327,6 +366,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 {
                     message:
                         '"apexMethod" from "@salesforce/apex/Namespace.Classname.apexMethodReference" is not a known adapter.',
+                    line: 6,
+                    column: 23,
                 },
             ],
         },
@@ -346,6 +387,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 {
                     message:
                         '"startRequest" from "@salesforce/apex/Continuation/SampleContinuationClass.startRequest" is not a known adapter.',
+                    line: 5,
+                    column: 23,
                 },
             ],
         },
@@ -365,6 +408,8 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 {
                     message:
                         '"startRequest" from "@salesforce/apexContinuation/SampleContinuationClass.startRequest" is not a known adapter.',
+                    line: 5,
+                    column: 23,
                 },
             ],
         },
