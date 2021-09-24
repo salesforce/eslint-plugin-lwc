@@ -30,6 +30,8 @@ The following properties are considered unsafe to access on `this.template`:
 -   `childNodes`
 -   `firstChild`
 -   `firstElementChild`
+-   `lastChild`
+-   `lastElementChild`
 
 Example of **correct** code:
 

@@ -55,19 +55,19 @@ const styles = [
 ];
 
 const invalidCases = buildCases({
-    properties: ['children', 'childNodes', 'firstChild', 'firstElementChild'],
+    properties: [
+        'children',
+        'childNodes',
+        'firstChild',
+        'firstElementChild',
+        'lastChild',
+        'lastElementChild',
+    ],
     styles,
 });
 
 const validCases = buildCases({
-    properties: [
-        'getElementById',
-        'getElementsByClassName',
-        'lastChild',
-        'lastElementChild',
-        'querySelector',
-        'querySelectorAll',
-    ],
+    properties: ['getElementById', 'getElementsByClassName', 'querySelector', 'querySelectorAll'],
     styles,
 });
 
