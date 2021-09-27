@@ -1,15 +1,19 @@
 ## Prevent accessing the immediate children of this.template (no-template-children)
 
-Directly accessing the Shadow root children elements via `this.template` can produce inconsistent results across browsers and across native and synthetic shadow DOM. This rule prevents accessing these unsafe properties.
+Directly accessing the shadow root children elements via `this.template` can produce inconsistent results across browsers and across native and synthetic shadow DOM. This rule prevents accessing these unsafe properties.
 
 ### Rule details
-In this section, we will assume the `Test` component to use the following template.
 
+Let's assume a `Test` component with the following template:
+
+```html
 <template>
     <div>Find me</div>
 </template>
+```
 
-The `Test` component will have to get a reference on the `<div>` element rendered its shadow tree.
+The `Test` component will have to get a reference to the `<div>` element rendered in its shadow tree.
+
 Example of **incorrect** code:
 
 ```js
@@ -51,4 +55,6 @@ export default class Test extends LightningElement {
 }
 ```
 
-In the example above, we are using `querySelector` to find the element from our template – in this case, a `<div>`. The behavior will not differ between browsers, because the selector will not match any element that isn't a `<div>` element, and this is regardless if the component is running in with native shadow DOM or not. Use whichever selector makes sense for the element you're trying to find.
+In the example above, we are using `querySelector` to find the element from our template – in this case, a `<div>`. The behavior will not differ between browsers, because the selector will not match any element that isn't a `<div>` element, and this is regardless of whether the component is running in native shadow DOM or not.
+
+In your own components, use whichever selector makes sense for the element you're trying to find.
