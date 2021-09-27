@@ -26,7 +26,7 @@ export default class Test extends LightningElement {
 In the code above, accessing `firstChild` on `this.template` could return the following results:
 
 -   A `<style>` element in the case of native shadow DOM running on [browsers that do not support constructable stylesheets](https://caniuse.com/mdn-api_shadowroot_adoptedstylesheets).
--   The first element defined in the component's template, if this is synthetic shadow DOM, or this is native shadow DOM and the browser supports constructable stylesheets.
+-   The`<div>` element defined in the component's template, if this is synthetic shadow DOM, or this is native shadow DOM and the browser supports constructable stylesheets.
 
 So the behavior could be different in different browsers, or in native shadow DOM compared to synthetic shadow DOM.
 
