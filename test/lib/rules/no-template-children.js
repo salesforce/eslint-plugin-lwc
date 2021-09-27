@@ -74,6 +74,10 @@ const validCases = [
     {
         code: `const firstChild = this[template].firstChild;`,
     },
+    // check we don't get an undefined/null error for checking the node parent/grandparent
+    {
+        code: 'this',
+    },
     ...buildCases({
         properties: [
             'getElementById',
