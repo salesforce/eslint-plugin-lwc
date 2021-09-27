@@ -66,10 +66,24 @@ const invalidCases = buildCases({
     styles,
 });
 
-const validCases = buildCases({
-    properties: ['getElementById', 'getElementsByClassName', 'querySelector', 'querySelectorAll'],
-    styles,
-});
+const validCases = [
+    // `this[template]` is valid, `this.template` is not
+    {
+        code: `const { firstChild } = this[template];`,
+    },
+    {
+        code: `const firstChild = this[template].firstChild;`,
+    },
+    ...buildCases({
+        properties: [
+            'getElementById',
+            'getElementsByClassName',
+            'querySelector',
+            'querySelectorAll',
+        ],
+        styles,
+    }).map(({ code }) => ({ code })),
+];
 
 ruleTester.run('no-template-children', rule, {
     valid: validCases,
