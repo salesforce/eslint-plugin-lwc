@@ -3,7 +3,13 @@
 Directly accessing the Shadow root children elements via `this.template` can produce inconsistent results across browsers and across native and synthetic shadow DOM. This rule prevents accessing these unsafe properties.
 
 ### Rule details
+In this section, we will assume the `Test` component to use the following template.
 
+<template>
+    <div>Find me</div>
+</template>
+
+The `Test` component will have to get a reference on the `<div>` element rendered its shadow tree.
 Example of **incorrect** code:
 
 ```js
