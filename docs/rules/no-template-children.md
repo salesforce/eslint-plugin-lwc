@@ -1,6 +1,6 @@
 ## Prevent accessing the immediate children of this.template (no-template-children)
 
-Directly querying the children of `this.template` can produce inconsistent results across browsers and across native and synthetic shadow DOM. This rules prevents accessing these unsafe properties.
+Directly accessing the Shadow root children elements via `this.template` can produce inconsistent results across browsers and across native and synthetic shadow DOM. This rule prevents accessing these unsafe properties.
 
 ### Rule details
 
