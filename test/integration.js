@@ -38,26 +38,20 @@ after(() => {
 // Small compat layer to support ESLint v8 API on both v7 and v8
 class ESLintCompat {
     constructor(options) {
-        this.version = eslint.CLIEngine ? 7 : 8;
-        if (this.version === 7) {
-            Object.assign(options, options.overrideConfig);
-            delete options.overrideConfig;
-            this.eslint = new eslint.CLIEngine(options);
-        } else {
-            this.eslint = new eslint.ESLint(options);
-        }
+        Object.assign(options, options.overrideConfig);
+        delete options.overrideConfig;
+        this.eslint = new eslint.CLIEngine(options);
     }
 
     lintText(text) {
-        if (this.version === 8) {
-            return this.eslint.lintText(text);
-        }
         return this.eslint.executeOnText(text).results;
     }
 }
+const isEslint7 = !!eslint.CLIEngine;
+const ESLint = isEslint7 ? ESLintCompat : eslint.ESLint;
 
 it('should resolve plugin rules', async () => {
-    const cli = new ESLintCompat({
+    const cli = new ESLint({
         useEslintrc: false,
         overrideConfig: {
             plugins: ['@lwc/eslint-plugin-lwc'],
