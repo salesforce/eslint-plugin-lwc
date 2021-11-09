@@ -34,7 +34,7 @@ jobs:
           steps:
             - run:
                 name: Override version of eslint@<<parameters.eslint-version>>
-                command: yarn add eslint@<<parameters.eslint-version>> -W --dev      
+                command: yarn add eslint@<<parameters.eslint-version>> --dev
       - run: yarn format:check
       - run: yarn lint
       - run: yarn test
