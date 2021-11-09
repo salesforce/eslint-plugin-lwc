@@ -60,9 +60,9 @@
   "nyc": {
     "check-coverage": true,
     "per-file": true,
-    "lines": 95,
-    "statements": 95,
-    "functions": 95,
+    "lines": 88,
+    "statements": 88,
+    "functions": 88,
     "reporter": [
       "html",
       "text"
