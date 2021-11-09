@@ -6,13 +6,13 @@
  */
 'use strict';
 
-const { RuleTester, ESLint } = require('eslint');
+const eslint = require('eslint');
 const { ESLINT_TEST_CONFIG } = require('../shared');
 const rule = require('../../../lib/rules/no-dupe-class-members');
 
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
+const ruleTester = new eslint.RuleTester(ESLINT_TEST_CONFIG);
 
-const isEslint7 = !!ESLint.CLIEngine;
+const isEslint7 = !!eslint.CLIEngine;
 
 ruleTester.run('no-dupe-class-members', rule, {
     valid: [
