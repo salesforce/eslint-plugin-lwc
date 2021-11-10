@@ -80,3 +80,9 @@ Older browsers like IE11 run LWC in compatibility mode. For more information abo
 | [lwc/no-async-await](./docs/rules/no-async-await.md)       | disallow usage of the async-await syntax    |         |
 | [lwc/no-for-of](./docs/rules/no-for-of.md)                 | disallow usage of the for-of syntax         |         |
 | [lwc/no-rest-parameter](./docs/rules/no-rest-parameter.md) | disallow usage of the rest parameter syntax |         |
+
+### Deprecated
+
+| Rule ID                                                            | Replaced by                                                                  |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md) | [no-dupe-class-members](https://eslint.org/docs/rules/no-dupe-class-members) |

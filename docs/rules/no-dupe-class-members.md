@@ -1,8 +1,8 @@
 # Disallow duplicate class members (no-dupe-class-members)
 
-If there are declarations of the same name in class members, the last declaration overwrites other declarations silently. This can cause unexpected behaviors. This rule prevents usage of duplicate class members (fields and methods) on the same class.
+> ⚠️ This rule is deprecated. It can be replaced by ESLint builtin [no-dupe-class-members](https://eslint.org/docs/rules/no-dupe-class-members) rule. ⚠️
 
-> Note: This rule extends the original eslint rule [`no-dupe-class-members`](https://eslint.org/docs/rules/no-dupe-class-members) to add support for [class fields](https://github.com/tc39/proposal-class-fields) that are not yet stage 4.
+If there are declarations of the same name in class members, the last declaration overwrites other declarations silently. This can cause unexpected behaviors. This rule prevents usage of duplicate class members (fields and methods) on the same class.
 
 ## Rule details
 
