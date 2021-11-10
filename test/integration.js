@@ -9,7 +9,6 @@
 const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
-
 const eslint = require('eslint');
 
 const SCOPE_DIRECTORY = path.resolve(__dirname, '../node_modules/@lwc');
@@ -35,21 +34,23 @@ after(() => {
     }
 });
 
-it('should resolve plugin rules', () => {
-    const cli = new eslint.CLIEngine({
+it('should resolve plugin rules', async () => {
+    const cli = new eslint.ESLint({
         useEslintrc: false,
-        plugins: ['@lwc/eslint-plugin-lwc'],
-        rules: {
-            '@lwc/lwc/no-document-query': 'error',
-            '@lwc/lwc/no-inner-html': 'warn',
+        overrideConfig: {
+            plugins: ['@lwc/eslint-plugin-lwc'],
+            rules: {
+                '@lwc/lwc/no-document-query': 'error',
+                '@lwc/lwc/no-inner-html': 'warn',
+            },
         },
     });
 
-    const report = cli.executeOnText(`
+    const results = await cli.lintText(`
         document.querySelectorAll("a").innerHTML = 'Hello'
     `);
 
-    const { messages } = report.results[0];
+    const { messages } = results[0];
 
     assert.equal(messages.length, 2);
     assert.equal(messages[0].ruleId, '@lwc/lwc/no-document-query');

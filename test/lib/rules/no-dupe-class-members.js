@@ -6,12 +6,14 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
-
+const semver = require('semver');
+const eslint = require('eslint');
 const { ESLINT_TEST_CONFIG } = require('../shared');
 const rule = require('../../../lib/rules/no-dupe-class-members');
 
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
+const ruleTester = new eslint.RuleTester(ESLINT_TEST_CONFIG);
+
+const isEslint7 = semver.satisfies(eslint.ESLint.version, '^7');
 
 ruleTester.run('no-dupe-class-members', rule, {
     valid: [
@@ -151,7 +153,9 @@ ruleTester.run('no-dupe-class-members', rule, {
             code: 'class A { foo; foo; }',
             errors: [
                 {
-                    type: 'ClassProperty',
+                    // In ESLint v7, class fields are called ClassProperty, whereas in ESLint v8,
+                    // they're called PropertyDefinition.
+                    type: isEslint7 ? 'ClassProperty' : 'PropertyDefinition',
                     line: 1,
                     column: 16,
                     messageId: 'unexpected',
