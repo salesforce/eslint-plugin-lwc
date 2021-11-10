@@ -13,7 +13,7 @@ const rule = require('../../../lib/rules/no-dupe-class-members');
 
 const ruleTester = new eslint.RuleTester(ESLINT_TEST_CONFIG);
 
-const isEslint7 = semver.satisfies(eslint.version, '^7');
+const isEslint7 = semver.satisfies(eslint.ESLint.version, '^7');
 
 ruleTester.run('no-dupe-class-members', rule, {
     valid: [
