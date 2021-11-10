@@ -9,7 +9,6 @@
 const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
-
 const eslint = require('eslint');
 
 const SCOPE_DIRECTORY = path.resolve(__dirname, '../node_modules/@lwc');
@@ -35,23 +34,8 @@ after(() => {
     }
 });
 
-// Small compat layer to support ESLint v8 API on both v7 and v8
-class ESLintCompat {
-    constructor(options) {
-        Object.assign(options, options.overrideConfig);
-        delete options.overrideConfig;
-        this.eslint = new eslint.CLIEngine(options);
-    }
-
-    lintText(text) {
-        return this.eslint.executeOnText(text).results;
-    }
-}
-const isEslint7 = !!eslint.CLIEngine;
-const ESLint = isEslint7 ? ESLintCompat : eslint.ESLint;
-
 it('should resolve plugin rules', async () => {
-    const cli = new ESLint({
+    const cli = new eslint.ESLint({
         useEslintrc: false,
         overrideConfig: {
             plugins: ['@lwc/eslint-plugin-lwc'],
