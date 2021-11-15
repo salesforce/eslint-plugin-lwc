@@ -86,3 +86,5 @@ Older browsers like IE11 run LWC in compatibility mode. For more information abo
 | Rule ID                                                            | Replaced by                                                                  |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
 | [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md) | [no-dupe-class-members](https://eslint.org/docs/rules/no-dupe-class-members) |
+
+
