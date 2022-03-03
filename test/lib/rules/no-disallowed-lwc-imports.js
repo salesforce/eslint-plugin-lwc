@@ -134,6 +134,82 @@ const invalidCases = [
             },
         ],
     },
+    {
+        code: `export { ShouldNotImport } from "lwc"`,
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                ),
+            },
+        ],
+    },
+    {
+        code: `export { ShouldNotImport as LightningElement } from "lwc"`,
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                ),
+            },
+        ],
+    },
+    {
+        code: `export { ShouldNotImport, LightningElement } from "lwc"`,
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                ),
+            },
+        ],
+    },
+    {
+        code: `export { LightningElement, ShouldNotImport } from "lwc"`,
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                ),
+            },
+        ],
+    },
+    {
+        code: `export { ShouldNotImport, AlsoBanned } from "lwc"`,
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                ),
+            },
+            {
+                message: new RegExp(`Invalid export. "AlsoBanned" is not a known and stable API.`),
+            },
+        ],
+    },
+    {
+        code: `export { LightningElement, ShouldNotImport, AlsoBanned } from "lwc"`,
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                ),
+            },
+            {
+                message: new RegExp(`Invalid export. "AlsoBanned" is not a known and stable API.`),
+            },
+        ],
+    },
+    {
+        code: `export {} from "lwc"`,
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid export. Bare exports are not allowed on "lwc". Instead, use named exports: "export { LightningElement } from 'lwc'".`,
+                ),
+            },
+        ],
+    },
 ];
 
 const validCases = [
@@ -163,6 +239,24 @@ const validCases = [
     },
     {
         code: `export * from "some-other-package"`,
+    },
+    {
+        code: `export { foo } from "some-other-package"`,
+    },
+    {
+        code: `export { LightningElement } from "lwc"`,
+    },
+    {
+        code: `export { LightningElement, wire } from "lwc"`,
+    },
+    {
+        code: `export { LightningElement, wire, api } from "lwc"`,
+    },
+    {
+        code: `export { LightningElement as Yolo } from "lwc"`,
+    },
+    {
+        code: `export {} from "some-other-package"`,
     },
 ];
 
