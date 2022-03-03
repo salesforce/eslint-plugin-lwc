@@ -18,7 +18,9 @@ const invalidCases = [
         code: `import { ShouldNotImport } from "lwc"`,
         errors: [
             {
-                message: new RegExp(`Invalid import. ShouldNotImport is not part of the lwc api.`),
+                message: new RegExp(
+                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                ),
             },
         ],
     },
@@ -26,7 +28,9 @@ const invalidCases = [
         code: `import { ShouldNotImport as LightningElement } from "lwc"`,
         errors: [
             {
-                message: new RegExp(`Invalid import. ShouldNotImport is not part of the lwc api.`),
+                message: new RegExp(
+                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                ),
             },
         ],
     },
@@ -34,7 +38,9 @@ const invalidCases = [
         code: `import { ShouldNotImport, LightningElement } from "lwc"`,
         errors: [
             {
-                message: new RegExp(`Invalid import. ShouldNotImport is not part of the lwc api.`),
+                message: new RegExp(
+                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                ),
             },
         ],
     },
@@ -42,7 +48,9 @@ const invalidCases = [
         code: `import { LightningElement, ShouldNotImport } from "lwc"`,
         errors: [
             {
-                message: new RegExp(`Invalid import. ShouldNotImport is not part of the lwc api.`),
+                message: new RegExp(
+                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                ),
             },
         ],
     },
@@ -50,10 +58,12 @@ const invalidCases = [
         code: `import { ShouldNotImport, AlsoBanned } from "lwc"`,
         errors: [
             {
-                message: new RegExp(`Invalid import. ShouldNotImport is not part of the lwc api.`),
+                message: new RegExp(
+                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                ),
             },
             {
-                message: new RegExp(`Invalid import. AlsoBanned is not part of the lwc api.`),
+                message: new RegExp(`Invalid import. "AlsoBanned" is not a known and stable API.`),
             },
         ],
     },
@@ -61,10 +71,12 @@ const invalidCases = [
         code: `import { LightningElement, ShouldNotImport, AlsoBanned } from "lwc"`,
         errors: [
             {
-                message: new RegExp(`Invalid import. ShouldNotImport is not part of the lwc api.`),
+                message: new RegExp(
+                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                ),
             },
             {
-                message: new RegExp(`Invalid import. AlsoBanned is not part of the lwc api.`),
+                message: new RegExp(`Invalid import. "AlsoBanned" is not a known and stable API.`),
             },
         ],
     },
@@ -82,9 +94,7 @@ const invalidCases = [
         code: `export * from 'lwc'`,
         errors: [
             {
-                message: new RegExp(
-                    `Invalid export. Exporting from "lwc" is not allowed. Instead, use named imports: "import { LightningElement } from 'lwc'".`,
-                ),
+                message: new RegExp(`Invalid export. Exporting from "lwc" is not allowed.`),
             },
         ],
     },
@@ -92,9 +102,7 @@ const invalidCases = [
         code: `export * as foo from 'lwc'`,
         errors: [
             {
-                message: new RegExp(
-                    `Invalid export. Exporting from "lwc" is not allowed. Instead, use named imports: "import { LightningElement } from 'lwc'".`,
-                ),
+                message: new RegExp(`Invalid export. Exporting from "lwc" is not allowed.`),
             },
         ],
     },
@@ -102,9 +110,7 @@ const invalidCases = [
         code: `import 'lwc'`,
         errors: [
             {
-                message: new RegExp(
-                    `Invalid import. Bare imports are not allowed on "lwc". Instead, use named imports: "import { LightningElement } from 'lwc'".`,
-                ),
+                message: new RegExp(`Invalid import. Bare imports are not allowed on "lwc".`),
             },
         ],
     },
