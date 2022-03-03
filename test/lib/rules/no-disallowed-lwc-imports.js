@@ -113,7 +113,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid import. "lwc" does not export a default module. Instead, use named imports: "import { LightningElement } from 'lwc'".`,
+                    `Invalid import. "lwc" does not have a default export. Instead, use named imports: "import { LightningElement } from 'lwc'".`,
                 ),
             },
         ],
@@ -123,7 +123,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid import. "lwc" does not export a default module. Instead, use named imports: "import { LightningElement } from 'lwc'".`,
+                    `Invalid import. "lwc" does not have a default export. Instead, use named imports: "import { LightningElement } from 'lwc'".`,
                 ),
             },
         ],
