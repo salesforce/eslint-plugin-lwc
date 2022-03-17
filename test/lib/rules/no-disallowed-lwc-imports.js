@@ -258,6 +258,9 @@ const validCases = [
     {
         code: `export {} from "some-other-package"`,
     },
+    {
+        code: `export { LightningElement as default } from "lwc"`,
+    },
 ];
 
 ruleTester.run('no-disallowed-lwc-imports', rule, {
