@@ -46,7 +46,7 @@ jobs:
           name: Install dependencies and build
           command: yarn install --frozen-lockfile
 
-      - save_v2_cache
+      - save_v1_cache
       - when:
           condition:
             not:
