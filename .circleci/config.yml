@@ -66,6 +66,8 @@ jobs:
           command: yarn test
   
   deploy:
+    docker:
+      - image: circleci/node
     steps:
       - checkout
       - restore_v1_cache
