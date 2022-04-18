@@ -15,7 +15,9 @@
     "format": "prettier --write --ignore-path .gitignore \"**/*.{js,md}\"",
     "format:check": "prettier --check --ignore-path .gitignore \"**/*.{js,md}\"",
     "lint": "eslint lib/ test/",
-    "test": "nyc mocha"
+    "test": "nyc mocha",
+    "release:version": "npm version",
+    "release:publish": "npm publish --registry=https://registry.npmjs.org"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
