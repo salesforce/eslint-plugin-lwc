@@ -170,6 +170,20 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 },
             ],
         },
+        {
+            code: `import { wire } from 'lwc';
+            import { getCartSummary } from '@salesforce/commerce/cartApi';
+
+            class Test {
+                @wire(getCartSummary)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/commerce/*Api!(Internal)', identifier: '*' }],
+                },
+            ],
+        },
     ],
     invalid: [
         {
@@ -408,6 +422,28 @@ ruleTester.run('no-unknown-wire-adapters', rule, {
                 {
                     message:
                         '"startRequest" from "@salesforce/apexContinuation/SampleContinuationClass.startRequest" is not a known adapter.',
+                    line: 5,
+                    column: 23,
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { getCartSummary } from '@salesforce/commerce/cartApiInternal';
+
+            class Test {
+                @wire(getCartSummary)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/commerce/*Api!(Internal)', identifier: '*' }],
+                },
+            ],
+            errors: [
+                {
+                    message:
+                        '"getCartSummary" from "@salesforce/commerce/cartApiInternal" is not a known adapter.',
                     line: 5,
                     column: 23,
                 },

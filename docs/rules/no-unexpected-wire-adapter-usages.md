@@ -14,6 +14,9 @@ This rule can be configured as follows:
 
         // for modules exporting wire adapters using default exports
         { module: '<module name>', identifier: 'default' },
+
+        // to match multiple adapters, use glob patterns
+        { module: '<module name glob pattern>', identifier: '<adapter identifier glob pattern>' },
     ];
 }
 ```
@@ -31,6 +34,29 @@ const barAdapter = fooAdapter; // invalid
 export default class Example extends LightningElement {
     @wire(fooAdapter) // valid
     foo;
+}
+```
+
+```js
+/*eslint lwc/no-unexpected-wire-adapter-usages: ["error", {"adapters": [{"module": "myNamespace/myAd*", "identifier": "foo*"}]}]*/
+
+import { LightningElement, wire } from 'lwc';
+import { fooAdapter } from 'myNamespace/myAdapters';
+import { fooBarAdapter } from 'myNamespace/myAccount';
+
+wire(fooAdapter); // invalid
+wire(fooBarAdapter); // valid
+new fooAdapter(); // invalid
+new fooBarAdapter(); // valid
+const barAdapter = fooAdapter; // invalid
+const bazAdapter = fooBarAdapter; // valid
+
+export default class Example extends LightningElement {
+    @wire(fooAdapter) // valid
+    foo;
+
+    @wire(fooBarAdapter) // valid
+    fooBar;
 }
 ```
 
