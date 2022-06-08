@@ -76,6 +76,64 @@ ruleTester.run('no-unexpected-wire-adapter-usages', rule, {
                 },
             ],
         },
+        {
+            code: `import { wire } from 'lwc';
+            import { apexMethod } from '@salesforce/apex/Namespace.Classname.apexMethodReference';
+
+            class Test {
+                @wire(apexMethod)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/apex/*', identifier: '*' }],
+                },
+            ],
+        },
+        // matches multiple modules, but not the given identifier
+        {
+            code: `import { wire } from 'lwc';
+            import { apexMethod } from '@salesforce/apex/Namespace.Classname.apexMethodReference';
+
+            class Test {
+                @wire(apexMethod)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/apex/*', identifier: 'default' }],
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import startRequest from '@salesforce/apex/Continuation/SampleContinuationClass.startRequest';
+            startRequest();
+
+            class Test {
+                @wire(startRequest) wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/apex/*', identifier: '*' }],
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { getCartSummary } from '@salesforce/commerce/cartApiInternal';
+            getCartSummary();
+
+            class Test {
+                @wire(getCartSummary)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/commerce/*Api!(Internal)', identifier: '*' }],
+                },
+            ],
+        },
     ],
     invalid: [
         {
@@ -170,6 +228,100 @@ ruleTester.run('no-unexpected-wire-adapter-usages', rule, {
                 {
                     message:
                         '"getFoo" is a wire adapter and can only be used via the @wire decorator.',
+                },
+            ],
+        },
+        // matches multiple identifiers, but only one module
+        {
+            code: `import { wire } from 'lwc';
+            import { fooMethod } from '@salesforce/apex/Foo.Namespace';
+
+            class Test {
+                @wire(fooMethod)
+                wiredValue;
+
+                aMethod() {
+                    fooMethod();
+                }
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/apex/Foo.Namespace', identifier: '*' }],
+                },
+            ],
+            errors: [
+                {
+                    message:
+                        '"fooMethod" is a wire adapter and can only be used via the @wire decorator.',
+                    line: 9,
+                    column: 21,
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import startRequest from '@salesforce/apex/Continuation/SampleContinuationClass.startRequest';
+            startRequest();
+
+            class Test {
+                @wire(startRequest) wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/apex/**', identifier: '*' }],
+                },
+            ],
+            errors: [
+                {
+                    message:
+                        '"startRequest" is a wire adapter and can only be used via the @wire decorator.',
+                    line: 3,
+                    column: 13,
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import startRequest from '@salesforce/apexContinuation/SampleContinuationClass.startRequest';
+            startRequest();
+
+            class Test {
+                @wire(startRequest) wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/apex*/*', identifier: '*' }],
+                },
+            ],
+            errors: [
+                {
+                    message:
+                        '"startRequest" is a wire adapter and can only be used via the @wire decorator.',
+                    line: 3,
+                    column: 13,
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { getCartSummary } from '@salesforce/commerce/cartApi';
+            getCartSummary();
+
+            class Test {
+                @wire(getCartSummary)
+                wiredProp;
+            }`,
+            options: [
+                {
+                    adapters: [{ module: '@salesforce/commerce/*Api!(Internal)', identifier: '*' }],
+                },
+            ],
+            errors: [
+                {
+                    message:
+                        '"getCartSummary" is a wire adapter and can only be used via the @wire decorator.',
+                    line: 3,
+                    column: 13,
                 },
             ],
         },
