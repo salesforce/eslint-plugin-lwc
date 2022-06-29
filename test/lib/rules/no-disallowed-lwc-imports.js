@@ -215,7 +215,7 @@ const invalidCases = [
         code: `import { LightningElement } from "lwc"`,
         options: [
             {
-                allowList: [],
+                allowlist: [],
             },
         ],
         errors: [
@@ -230,7 +230,7 @@ const invalidCases = [
         code: `export { LightningElement } from "lwc"`,
         options: [
             {
-                allowList: [],
+                allowlist: [],
             },
         ],
         errors: [
@@ -245,7 +245,7 @@ const invalidCases = [
         code: `import { api } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement'],
+                allowlist: ['LightningElement'],
             },
         ],
         errors: [
@@ -258,7 +258,7 @@ const invalidCases = [
         code: `import { Unknown as LightningElement } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement'],
+                allowlist: ['LightningElement'],
             },
         ],
         errors: [
@@ -271,7 +271,7 @@ const invalidCases = [
         code: `export { api } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement'],
+                allowlist: ['LightningElement'],
             },
         ],
         errors: [
@@ -284,7 +284,7 @@ const invalidCases = [
         code: `export { Unknown as LightningElement } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement'],
+                allowlist: ['LightningElement'],
             },
         ],
         errors: [
@@ -364,7 +364,7 @@ const validCases = [
         code: `import { LightningElement } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement', 'api'],
+                allowlist: ['LightningElement', 'api'],
             },
         ],
     },
@@ -372,7 +372,7 @@ const validCases = [
         code: `import { LightningElement as LWCElement } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement', 'api'],
+                allowlist: ['LightningElement', 'api'],
             },
         ],
     },
@@ -380,7 +380,7 @@ const validCases = [
         code: `import { LightningElement, api } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement', 'api'],
+                allowlist: ['LightningElement', 'api'],
             },
         ],
     },
@@ -388,7 +388,7 @@ const validCases = [
         code: `export  { LightningElement } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement', 'api'],
+                allowlist: ['LightningElement', 'api'],
             },
         ],
     },
@@ -396,7 +396,7 @@ const validCases = [
         code: `export  { LightningElement, api } from "lwc"`,
         options: [
             {
-                allowList: ['LightningElement', 'api'],
+                allowlist: ['LightningElement', 'api'],
             },
         ],
     },
