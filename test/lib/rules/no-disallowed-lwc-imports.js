@@ -19,7 +19,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid import. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
         ],
@@ -29,7 +29,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid import. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
         ],
@@ -39,7 +39,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid import. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
         ],
@@ -49,7 +49,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid import. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
         ],
@@ -59,11 +59,11 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid import. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
             {
-                message: new RegExp(`Invalid import. "AlsoBanned" is not a known and stable API.`),
+                message: new RegExp(`Invalid import. "AlsoBanned" can't be imported from "lwc".`),
             },
         ],
     },
@@ -72,11 +72,11 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid import. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid import. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
             {
-                message: new RegExp(`Invalid import. "AlsoBanned" is not a known and stable API.`),
+                message: new RegExp(`Invalid import. "AlsoBanned" can't be imported from "lwc".`),
             },
         ],
     },
@@ -139,7 +139,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid export. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
         ],
@@ -149,7 +149,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid export. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
         ],
@@ -159,7 +159,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid export. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
         ],
@@ -169,7 +169,7 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid export. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
         ],
@@ -179,11 +179,11 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid export. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
             {
-                message: new RegExp(`Invalid export. "AlsoBanned" is not a known and stable API.`),
+                message: new RegExp(`Invalid export. "AlsoBanned" can't be imported from "lwc".`),
             },
         ],
     },
@@ -192,11 +192,11 @@ const invalidCases = [
         errors: [
             {
                 message: new RegExp(
-                    `Invalid export. "ShouldNotImport" is not a known and stable API.`,
+                    `Invalid export. "ShouldNotImport" can't be imported from "lwc".`,
                 ),
             },
             {
-                message: new RegExp(`Invalid export. "AlsoBanned" is not a known and stable API.`),
+                message: new RegExp(`Invalid export. "AlsoBanned" can't be imported from "lwc".`),
             },
         ],
     },
@@ -207,6 +207,89 @@ const invalidCases = [
                 message: new RegExp(
                     `Invalid export. Bare exports are not allowed on "lwc". Instead, use named exports: "export { LightningElement } from 'lwc'".`,
                 ),
+            },
+        ],
+    },
+
+    {
+        code: `import { LightningElement } from "lwc"`,
+        options: [
+            {
+                allowlist: [],
+            },
+        ],
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid import. "LightningElement" can't be imported from "lwc".`,
+                ),
+            },
+        ],
+    },
+    {
+        code: `export { LightningElement } from "lwc"`,
+        options: [
+            {
+                allowlist: [],
+            },
+        ],
+        errors: [
+            {
+                message: new RegExp(
+                    `Invalid export. "LightningElement" can't be imported from "lwc".`,
+                ),
+            },
+        ],
+    },
+    {
+        code: `import { api } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement'],
+            },
+        ],
+        errors: [
+            {
+                message: new RegExp(`Invalid import. "api" can't be imported from "lwc".`),
+            },
+        ],
+    },
+    {
+        code: `import { Unknown as LightningElement } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement'],
+            },
+        ],
+        errors: [
+            {
+                message: new RegExp(`Invalid import. "Unknown" can't be imported from "lwc".`),
+            },
+        ],
+    },
+    {
+        code: `export { api } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement'],
+            },
+        ],
+        errors: [
+            {
+                message: new RegExp(`Invalid export. "api" can't be imported from "lwc".`),
+            },
+        ],
+    },
+    {
+        code: `export { Unknown as LightningElement } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement'],
+            },
+        ],
+        errors: [
+            {
+                message: new RegExp(`Invalid export. "Unknown" can't be imported from "lwc".`),
             },
         ],
     },
@@ -275,6 +358,47 @@ const validCases = [
     },
     {
         code: `export default 'foo'`,
+    },
+
+    {
+        code: `import { LightningElement } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement', 'api'],
+            },
+        ],
+    },
+    {
+        code: `import { LightningElement as LWCElement } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement', 'api'],
+            },
+        ],
+    },
+    {
+        code: `import { LightningElement, api } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement', 'api'],
+            },
+        ],
+    },
+    {
+        code: `export  { LightningElement } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement', 'api'],
+            },
+        ],
+    },
+    {
+        code: `export  { LightningElement, api } from "lwc"`,
+        options: [
+            {
+                allowlist: ['LightningElement', 'api'],
+            },
+        ],
     },
 ];
 

@@ -39,3 +39,21 @@ import { LightningElement, wire, api } from 'lwc';
 ```
 
 If you disable this rule, then you may import unstable or otherwise undesirable APIs from `lwc`.
+
+### `allowlist`
+
+The `allowlist` property overrides the default list of APIs that could be imported from the `lwc` package. It accepts an array of strings.
+
+Examples of **incorrect** code:
+
+```js
+/* eslint lwc/valid-api: ["error", { "allowlist": ["LightningElement"] }] */
+import { wire } from 'lwc';
+```
+
+Examples of **correct** code:
+
+```js
+/* eslint lwc/valid-api: ["error", { "allowlist": ["LightningElement"] }] */
+import { LightningElement } from 'lwc';
+```
