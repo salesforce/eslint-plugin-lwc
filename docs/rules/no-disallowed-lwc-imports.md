@@ -57,3 +57,31 @@ Examples of **correct** code:
 /* eslint lwc/valid-api: ["error", { "allowlist": ["LightningElement"] }] */
 import { LightningElement } from 'lwc';
 ```
+
+### `allowBareImports`
+
+The `allowBareImports` property, when set to `true`, allows the following to be treated as **correct** code:
+
+```js
+import 'lwc';
+```
+
+The default value is `false`.
+
+### `allowExports`
+
+The `allowExports` property, when set to `true`, allows any `exports` (such as the following) to be treated as **correct** code:
+
+```js
+export * from 'lwc';
+```
+
+```js
+export { LightningElement } from 'lwc';
+```
+
+```js
+export { doesNotExist } from 'lwc';
+```
+
+The default value is `false`.
