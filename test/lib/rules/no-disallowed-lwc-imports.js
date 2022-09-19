@@ -400,6 +400,54 @@ const validCases = [
             },
         ],
     },
+    {
+        code: `import 'lwc'`,
+        options: [
+            {
+                allowBareImports: true,
+            },
+        ],
+    },
+    {
+        code: `export  { LightningElement } from "lwc"`,
+        options: [
+            {
+                allowExports: true,
+            },
+        ],
+    },
+    {
+        code: `export  { doesNotExist } from "lwc"`,
+        options: [
+            {
+                allowExports: true,
+            },
+        ],
+    },
+    {
+        code: `export {} from 'lwc'`,
+        options: [
+            {
+                allowExports: true,
+            },
+        ],
+    },
+    {
+        code: `export * as foo from 'lwc'`,
+        options: [
+            {
+                allowExports: true,
+            },
+        ],
+    },
+    {
+        code: `export * from 'lwc'`,
+        options: [
+            {
+                allowExports: true,
+            },
+        ],
+    },
 ];
 
 ruleTester.run('no-disallowed-lwc-imports', rule, {
