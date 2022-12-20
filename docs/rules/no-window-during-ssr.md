@@ -4,30 +4,31 @@
 
 <!-- end auto-generated rule header -->
 
-TODO: full length description & reasoning for the rule
+Browser APIs must not be accessed when SSR is being done. This rule prevents usage of `window` in `connectedCallback`
+(and in methods called from `conenctedCallback` or anywhere when SSR is being done).
 
 ## Rule Details
 
 Examples of **incorrect** code for this rule:
 
 ```js
-// TODO
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    connectedCallback() {
+        window.foo = true;
+    }
+}
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-// TODO
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    renderedCallback() {
+        window.foo = true;
+    }
+}
 ```
-
-<!--
-## When Not To Use It
-
-TODO: when not to use it
--->
-
-<!--
-## Further Reading
-
-TODO: further reading
--->

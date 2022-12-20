@@ -4,30 +4,31 @@
 
 <!-- end auto-generated rule header -->
 
-TODO: full length description & reasoning for the rule
+Browser APIs must not be accessed when SSR is being done. This rule prevents usage of browser APIs like `querySelector`
+on `template` in `connectedCallback` (and in methods called from `conenctedCallback` or anywhere when SSR is being done).
 
 ## Rule Details
 
 Examples of **incorrect** code for this rule:
 
 ```js
-// TODO
+// TODOimport { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    connectedCallback() {
+        this.template.querySelector('span')?.foo();
+    }
+}
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-// TODO
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    renderedCallback() {
+        this.template.querySelector('span')?.foo();
+    }
+}
 ```
-
-<!--
-## When Not To Use It
-
-TODO: when not to use it
--->
-
-<!--
-## Further Reading
-
-TODO: further reading
--->
