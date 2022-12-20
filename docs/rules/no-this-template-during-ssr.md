@@ -1,4 +1,4 @@
-# Disallow access of this.template during SSR (`@divmain/ssr/no-this-template-during-ssr`)
+# Disallow access of this.template during SSR (`lwc/no-this-template-during-ssr`)
 
 💼 This rule is enabled in the ✅ `recommended` config.
 

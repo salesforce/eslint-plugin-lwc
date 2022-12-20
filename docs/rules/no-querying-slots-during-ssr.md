@@ -1,4 +1,4 @@
-# Disallow querying of slots during SSR (`@divmain/ssr/no-querying-slots-during-ssr`)
+# Disallow querying of slots during SSR (`lwc/no-querying-slots-during-ssr`)
 
 💼 This rule is enabled in the ✅ `recommended` config.
 

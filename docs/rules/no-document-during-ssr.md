@@ -1,4 +1,4 @@
-# Disallow references to document during SSR (`@divmain/ssr/no-document-during-ssr`)
+# Disallow references to document during SSR (`lwc/no-document-during-ssr`)
 
 💼 This rule is enabled in the ✅ `recommended` config.
 

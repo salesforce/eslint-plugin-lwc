@@ -1,4 +1,4 @@
-# Disallow access to global browser APIs during SSR (`@divmain/ssr/no-restricted-browser-globals-during-ssr`)
+# Disallow access to global browser APIs during SSR (`lwc/no-restricted-browser-globals-during-ssr`)
 
 💼 This rule is enabled in the ✅ `recommended` config.
 

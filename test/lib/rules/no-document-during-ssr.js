@@ -16,6 +16,15 @@ tester.run('no-document-during-ssr', rule, {
     valid: [
         {
             code: `
+                class RandomClass {
+                    constructor() {
+                      document.write("hello");
+                    }
+                }
+            `,
+        },
+        {
+            code: `
         import { LightningElement } from 'lwc';
 
         export default class Foo extends LightningElement {
@@ -120,6 +129,48 @@ tester.run('no-document-during-ssr', rule, {
         import { LightningElement } from 'lwc';
 
         function notInvokedDuringSSR() {
+          document.futzAround();
+        }
+
+        export default class Foo extends LightningElement {
+          connectedCallback() {
+            // we can't use document here
+          }
+          renderedCallback() {
+            this.bar();
+          }
+          bar() {
+            notInvokedDuringSSR();
+          }
+        }
+  `,
+        },
+        {
+            code: `
+        import { LightningElement } from 'lwc';
+
+        const notInvokedDuringSSR = function () {
+          document.futzAround();
+        }
+
+        export default class Foo extends LightningElement {
+          connectedCallback() {
+            // we can't use document here
+          }
+          renderedCallback() {
+            this.bar();
+          }
+          bar() {
+            notInvokedDuringSSR();
+          }
+        }
+  `,
+        },
+        {
+            code: `
+        import { LightningElement } from 'lwc';
+
+        const notInvokedDuringSSR = () => {
           document.futzAround();
         }
 
@@ -286,6 +337,44 @@ tester.run('no-document-during-ssr', rule, {
           }
         }
       `,
+            errors: [
+                {
+                    message:
+                        'You should not access `document` in methods that will execute during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+        import { LightningElement } from 'lwc';
+
+        const writer = function() {
+          document.write("Hello world")
+        };
+        export default class Foo extends LightningElement {
+          connectedCallback() {
+            writer();
+          }
+        }    `,
+            errors: [
+                {
+                    message:
+                        'You should not access `document` in methods that will execute during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+        import { LightningElement } from 'lwc';
+
+        const writer = () => {
+          document.write("Hello world")
+        };
+        export default class Foo extends LightningElement {
+          connectedCallback() {
+            writer();
+          }
+        }    `,
             errors: [
                 {
                     message:

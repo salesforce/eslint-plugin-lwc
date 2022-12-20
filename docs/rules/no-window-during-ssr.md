@@ -1,4 +1,4 @@
-# Disallow references to window during SSR (`@divmain/ssr/no-window-during-ssr`)
+# Disallow references to window during SSR (`lwc/no-window-during-ssr`)
 
 💼 This rule is enabled in the ✅ `recommended` config.
 
