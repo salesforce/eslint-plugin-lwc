@@ -16,143 +16,143 @@ tester.run('no-window-during-ssr', rule, {
     valid: [
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-          renderedCallback() {
-            window.foo = true;
-          }
-          bar() {
-            this.template.classList.add('foo');
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    window.foo = true;
+                  }
+                  bar() {
+                    this.template.classList.add('foo');
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-          renderedCallback() {
-            this.bar();
-          }
-          bar() {
-            window.foo = true;
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    this.bar();
+                  }
+                  bar() {
+                    window.foo = true;
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-          renderedCallback() {
-            this.bar();
-          }
-          bar() {
-            doSomething(window);
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    this.bar();
+                  }
+                  bar() {
+                    doSomething(window);
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-          bar() {
-            doSomething(window);
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  bar() {
+                    doSomething(window);
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-
-        function notInvokedDuringSSR() {
-          window.futzAround();
-        }
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-          bar() {
-            notInvokedDuringSSR();
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+        
+                function notInvokedDuringSSR() {
+                  window.futzAround();
+                }
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  bar() {
+                    notInvokedDuringSSR();
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-
-        function notInvokedDuringSSR() {
-          window.futzAround();
-        }
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-          renderedCallback() {
-            notInvokedDuringSSR();
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+        
+                function notInvokedDuringSSR() {
+                  window.futzAround();
+                }
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    notInvokedDuringSSR();
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-
-        function notInvokedDuringSSR() {
-          window.futzAround();
-        }
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-          renderedCallback() {
-            this.bar();
-          }
-          bar() {
-            notInvokedDuringSSR();
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+        
+                function notInvokedDuringSSR() {
+                  window.futzAround();
+                }
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    this.bar();
+                  }
+                  bar() {
+                    notInvokedDuringSSR();
+                  }
+                }
+            `,
         },
     ],
     invalid: [
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            window.foo = true;
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    window.foo = true;
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -162,18 +162,18 @@ tester.run('no-window-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            this.foo();
-          }
-          foo() {
-            window.bar = true;
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.foo();
+                  }
+                  foo() {
+                    window.bar = true;
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -183,18 +183,18 @@ tester.run('no-window-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            this.foo();
-          }
-          foo() {
-            doSomethingWith(window);
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.foo();
+                  }
+                  foo() {
+                    doSomethingWith(window);
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -204,15 +204,15 @@ tester.run('no-window-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            doSomethingWith(window);
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    doSomethingWith(window);
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -222,16 +222,16 @@ tester.run('no-window-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-
-        window.futzAround();
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+        
+                window.futzAround();
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -241,17 +241,17 @@ tester.run('no-window-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-
-        {
-          window.futzAround();
-        }
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+        
+                {
+                  window.futzAround();
+                }
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -261,18 +261,18 @@ tester.run('no-window-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-
-        for (const thing of things) {
-          window.futzAround(thing);
-        }
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use window here
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+        
+                for (const thing of things) {
+                  window.futzAround(thing);
+                }
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                }
+            `,
             errors: [
                 {
                     message:

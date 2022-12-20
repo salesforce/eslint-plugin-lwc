@@ -15,86 +15,86 @@ tester.run('no-this-template-during-ssr', rule, {
     valid: [
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use this.template here
-          }
-          renderedCallback() {
-            this.template.querySelector('span')?.foo();
-          }
-          bar() {
-            this.template.querySelector('span')?.foo();
-          }
-        }
-  `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use this.template here
+                  }
+                  renderedCallback() {
+                    this.template.querySelector('span')?.foo();
+                  }
+                  bar() {
+                    this.template.querySelector('span')?.foo();
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use this.template here
-          }
-          renderedCallback() {
-            this.bar();
-          }
-          bar() {
-            this.template.querySelector('span')?.foo();
-          }
-        }
-  `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use this.template here
+                  }
+                  renderedCallback() {
+                    this.bar();
+                  }
+                  bar() {
+                    this.template.querySelector('span')?.foo();
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use this.template here
-          }
-          renderedCallback() {
-            this.bar();
-          }
-          bar() {
-            doSomething(this.template);
-          }
-        }
-  `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use this.template here
+                  }
+                  renderedCallback() {
+                    this.bar();
+                  }
+                  bar() {
+                    doSomething(this.template);
+                  }
+                }
+            `,
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            // we can't use this.template here
-          }
-          bar() {
-            doSomething(this.template);
-          }
-        }
-  `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use this.template here
+                  }
+                  bar() {
+                    doSomething(this.template);
+                  }
+                }
+            `,
         },
     ],
     invalid: [
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            this.template.querySelector('span')?.foo();
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.template.querySelector('span')?.foo();
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -104,18 +104,18 @@ tester.run('no-this-template-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            this.foo();
-          }
-          foo() {
-            this.template.querySelector('span')?.foo();
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.foo();
+                  }
+                  foo() {
+                    this.template.querySelector('span')?.foo();
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -125,18 +125,18 @@ tester.run('no-this-template-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            this.foo();
-          }
-          foo() {
-            doSomethingWith(this.template);
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.foo();
+                  }
+                  foo() {
+                    doSomethingWith(this.template);
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -146,15 +146,15 @@ tester.run('no-this-template-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            doSomethingWith(this.template);
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    doSomethingWith(this.template);
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
@@ -164,21 +164,21 @@ tester.run('no-this-template-during-ssr', rule, {
         },
         {
             code: `
-        import { LightningElement } from 'lwc';
-        import tmplA from './a.html';
-
-        export default class Foo extends LightningElement {
-          connectedCallback() {
-            this.foo();
-          }
-          renderedCallbac() {
-            this.foo();
-          }
-          foo() {
-            doSomethingWith(this.template);
-          }
-        }
-      `,
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.foo();
+                  }
+                  renderedCallbac() {
+                    this.foo();
+                  }
+                  foo() {
+                    doSomethingWith(this.template);
+                  }
+                }
+            `,
             errors: [
                 {
                     message:
