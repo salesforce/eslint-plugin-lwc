@@ -140,6 +140,19 @@ tester.run('no-window-during-ssr', rule, {
                 }
             `,
         },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+      
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if(document !== undefined) {
+                    window.x = 1;
+                  }
+                }
+              }
+          `,
+        },
     ],
     invalid: [
         {

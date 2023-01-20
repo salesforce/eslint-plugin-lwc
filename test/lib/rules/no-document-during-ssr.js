@@ -46,6 +46,19 @@ tester.run('no-document-during-ssr', rule, {
         
                 export default class Foo extends LightningElement {
                   connectedCallback() {
+                    if(document !== undefined) {
+                      document.foo = true;
+                    }
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
                     // we can't use document here
                   }
                   renderedCallback() {

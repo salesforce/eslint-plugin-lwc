@@ -82,6 +82,19 @@ tester.run('no-this-template-during-ssr', rule, {
                 }
             `,
         },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+        
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    if(document !== undefined) {
+                      doSomething(this.template);
+                    }
+                  }
+                }
+            `,
+        },
     ],
     invalid: [
         {
