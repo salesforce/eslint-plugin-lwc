@@ -64,7 +64,6 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/no-querying-slots-during-ssr](./docs/rules/no-querying-slots-during-ssr.md)                         | disallow querying of slots during SSR                             |         |
 | [lwc/no-restricted-browser-globals-during-ssr](./docs/rules/no-restricted-browser-globals-during-ssr.md) | disallow access to global browser APIs during SSR                 |         |
 | [lwc/no-this-template-during-ssr](./docs/rules/no-this-template-during-ssr.md)                           | disallow access of this.template during SSR                       |         |
-| [lwc/no-window-during-ssr](./docs/rules/no-window-during-ssr.md)                                         | disallow references to window during SSR                          |         |
 
 ### Best practices
 
