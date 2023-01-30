@@ -1,9 +1,5 @@
 # Disallow querying of slots during SSR (`lwc/no-querying-slots-during-ssr`)
 
-💼 This rule is enabled in the ✅ `recommended` config.
-
-<!-- end auto-generated rule header -->
-
 TODO: full length description & reasoning for the rule
 
 ## Rule Details

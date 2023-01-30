@@ -1,9 +1,5 @@
 # Disallow access of this.template during SSR (`lwc/no-this-template-during-ssr`)
 
-💼 This rule is enabled in the ✅ `recommended` config.
-
-<!-- end auto-generated rule header -->
-
 Browser APIs must not be accessed when SSR is being done. This rule prevents usage of browser APIs like `querySelector`
 on `template` in `connectedCallback` (and in methods called from `conenctedCallback` or anywhere when SSR is being done).
 
@@ -12,7 +8,7 @@ on `template` in `connectedCallback` (and in methods called from `conenctedCallb
 Examples of **incorrect** code for this rule:
 
 ```js
-// TODOimport { LightningElement } from 'lwc';
+import { LightningElement } from 'lwc';
 
 export default class Foo extends LightningElement {
     connectedCallback() {

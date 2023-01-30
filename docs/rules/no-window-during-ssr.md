@@ -1,9 +1,5 @@
 # Disallow references to window during SSR (`lwc/no-window-during-ssr`)
 
-💼 This rule is enabled in the ✅ `recommended` config.
-
-<!-- end auto-generated rule header -->
-
 Browser APIs must not be accessed when SSR is being done. This rule prevents usage of `window` in `connectedCallback`
 (and in methods called from `conenctedCallback` or anywhere when SSR is being done).
 
