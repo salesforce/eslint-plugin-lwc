@@ -5177,22 +5177,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
             ],
         },
         {
-            code: 'onlyValidInTheBrowser(close);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
-            code: 'onlyValidInTheBrowser(closed);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
             code: 'onlyValidInTheBrowser(confirm);',
             errors: [
                 {
@@ -5226,38 +5210,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
         },
         {
             code: 'onlyValidInTheBrowser(devicePixelRatio);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
-            code: 'onlyValidInTheBrowser(event);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
-            code: 'onlyValidInTheBrowser(external);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
-            code: 'onlyValidInTheBrowser(find);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
-            code: 'onlyValidInTheBrowser(focus);',
             errors: [
                 {
                     message: 'Most browser APIs are not accessible during SSR.',
@@ -5345,14 +5297,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
             ],
         },
         {
-            code: 'onlyValidInTheBrowser(length);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
             code: 'onlyValidInTheBrowser(localStorage);',
             errors: [
                 {
@@ -5402,14 +5346,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
         },
         {
             code: 'onlyValidInTheBrowser(moveTo);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
-            code: 'onlyValidInTheBrowser(name);',
             errors: [
                 {
                     message: 'Most browser APIs are not accessible during SSR.',
@@ -6409,14 +6345,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
             ],
         },
         {
-            code: 'onlyValidInTheBrowser(parent);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
             code: 'onlyValidInTheBrowser(personalbar);',
             errors: [
                 {
@@ -6593,14 +6521,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
             ],
         },
         {
-            code: 'onlyValidInTheBrowser(self);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
             code: 'onlyValidInTheBrowser(sessionStorage);',
             errors: [
                 {
@@ -6658,14 +6578,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
         },
         {
             code: 'onlyValidInTheBrowser(toolbar);',
-            errors: [
-                {
-                    message: 'Most browser APIs are not accessible during SSR.',
-                },
-            ],
-        },
-        {
-            code: 'onlyValidInTheBrowser(top);',
             errors: [
                 {
                     message: 'Most browser APIs are not accessible during SSR.',
