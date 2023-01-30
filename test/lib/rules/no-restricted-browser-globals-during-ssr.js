@@ -13,8 +13,337 @@ const rule = require('../../../lib/rules/no-restricted-browser-globals-during-ss
 const tester = new RuleTester(ESLINT_TEST_CONFIG);
 
 tester.run('no-browser-globals-during-ssr', rule, {
-    valid: [{ code: `const f = new Foo();` }],
+    valid: [
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    window.foo = true;
+                  }
+                  bar() {
+                    this.template.classList.add('foo');
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    this.bar();
+                  }
+                  bar() {
+                    window.foo = true;
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    this.bar();
+                  }
+                  bar() {
+                    doSomething(window);
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  bar() {
+                    doSomething(window);
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                function notInvokedDuringSSR() {
+                  window.futzAround();
+                }
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  bar() {
+                    notInvokedDuringSSR();
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                function notInvokedDuringSSR() {
+                  window.futzAround();
+                }
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    notInvokedDuringSSR();
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                function notInvokedDuringSSR() {
+                  window.futzAround();
+                }
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use window here
+                  }
+                  renderedCallback() {
+                    this.bar();
+                  }
+                  bar() {
+                    notInvokedDuringSSR();
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if(document !== undefined) {
+                    window.x = 1;
+                  }
+                }
+              }
+          `,
+        },
+        { code: `const f = new Foo();` },
+    ],
     invalid: [
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                document.futzAround();
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use document here
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                {
+                  document.futzAround();
+                }
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use document here
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                for (const thing of things) {
+                  document.futzAround(thing);
+                }
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    // we can't use document here
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                function writer() {
+                  document.write("Hello world")
+                };
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    writer();
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                const writer = function() {
+                  document.write("Hello world")
+                };
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    writer();
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                const writer = () => {
+                  document.write("Hello world")
+                };
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    writer();
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    window.foo = true;
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.foo();
+                  }
+                  foo() {
+                    window.bar = true;
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.foo();
+                  }
+                  foo() {
+                    doSomethingWith(window);
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                import tmplA from './a.html';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    doSomethingWith(window);
+                  }
+                }
+            `,
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
         {
             code: 'const foo = new AbstractRange()',
             errors: [
@@ -6465,6 +6794,22 @@ tester.run('no-browser-globals-during-ssr', rule, {
         },
         {
             code: 'onlyValidInTheBrowser(webkitURL);',
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: 'onlyValidInTheBrowser(window);',
+            errors: [
+                {
+                    message: 'Most browser APIs are not accessible during SSR.',
+                },
+            ],
+        },
+        {
+            code: 'onlyValidInTheBrowser(document);',
             errors: [
                 {
                     message: 'Most browser APIs are not accessible during SSR.',
