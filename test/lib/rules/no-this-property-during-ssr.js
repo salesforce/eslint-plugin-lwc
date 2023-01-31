@@ -429,7 +429,7 @@ tester.run('no-this-property-during-ssr', rule, {
             errors: [
                 {
                     message:
-                        'You should not access any DOM properties on `this` in methods that will execute during SSR.',
+                        'You should not use `this.template.querySelector` in methods that will execute during SSR. Use `lwc:ref` instead.',
                 },
             ],
         },
@@ -443,14 +443,14 @@ tester.run('no-this-property-during-ssr', rule, {
                     this.foo();
                   }
                   foo() {
-                    this.template.querySelector('span')?.foo();
+                    this.template.querySelectorAll('span')?.foo();
                   }
                 }
             `,
             errors: [
                 {
                     message:
-                        'You should not access any DOM properties on `this` in methods that will execute during SSR.',
+                        'You should not use `this.template.querySelectorAll` in methods that will execute during SSR. Use `lwc:ref` instead.',
                 },
             ],
         },
@@ -537,7 +537,7 @@ tester.run('no-this-property-during-ssr', rule, {
             errors: [
                 {
                     message:
-                        'You should not use `querySelector` in methods that will execute during SSR. Use `lwc:ref` instead.',
+                        'You should not use `this.querySelector` in methods that will execute during SSR. Use `lwc:ref` instead.',
                 },
             ],
         },
@@ -561,7 +561,7 @@ tester.run('no-this-property-during-ssr', rule, {
             errors: [
                 {
                     message:
-                        'You should not use `querySelectorAll` in methods that will execute during SSR. Use `lwc:ref` instead.',
+                        'You should not use `this.querySelectorAll` in methods that will execute during SSR. Use `lwc:ref` instead.',
                 },
             ],
         },
