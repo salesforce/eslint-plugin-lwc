@@ -62,7 +62,7 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/valid-wire](./docs/rules/valid-wire.md)                                                             | validate `wire` decorator usage                                   |         |
 | [lwc/no-document-during-ssr](./docs/rules/no-document-during-ssr.md)                                     | disallow references to document during SSR                        |         |
 | [lwc/no-restricted-browser-globals-during-ssr](./docs/rules/no-restricted-browser-globals-during-ssr.md) | disallow access to global browser APIs during SSR                 |         |
-| [lwc/no-this-property-during-ssr](./docs/rules/no-this-property-during-ssr.md)                           | disallow access of any properties on `this` during SSR            |         |
+| [lwc/no-this-property-during-ssr](./docs/rules/no-this-property-during-ssr.md)                           | disallow access of any DOM properties on `this` during SSR        |         |
 
 ### Best practices
 
