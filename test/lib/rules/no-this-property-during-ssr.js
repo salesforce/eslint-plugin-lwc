@@ -247,8 +247,8 @@ const disallowedProperties = [
     'insertAdjacentText',
     'matches',
     'prepend',
-    'querySelector',
-    'querySelectorAll',
+    // 'querySelector', // separate test
+    // 'querySelectorAll',
     'releasePointerCapture',
     'remove',
     'removeAttribute',
@@ -514,6 +514,54 @@ tester.run('no-this-property-during-ssr', rule, {
                 {
                     message:
                         'You should not access any DOM properties on `this` in methods that will execute during SSR.',
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+              import tmplA from './a.html';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  this.foo();
+                }
+                renderedCallbac() {
+                  this.foo();
+                }
+                foo() {
+                  doSomethingWith(this.querySelector);
+                }
+              }
+          `,
+            errors: [
+                {
+                    message:
+                        'You should not use `querySelector` in methods that will execute during SSR. Use `lwc:ref` instead.',
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+              import tmplA from './a.html';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  this.foo();
+                }
+                renderedCallbac() {
+                  this.foo();
+                }
+                foo() {
+                  doSomethingWith(this.querySelectorAll);
+                }
+              }
+          `,
+            errors: [
+                {
+                    message:
+                        'You should not use `querySelectorAll` in methods that will execute during SSR. Use `lwc:ref` instead.',
                 },
             ],
         },
