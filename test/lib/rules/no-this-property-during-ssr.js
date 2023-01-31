@@ -11,7 +11,7 @@ const { ESLINT_TEST_CONFIG } = require('../shared');
 const rule = require('../../../lib/rules/no-this-property-during-ssr');
 
 const tester = new RuleTester(ESLINT_TEST_CONFIG);
-tester.run('no-this-template-during-ssr', rule, {
+tester.run('no-this-property-during-ssr', rule, {
     valid: [
         {
             code: `
@@ -111,7 +111,7 @@ tester.run('no-this-template-during-ssr', rule, {
             errors: [
                 {
                     message:
-                        'You should not access `this.template` in methods that will execute during SSR.',
+                        'You should not access any properties on `this` in methods that will execute during SSR.',
                 },
             ],
         },
@@ -132,7 +132,7 @@ tester.run('no-this-template-during-ssr', rule, {
             errors: [
                 {
                     message:
-                        'You should not access `this.template` in methods that will execute during SSR.',
+                        'You should not access any properties on `this` in methods that will execute during SSR.',
                 },
             ],
         },
@@ -153,7 +153,7 @@ tester.run('no-this-template-during-ssr', rule, {
             errors: [
                 {
                     message:
-                        'You should not access `this.template` in methods that will execute during SSR.',
+                        'You should not access any properties on `this` in methods that will execute during SSR.',
                 },
             ],
         },
@@ -171,7 +171,7 @@ tester.run('no-this-template-during-ssr', rule, {
             errors: [
                 {
                     message:
-                        'You should not access `this.template` in methods that will execute during SSR.',
+                        'You should not access any properties on `this` in methods that will execute during SSR.',
                 },
             ],
         },
@@ -195,7 +195,7 @@ tester.run('no-this-template-during-ssr', rule, {
             errors: [
                 {
                     message:
-                        'You should not access `this.template` in methods that will execute during SSR.',
+                        'You should not access any properties on `this` in methods that will execute during SSR.',
                 },
             ],
         },
