@@ -8,7 +8,7 @@
 const { RuleTester } = require('eslint');
 
 const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-this-template-during-ssr');
+const rule = require('../../../lib/rules/no-this-property-during-ssr');
 
 const tester = new RuleTester(ESLINT_TEST_CONFIG);
 tester.run('no-this-template-during-ssr', rule, {
@@ -17,7 +17,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     // we can't use this.template here
@@ -35,7 +35,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     // we can't use this.template here
@@ -53,7 +53,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     // we can't use this.template here
@@ -71,7 +71,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     // we can't use this.template here
@@ -85,7 +85,7 @@ tester.run('no-this-template-during-ssr', rule, {
         {
             code: `
                 import { LightningElement } from 'lwc';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     if(document !== undefined) {
@@ -101,7 +101,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.template.querySelector('span')?.foo();
@@ -119,7 +119,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.foo();
@@ -140,7 +140,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.foo();
@@ -161,7 +161,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     doSomethingWith(this.template);
@@ -179,7 +179,7 @@ tester.run('no-this-template-during-ssr', rule, {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
-        
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.foo();

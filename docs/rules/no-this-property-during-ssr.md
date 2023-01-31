@@ -1,7 +1,7 @@
-# Disallow access of this.template during SSR (`lwc/no-this-template-during-ssr`)
+# Disallow access of properties on this during SSR (`lwc/no-this-property-during-ssr`)
 
-Browser APIs must not be accessed when SSR is being done. This rule prevents usage of browser APIs like `querySelector`
-on `template` in `connectedCallback` (and in methods called from `conenctedCallback` or anywhere when SSR is being done).
+Browser APIs must not be accessed when SSR is being done. This rule prevents usage of browser APIs like `querySelector`, `template`
+on `this` in `connectedCallback` (and in methods called from `connectedCallback` or anywhere when SSR is being done).
 
 ## Rule Details
 
@@ -12,7 +12,7 @@ import { LightningElement } from 'lwc';
 
 export default class Foo extends LightningElement {
     connectedCallback() {
-        this.template.querySelector('span')?.foo();
+        this.querySelector('span')?.foo();
     }
 }
 ```
