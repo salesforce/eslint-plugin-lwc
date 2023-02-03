@@ -26,6 +26,17 @@ ruleTester.run('consistent-class-name', rule, {
             code: `export class ComplexName extends LightningElement {}`,
             filename: 'complexName.js',
         },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                export class Foo extends LightningElement {}
+            `,
+            filename: 'foo.ts',
+        },
+        {
+            code: `export class ComplexName extends LightningElement {}`,
+            filename: 'complexName.ts',
+        },
     ],
     invalid: [
         {
