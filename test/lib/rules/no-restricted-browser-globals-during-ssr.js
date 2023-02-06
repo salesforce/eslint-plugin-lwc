@@ -183,12 +183,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
                 import { LightningElement } from 'lwc';
 
                 document.futzAround();
-
-                export default class Foo extends LightningElement {
-                  connectedCallback() {
-                    // we can't use document here
-                  }
-                }
             `,
             errors: [
                 {
@@ -202,11 +196,6 @@ tester.run('no-browser-globals-during-ssr', rule, {
 
                 {
                   document.futzAround();
-                }
-                export default class Foo extends LightningElement {
-                  connectedCallback() {
-                    // we can't use document here
-                  }
                 }
             `,
             errors: [
