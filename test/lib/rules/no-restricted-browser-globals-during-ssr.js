@@ -146,7 +146,20 @@ tester.run('no-browser-globals-during-ssr', rule, {
 
               export default class Foo extends LightningElement {
                 connectedCallback() {
-                  if(document !== undefined) {
+                  if(typeof document !== 'undefined') {
+                    window.x = 1;
+                  }
+                }
+              }
+          `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if(typeof window !== 'undefined') {
                     window.x = 1;
                   }
                 }

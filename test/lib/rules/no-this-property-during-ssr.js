@@ -406,7 +406,7 @@ tester.run('no-this-property-during-ssr', rule, {
 
                 export default class Foo extends LightningElement {
                   connectedCallback() {
-                    if(document !== undefined) {
+                    if(typeof document !== 'undefined') {
                       doSomething(this.template);
                     }
                   }
