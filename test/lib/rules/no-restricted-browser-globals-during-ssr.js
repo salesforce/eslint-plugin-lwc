@@ -199,7 +199,7 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`document`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
                 },
             ],
         },
@@ -213,7 +213,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`document`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'document' },
                 },
             ],
         },
@@ -233,7 +234,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`document`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'document' },
                 },
             ],
         },
@@ -252,7 +254,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`document`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'document' },
                 },
             ],
         },
@@ -271,7 +274,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`document`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'document' },
                 },
             ],
         },
@@ -290,7 +294,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`document`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'document' },
                 },
             ],
         },
@@ -307,7 +312,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`window`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
                 },
             ],
         },
@@ -327,7 +333,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`window`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
                 },
             ],
         },
@@ -347,7 +354,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`window`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
                 },
             ],
         },
@@ -364,7 +372,8 @@ tester.run('no-browser-globals-during-ssr', rule, {
             `,
             errors: [
                 {
-                    message: '`window`, like most browser APIs, is not accessible during SSR.',
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
                 },
             ],
         },
