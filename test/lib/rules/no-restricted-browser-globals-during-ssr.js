@@ -189,6 +189,10 @@ tester.run('no-browser-globals-during-ssr', rule, {
               }
           `,
         },
+
+        {
+            code: `btoa('lwc');`,
+        },
     ],
     invalid: [
         {
