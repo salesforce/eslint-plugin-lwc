@@ -28,3 +28,13 @@ export default class Foo extends LightningElement {
     }
 }
 ```
+
+## Options
+
+The rule takes one option, an object, which has one key `restricted-globals` which is an object. The keys in the object
+are strings which represent the name of the global and the values can be booleans, `true` indicating that the global
+is restricted and `false` to indicate that the global is allowed (useful for overriding an already restricted global).
+
+```js
+{ "restricted-globals": { MyBrowserOnlyGlobal: false, MyRestrictedGlobal: true } }
+```

@@ -193,8 +193,21 @@ tester.run('no-browser-globals-during-ssr', rule, {
         {
             code: `btoa('lwc');`,
         },
+        {
+            code: `document`,
+            options: [{ 'restricted-globals': { document: false } }],
+        },
     ],
     invalid: [
+        {
+            code: `sample`,
+            options: [{ 'restricted-globals': { sample: true } }],
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                },
+            ],
+        },
         {
             code: `
                 import { LightningElement } from 'lwc';
