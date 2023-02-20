@@ -36,5 +36,5 @@ are strings which represent the name of the global and the values can be boolean
 is restricted and `false` to indicate that the global is allowed (useful for overriding an already restricted global).
 
 ```js
-{ "restricted-globals": { MyBrowserOnlyGlobal: false, MyRestrictedGlobal: true } }
+{ "restricted-globals": { MyBrowserOnlyGlobal: true, MyAvailableGlobal: false } }
 ```
