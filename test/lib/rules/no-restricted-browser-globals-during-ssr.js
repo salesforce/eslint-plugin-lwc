@@ -166,6 +166,19 @@ tester.run('no-browser-globals-during-ssr', rule, {
               }
           `,
         },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if(!import.meta.env.SSR) {
+                    window.x = 1;
+                  }
+                }
+              }
+          `,
+        },
         { code: `const f = new Foo();` },
         { code: `const name = new Foo();` },
         {
@@ -387,6 +400,64 @@ tester.run('no-browser-globals-during-ssr', rule, {
                   }
                 }
             `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
+                },
+            ],
+        },
+
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if(!import.meta.env.notSSR) {
+                    window.x = 1;
+                  }
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if(!import.meta.notenv.SSR) {
+                    window.x = 1;
+                  }
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if(!notimport.meta.env.SSR) {
+                    window.x = 1;
+                  }
+                }
+              }
+          `,
             errors: [
                 {
                     messageId: 'prohibitedBrowserAPIUsage',

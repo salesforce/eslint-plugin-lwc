@@ -31,6 +31,18 @@ export default class Foo extends LightningElement {
 }
 ```
 
+```js
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    renderedCallback() {
+        if (!import.meta.env.SSR) {
+            const parser = new DOMParser();
+        }
+    }
+}
+```
+
 ## Options
 
 The rule takes one option, an object, which has one key `restricted-globals` which is an object. The keys in the object
