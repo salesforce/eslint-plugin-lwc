@@ -2,6 +2,12 @@ version: 2.1
 
 supported-eslint-versions: &supported-eslint-versions ["local", "7"]
 
+executors:
+  node:
+    working_directory: ~/eslint-plugin-lwc
+    docker:
+      - image: cimg/node:16.17.0
+
 deploy_filters: &deploy_filters
   filters:
     branches:
