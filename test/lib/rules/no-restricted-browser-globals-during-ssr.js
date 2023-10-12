@@ -465,5 +465,38 @@ tester.run('no-browser-globals-during-ssr', rule, {
                 },
             ],
         },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+            import tmplA from './a.html';
+
+            export default class Foo extends LightningElement {
+              constructor() {
+                console.log(window.x);
+              }
+            }
+        `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
+                },
+            ],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+
+            export default class Foo extends LightningElement {
+              foo = window.x;
+            }
+        `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'window' },
+                },
+            ],
+        },
     ],
 });

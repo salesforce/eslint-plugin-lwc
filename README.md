@@ -62,6 +62,7 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/valid-wire](./docs/rules/valid-wire.md)                                                             | validate `wire` decorator usage                                   |         |
 | [lwc/no-restricted-browser-globals-during-ssr](./docs/rules/no-restricted-browser-globals-during-ssr.md) | disallow access to global browser APIs during SSR                 |         |
 | [lwc/no-unsupported-ssr-properties](./docs/rules/no-unsupported-ssr-properties.md)                       | disallow access of unsupported properties in SSR                  |         |
+| [lwc/no-node-env-in-ssr](./docs/rules/no-node-env-in-ssr.md)                                             | disallow usage of process.env.NODE_ENV in SSR                     |         |
 
 ### Best practices
 
