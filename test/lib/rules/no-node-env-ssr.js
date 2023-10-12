@@ -186,7 +186,7 @@ tester.run('no-node-env-in-ssr', rule, {
                 connectedCallback() {
                   this.foo();
                 }
-                renderedCallbac() {
+                renderedCallback() {
                   this.foo();
                 }
                 foo() {
@@ -194,6 +194,60 @@ tester.run('no-node-env-in-ssr', rule, {
                 }
               }
           `,
+            errors: [
+                {
+                    messageId: 'nodeEnvFound',
+                },
+            ],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+            import tmplA from './a.html';
+
+            export default class Foo extends LightningElement {
+              constructor() {
+                if (process.env.NODE_ENV === 'development') {
+                  console.log('test');
+                }
+              }
+            }
+        `,
+            errors: [
+                {
+                    messageId: 'nodeEnvFound',
+                },
+            ],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+            import tmplA from './a.html';
+
+            export default class Foo extends LightningElement {
+              constructor() {
+                this.foo();
+              }
+              foo() {
+                doSomethingWith(process.env.NODE_ENV);
+              }
+            }
+        `,
+            errors: [
+                {
+                    messageId: 'nodeEnvFound',
+                },
+            ],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+            import tmplA from './a.html';
+
+            export default class Foo extends LightningElement {
+              foo = process.env.NODE_ENV;              
+            }
+        `,
             errors: [
                 {
                     messageId: 'nodeEnvFound',
