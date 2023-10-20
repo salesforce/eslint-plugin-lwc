@@ -202,13 +202,54 @@ tester.run('no-browser-globals-during-ssr', rule, {
               }
           `,
         },
-
         {
             code: `btoa('lwc');`,
         },
         {
             code: `document`,
             options: [{ 'restricted-globals': { document: false } }],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+
+            export default class Foo extends LightningElement {
+              foo = globalThis.document?.x;
+            }
+          `,
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+
+            export default class Foo extends LightningElement {
+              constructor() {
+                console.log(globalThis.document?.x);
+              }
+            }
+          `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  globalThis.document?.addEventListener('click', () => {});
+                }
+              }
+          `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    doSomethingWith(globalThis);
+                  }
+                }
+            `,
         },
     ],
     invalid: [
@@ -495,6 +536,106 @@ tester.run('no-browser-globals-during-ssr', rule, {
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
                     data: { identifier: 'window' },
+                },
+            ],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+
+            export default class Foo extends LightningElement {
+              foo = globalThis.document.x;
+            }
+        `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsageGlobal',
+                    data: { identifier: 'document', property: 'x' },
+                },
+            ],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+
+            export default class Foo extends LightningElement {
+              constructor() {
+                console.log(globalThis.document.x);
+              }
+            }
+        `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsageGlobal',
+                    data: { identifier: 'document', property: 'x' },
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  document.addEventListener('click', () => {});
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'document' },
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  document?.addEventListener('click', () => {});
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'document' },
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  globalThis.document.addEventListener('click', () => {});
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsageGlobal',
+                    data: { identifier: 'document', property: 'addEventListener' },
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  globalThis.addEventListener('click', () => {});
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'addEventListener' },
                 },
             ],
         },

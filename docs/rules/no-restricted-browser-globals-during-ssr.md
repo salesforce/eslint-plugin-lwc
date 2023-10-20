@@ -19,7 +19,48 @@ export default class Foo extends LightningElement {
 }
 ```
 
+```js
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    constructor() {
+        this.handleResize = this.handleResize.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    connectedCallback() {
+        globalThis.addEventListener('resize', this.handleResize);
+        document.addEventListener('click', this.handleClick);
+    }
+
+    disconnectedCallback() {
+        globalThis.removeEventListener('resize', this.handleResize);
+        document.removeEventListener('click', this.handleClick);
+    }
+
+    handleResize(event) {
+        /* ... */
+    }
+
+    handleClick(event) {
+        /* ... */
+    }
+}
+```
+
 Examples of **correct** code for this rule:
+
+```js
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    connectedCallback() {
+        if (!import.meta.env.SSR) {
+            const parser = new DOMParser();
+        }
+    }
+}
+```
 
 ```js
 import { LightningElement } from 'lwc';
@@ -35,10 +76,27 @@ export default class Foo extends LightningElement {
 import { LightningElement } from 'lwc';
 
 export default class Foo extends LightningElement {
-    renderedCallback() {
-        if (!import.meta.env.SSR) {
-            const parser = new DOMParser();
-        }
+    constructor() {
+        this.handleResize = this.handleResize.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    connectedCallback() {
+        globalThis.addEventListener?.('resize', this.handleResize);
+        globalThis.document?.addEventListener('click', this.handleClick);
+    }
+
+    disconnectedCallback() {
+        globalThis.removeEventListener?.('resize', this.handleResize);
+        globalThis.document?.removeEventListener('click', this.handleClick);
+    }
+
+    handleResize(event) {
+        /* ... */
+    }
+
+    handleClick(event) {
+        /* ... */
     }
 }
 ```
@@ -49,6 +107,6 @@ The rule takes one option, an object, which has one key `restricted-globals` whi
 are strings which represent the name of the global and the values can be booleans, `true` indicating that the global
 is restricted and `false` to indicate that the global is allowed (useful for overriding an already restricted global).
 
-```js
-{ "restricted-globals": { MyBrowserOnlyGlobal: true, MyAvailableGlobal: false } }
+```json
+{ "restricted-globals": { "MyBrowserOnlyGlobal": true, "MyAvailableGlobal": false } }
 ```
