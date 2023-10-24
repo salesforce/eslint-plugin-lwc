@@ -14,8 +14,8 @@ executors:
   node:
     working_directory: ~/eslint-plugin-lwc
     docker:
-      - image: cimg/node:16.17.0
-      
+      - image: cimg/node:18.18.0
+
 commands:
   save_yarn_cache:
     description: Save Yarn cache for future build
@@ -46,7 +46,7 @@ jobs:
     steps:
       - checkout
       - restore_yarn_cache
-      - run: 
+      - run:
           name: Install dependencies and build
           command: yarn install --frozen-lockfile
 
@@ -59,7 +59,7 @@ jobs:
             - run:
                 name: Override version of eslint@<<parameters.eslint-version>>
                 command: yarn add eslint@<<parameters.eslint-version>> --dev
-      - run: 
+      - run:
           name: Check formatting
           command: yarn format:check
       - run:
@@ -68,7 +68,7 @@ jobs:
       - run:
           name: Run unit tests
           command: yarn test
-  
+
   deploy:
     docker:
       - image: circleci/node
@@ -100,7 +100,7 @@ workflows:
           matrix:
             parameters:
               eslint-version: *supported-eslint-versions
-      
+
       - deploy:
           <<: *deploy_filters
           requires:
