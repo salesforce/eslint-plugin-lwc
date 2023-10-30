@@ -30,6 +30,42 @@ Examples of **correct** code for this rule:
 import { LightningElement } from 'lwc';
 
 export default class Foo extends LightningElement {
+    connectedCallback() {
+        this.querySelector?.('span')?.getAttribute?.('role');
+    }
+}
+
+export default class Foo extends LightningElement {
+    connectedCallback() {
+        this.dispatchEvent?.(new CustomEvent('customevent'));
+    }
+}
+```
+
+```js
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    connectedCallback() {
+        if (!import.meta.env.SSR) {
+            this.querySelector('span')?.getAttribute('role');
+        }
+    }
+}
+
+export default class Foo extends LightningElement {
+    connectedCallback() {
+        if (!import.meta.env.SSR) {
+            this.dispatchEvent(new CustomEvent('customevent'));
+        }
+    }
+}
+```
+
+```js
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
     renderedCallback() {
         this.querySelector('span')?.foo();
     }
@@ -37,6 +73,8 @@ export default class Foo extends LightningElement {
 
 export default class Foo extends LightningElement {
     renderedCallback() {
+        // Caution: This lifecycle hook is very likely
+        // to be called more than once.
         this.dispatchEvent(new CustomEvent('customevent'));
     }
 }

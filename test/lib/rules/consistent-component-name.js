@@ -13,7 +13,7 @@ const rule = require('../../../lib/rules/consistent-component-name');
 
 const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 
-ruleTester.run('consistent-class-name', rule, {
+ruleTester.run('consistent-component-name', rule, {
     valid: [
         {
             code: `

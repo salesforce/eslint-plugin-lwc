@@ -66,16 +66,6 @@ export default class Foo extends LightningElement {
 import { LightningElement } from 'lwc';
 
 export default class Foo extends LightningElement {
-    renderedCallback() {
-        const parser = new DOMParser();
-    }
-}
-```
-
-```js
-import { LightningElement } from 'lwc';
-
-export default class Foo extends LightningElement {
     constructor() {
         this.handleResize = this.handleResize.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -97,6 +87,16 @@ export default class Foo extends LightningElement {
 
     handleClick(event) {
         /* ... */
+    }
+}
+```
+
+```js
+import { LightningElement } from 'lwc';
+
+export default class Foo extends LightningElement {
+    renderedCallback() {
+        const parser = new DOMParser();
     }
 }
 ```

@@ -194,6 +194,18 @@ tester.run('no-browser-globals-during-ssr', rule, {
         },
         {
             code: `
+              let name;
+              let screen = 'mobile';
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  name = "hello";
+                  screen;
+                }
+              }
+            `,
+        },
+        {
+            code: `
               import { name } from 'some/component';
               export default class Foo extends LightningElement {
                 connectedCallback() {
@@ -636,6 +648,23 @@ tester.run('no-browser-globals-during-ssr', rule, {
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
                     data: { identifier: 'addEventListener' },
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  name = 'hello';
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'name' },
                 },
             ],
         },
