@@ -96,6 +96,45 @@ tester.run('no-unsupported-ssr-properties', rule, {
                 }
             `,
         },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    if (!import.meta.env.SSR) {
+                      this.querySelector('span').getAttribute('role');
+                    }
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.querySelector?.('span').firstElementChild;
+                    this.querySelector?.('span')?.firstElementChild;
+                    this.querySelector?.('span')?.firstElementChild.id;
+                    this.querySelector?.('span')?.firstElementChild?.id;
+                    this.querySelector?.('span')?.firstElementChild?.id.length;
+                    this.querySelector?.('span')?.firstElementChild?.id?.length;
+
+                    this.querySelector?.('span')?.children.item?.(0);
+                    this.querySelector?.('span')?.children?.item?.(0);
+
+                    this.querySelector?.('span').getAttribute?.('role');
+                    this.querySelector?.('span')?.getAttribute?.('role');
+                    this.querySelector?.('span')?.getAttribute?.('role').length;
+                    this.querySelector?.('span')?.getAttribute?.('role')?.length;
+                    this.querySelector?.('span')?.getAttribute?.('role').includes?.('button');
+                    this.querySelector?.('span')?.getAttribute?.('role')?.includes?.('button');
+                  }
+                }
+            `,
+        },
     ],
     invalid: [
         {
@@ -235,6 +274,102 @@ tester.run('no-unsupported-ssr-properties', rule, {
                 }
               }
           `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.querySelector?.('span').foo();
+                  }
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.querySelector?.('span')?.getAttribute('role');
+                  }
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.querySelector?.('span').foo.bar;
+                  }
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.querySelector?.('span').getAttribute('role');
+                  }
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.querySelector?.('span').getAttribute?.('role').startsWith('button');
+                  }
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    this.childNodes.item(0).textContent = 'foo';
+                  }
+                }
+            `,
             errors: [
                 {
                     messageId: 'propertyAccessFound',
