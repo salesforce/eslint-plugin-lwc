@@ -454,7 +454,7 @@ tester.run('no-browser-globals-during-ssr', rule, {
             errors: [
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
-                    data: { identifier: 'window' },
+                    data: { identifier: 'foo' },
                 },
             ],
         },
@@ -475,7 +475,7 @@ tester.run('no-browser-globals-during-ssr', rule, {
             errors: [
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
-                    data: { identifier: 'window' },
+                    data: { identifier: 'bar' },
                 },
             ],
         },
@@ -534,7 +534,7 @@ tester.run('no-browser-globals-during-ssr', rule, {
             errors: [
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
-                    data: { identifier: 'window' },
+                    data: { identifier: 'x' },
                 },
             ],
         },
@@ -553,7 +553,7 @@ tester.run('no-browser-globals-during-ssr', rule, {
             errors: [
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
-                    data: { identifier: 'window' },
+                    data: { identifier: 'x' },
                 },
             ],
         },
@@ -572,7 +572,7 @@ tester.run('no-browser-globals-during-ssr', rule, {
             errors: [
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
-                    data: { identifier: 'window' },
+                    data: { identifier: 'x' },
                 },
             ],
         },
@@ -590,7 +590,7 @@ tester.run('no-browser-globals-during-ssr', rule, {
             errors: [
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
-                    data: { identifier: 'window' },
+                    data: { identifier: 'x' },
                 },
             ],
         },
@@ -605,7 +605,7 @@ tester.run('no-browser-globals-during-ssr', rule, {
             errors: [
                 {
                     messageId: 'prohibitedBrowserAPIUsage',
-                    data: { identifier: 'window' },
+                    data: { identifier: 'x' },
                 },
             ],
         },
@@ -821,6 +821,93 @@ tester.run('no-browser-globals-during-ssr', rule, {
                 {
                     messageId: 'prohibitedBrowserAPIUsageGlobal',
                     data: { identifier: 'location', property: 'href' },
+                },
+            ],
+        },
+        {
+            code: `
+                function utility() {
+                  window.fuzzAround();
+                }
+
+                export default class Foo {
+                  bar() {
+                    utility();
+                  }
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'fuzzAround' },
+                },
+            ],
+        },
+        {
+            code: `addEventListener('resize', () => {});`,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'addEventListener' },
+                },
+            ],
+        },
+        {
+            code: `
+                function utility() {
+                    console.log(window.x);
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'x' },
+                },
+            ],
+        },
+        {
+            code: `
+                function getAttributes(element) {
+                    if (element instanceof Element) {
+                        return element.getAttributeNames();
+                    }
+                    return [];
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'Element' },
+                },
+            ],
+        },
+        {
+            code: `
+                function getAttributes(element) {
+                    return element instanceof Element ? element.getAttributeNames() : [];
+                }
+            `,
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'Element' },
+                },
+            ],
+        },
+        {
+            code: `
+                function getJson(response) {
+                    if (response instanceof Response) {
+                        return response.json();
+                    }
+                    return Promise.resolve();
+                }
+            `,
+            options: [{ 'restricted-globals': { Response: true } }],
+            errors: [
+                {
+                    messageId: 'prohibitedBrowserAPIUsage',
+                    data: { identifier: 'Response' },
                 },
             ],
         },
