@@ -1,6 +1,6 @@
 {
   "name": "@lwc/eslint-plugin-lwc",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "license": "MIT",
   "description": "Official ESLint rules for LWC",
   "keywords": [
