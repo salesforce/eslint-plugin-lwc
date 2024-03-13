@@ -20,15 +20,15 @@
     "release:publish": "npm publish --registry=https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.6",
-    "@babel/eslint-parser": "^7.23.3",
-    "eslint": "^8.56.0",
+    "@babel/core": "^7.24.0",
+    "@babel/eslint-parser": "^7.23.10",
+    "eslint": "^8.57.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
-    "mocha": "^10.2.0",
+    "mocha": "^10.3.0",
     "nyc": "^15.1.0",
-    "prettier": "^2.8.8",
-    "semver": "^7.5.4"
+    "prettier": "^3.2.5",
+    "semver": "^7.6.0"
   },
   "dependencies": {
     "globals": "^13.24.0",
