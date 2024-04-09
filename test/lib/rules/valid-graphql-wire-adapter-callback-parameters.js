@@ -50,5 +50,20 @@ ruleTester.run('valid-graphql-wire-adapter-callback-parameters', rule, {
                 },
             ],
         },
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+            
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({error, errors, data}) {}
+            }`,
+            errors: [
+                {
+                    message:
+                        '@wire graphql callback function object must use "errors" instead of "error"',
+                },
+            ],
+        },
     ],
 });
