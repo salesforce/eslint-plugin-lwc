@@ -11,7 +11,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky || true",
     "format": "prettier --write --ignore-path .gitignore \"**/*.{js,md}\"",
     "format:check": "prettier --check --ignore-path .gitignore \"**/*.{js,md}\"",
     "lint": "eslint lib/ test/",
@@ -45,6 +45,10 @@
   "engines": {
     "node": ">=10.0.0"
   },
+  "volta": {
+    "node": "20.12.2",
+    "yarn": "1.22.22"
+  },
   "files": [
     "lib"
   ],
@@ -77,6 +81,5 @@
     "tabWidth": 4,
     "singleQuote": true,
     "trailingComma": "all"
-  },
-  "packageManager": "yarn@3.4.1"
+  }
 }

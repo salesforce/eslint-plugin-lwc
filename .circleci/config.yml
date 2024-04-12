@@ -71,7 +71,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/node:18.18.0
+      - image: cimg/node:20.12.2
     steps:
       - checkout
       - restore_yarn_cache
