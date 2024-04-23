@@ -1,6 +1,6 @@
 {
   "name": "@lwc/eslint-plugin-lwc",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "license": "MIT",
   "description": "Official ESLint rules for LWC",
   "keywords": [
@@ -11,7 +11,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky || true",
     "format": "prettier --write --ignore-path .gitignore \"**/*.{js,md}\"",
     "format:check": "prettier --check --ignore-path .gitignore \"**/*.{js,md}\"",
     "lint": "eslint lib/ test/",
@@ -20,19 +20,19 @@
     "release:publish": "npm publish --registry=https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.0",
-    "@babel/eslint-parser": "^7.23.10",
+    "@babel/core": "^7.24.4",
+    "@babel/eslint-parser": "^7.24.1",
     "eslint": "^8.57.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "mocha": "^10.3.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "mocha": "^10.4.0",
     "nyc": "^15.1.0",
     "prettier": "^3.2.5",
     "semver": "^7.6.0"
   },
   "dependencies": {
     "globals": "^13.24.0",
-    "minimatch": "^9.0.3"
+    "minimatch": "^9.0.4"
   },
   "peerDependencies": {
     "@babel/eslint-parser": "^7",
@@ -44,6 +44,10 @@
   },
   "engines": {
     "node": ">=10.0.0"
+  },
+  "volta": {
+    "node": "20.12.2",
+    "yarn": "1.22.22"
   },
   "files": [
     "lib"
@@ -77,6 +81,5 @@
     "tabWidth": 4,
     "singleQuote": true,
     "trailingComma": "all"
-  },
-  "packageManager": "yarn@3.4.1"
+  }
 }
