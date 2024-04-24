@@ -16,6 +16,12 @@ const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
 ruleTester.run('valid-graphql-wire-adapter-callback-parameters', rule, {
     valid: [
         {
+            code: `import { LightningElement, api } from 'lwc';
+            export default class Foo extends LightningElement {
+                @api bar_Foo() {}
+            }`,
+        },
+        {
             code: `import { wire } from 'lwc';
             import getFoo from 'adapter';
             
