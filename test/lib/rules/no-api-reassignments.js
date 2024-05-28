@@ -6,7 +6,7 @@
  */
 'use strict';
 
-const { testRule } = require('../shared');
+const { testRule, testTypeScript } = require('../shared');
 
 testRule('no-api-reassignments', {
     valid: [
@@ -174,6 +174,186 @@ testRule('no-api-reassignments', {
         {
             code: `class Test {
                 @api foo;
+
+                method = () => {
+                    this.foo = 1;
+                }
+            }`,
+            errors: [
+                {
+                    message: 'Invalid reassignment of public property "foo"',
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('no-api-reassignments', {
+    valid: [
+        {
+            code: `this.foo = 1;`,
+        },
+        {
+            code: `class Test {
+                @api foo: string;
+            }`,
+        },
+        {
+            code: `class Test {
+                @api foo: number = 1;
+            }`,
+        },
+        {
+            code: `class Test {
+                @api foo: number;
+
+                method(obj: any) {
+                    obj.foo = 1;
+                }
+            }`,
+        },
+        {
+            code: `class Test {
+                @api foo: number;
+
+                method() {
+                    function test() {
+                        this.foo = 1;
+                    }
+                }
+            }`,
+        },
+        {
+            code: `class Test {
+                @api public foo: number;
+
+                method() {
+                    const test = function() {
+                        this.foo = 1;
+                    }
+                }
+            }`,
+        },
+        {
+            code: `class Test {
+                @api public foo: number;
+
+                method() {
+                    const obj = {
+                        inner() {
+                            this.foo = 1;
+                        }
+                    }
+                }
+            }`,
+        },
+        {
+            code: `class Test {
+                @api 
+                public foo(): void {
+                    this.foo = 1;
+                }
+            }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `class Test {
+                @api foo: number;
+
+                method() {
+                    this.foo = 1;
+                }
+            }`,
+            errors: [
+                {
+                    message: 'Invalid reassignment of public property "foo"',
+                },
+            ],
+        },
+        {
+            code: `class Test {
+                @api 
+                set foo(v: number) {}
+
+                method() {
+                    this.foo = 1;
+                }
+            }`,
+            errors: [
+                {
+                    message: 'Invalid reassignment of public property "foo"',
+                },
+            ],
+        },
+        {
+            code: `class Test {
+                @api 
+                get foo(): number {}
+
+                method() {
+                    this.foo = 1;
+                }
+            }`,
+            errors: [
+                {
+                    message: 'Invalid reassignment of public property "foo"',
+                },
+            ],
+        },
+        {
+            code: `class Test {
+                @api public foo: number;
+
+                method() {
+                    const obj = {
+                        inner: () => {
+                            this.foo = 1;
+                        }
+                    }
+                }
+            }`,
+            errors: [
+                {
+                    message: 'Invalid reassignment of public property "foo"',
+                },
+            ],
+        },
+        {
+            code: `class Test {
+                @api foo: number;
+
+                method() {
+                    {
+                        this.foo = 1;
+                    }
+                }
+            }`,
+            errors: [
+                {
+                    message: 'Invalid reassignment of public property "foo"',
+                },
+            ],
+        },
+        {
+            code: `class Test {
+                @api foo: number;
+
+                method() {
+                    const test = () => {
+                        this.foo = 1;
+                    }
+                }
+            }`,
+            errors: [
+                {
+                    message: 'Invalid reassignment of public property "foo"',
+                },
+            ],
+        },
+        {
+            code: `class Test {
+                @api foo: number;
 
                 method = () => {
                     this.foo = 1;

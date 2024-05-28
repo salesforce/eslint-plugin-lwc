@@ -6,7 +6,7 @@
  */
 'use strict';
 
-const { testRule } = require('../shared');
+const { testRule, testTypeScript } = require('../shared');
 
 testRule('no-leading-uppercase-api-name', {
     valid: [
@@ -82,6 +82,91 @@ testRule('no-leading-uppercase-api-name', {
             code: `import { api } from 'lwc';
         class Foo {
             @api OnChange() {}
+        }`,
+            errors: [
+                {
+                    message:
+                        'Invalid property name syntax in "OnChange". Property name must start with a lowercase character.',
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('no-leading-uppercase-api-name', {
+    valid: [
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api foo: string;
+        }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            _foo;
+            @api
+            get foo(): string { return this._foo; }
+            set foo(value: string) { this._foo = value; }
+        }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api foo(): string {}
+        }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api onChange(): string {}
+        }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api Foo: string;
+        }`,
+            errors: [
+                {
+                    message:
+                        'Invalid property name syntax in "Foo". Property name must start with a lowercase character.',
+                },
+            ],
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            _foo: string;
+            @api
+            get Foo(): string { return this._foo; }
+            set Foo(value: string) { this._foo = value; }
+        }`,
+            errors: [
+                {
+                    message:
+                        'Invalid property name syntax in "Foo". Property name must start with a lowercase character.',
+                },
+            ],
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api Foo(): string {}
+        }`,
+            errors: [
+                {
+                    message:
+                        'Invalid property name syntax in "Foo". Property name must start with a lowercase character.',
+                },
+            ],
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api OnChange(): string {}
         }`,
             errors: [
                 {

@@ -6,7 +6,7 @@
  */
 'use strict';
 
-const { testRule } = require('../shared');
+const { testRule, testTypeScript } = require('../shared');
 
 testRule('no-attributes-during-construction', {
     valid: [
@@ -110,6 +110,213 @@ testRule('no-attributes-during-construction', {
             code: `
                 import { LightningElement } from 'lwc';
                 const foo = {};
+                class Test extends LightningElement {
+                    constructor() {
+                        super();
+                        foo.hidden = 'test';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { api } from 'lwc';
+                import MyLightningElement from './my-lightning-element';
+                class Test extends MyLightningElement {
+                    constructor() {
+                        super();
+                        this.title = 'test';
+                    }
+                }
+            `,
+        },
+    ],
+    invalid: [
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    constructor() {
+                        super();
+                        this.tabIndex = '0';
+                    }
+                }
+            `,
+            errors: [
+                {
+                    message:
+                        'Invariant violation: Setting "tabIndex" in the constructor results in a rendered attribute during construction. Change the name of this property, move this assignment to another lifecycle method, or override the default behavior by defining "tabIndex" as a property on the class.',
+                    type: 'AssignmentExpression',
+                    column: 25,
+                    line: 6,
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement as Component } from 'lwc';
+                class Test extends Component {
+                    constructor() {
+                        super();
+                        this.title = 'test';
+                    }
+                }
+            `,
+            errors: [
+                {
+                    message:
+                        'Invariant violation: Setting "title" in the constructor results in a rendered attribute during construction. Change the name of this property, move this assignment to another lifecycle method, or override the default behavior by defining "title" as a property on the class.',
+                    type: 'AssignmentExpression',
+                    column: 25,
+                    line: 6,
+                },
+            ],
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    constructor() {
+                        super();
+                        this.ariaDescribedBy = 'test';
+                    }
+                }
+            `,
+            errors: [
+                {
+                    message:
+                        'Invariant violation: Setting "ariaDescribedBy" in the constructor results in a rendered attribute during construction. Change the name of this property, move this assignment to another lifecycle method, or override the default behavior by defining "ariaDescribedBy" as a property on the class.',
+                    type: 'AssignmentExpression',
+                    column: 25,
+                    line: 6,
+                },
+            ],
+        },
+        {
+            code: `
+                import { track, LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    constructor() {
+                        super();
+                        this.role = ['test'];
+                    }
+                }
+            `,
+            errors: [
+                {
+                    message:
+                        'Invariant violation: Setting "role" in the constructor results in a rendered attribute during construction. Change the name of this property, move this assignment to another lifecycle method, or override the default behavior by defining "role" as a property on the class.',
+                    type: 'AssignmentExpression',
+                    column: 25,
+                    line: 6,
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('no-attributes-during-construction', {
+    valid: [
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                let tabIndex;
+                class Test extends LightningElement {
+                    public tabIndex: string = '-1';
+                    constructor() {
+                        super();
+                        tabIndex = '0';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                class LightningElement {}
+                class Test extends LightningElement {
+                    constructor() {
+                        super();
+                        (this as any).tabIndex = '0';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    public tabIndex: string;
+                    constructor() {
+                        super();
+                        this.tabIndex = '0';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement as Component } from 'lwc';
+                class Test extends Component {
+                    public title: string;
+                    constructor() {
+                        super();
+                        this.title = 'test';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    public ariaDescribedBy: string = 'foo';
+                    constructor() {
+                        super();
+                        this.ariaDescribedBy = 'test';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { track, LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    @track role: unknown[] = [];
+                    constructor() {
+                        super();
+                        this.role = ['test'];
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    get role(): string {}
+                    constructor() {
+                        super();
+                        this.role = 'test';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                class Test extends LightningElement {
+                    set hidden(val: string) {}
+                    constructor() {
+                        super();
+                        this.hidden = 'test';
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                const foo: object = {};
                 class Test extends LightningElement {
                     constructor() {
                         super();

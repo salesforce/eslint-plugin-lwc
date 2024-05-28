@@ -6,7 +6,7 @@
  */
 'use strict';
 
-const { testRule } = require('../shared');
+const { testRule, testTypeScript } = require('../shared');
 
 testRule('no-rest-parameter', {
     valid: [
@@ -20,6 +20,27 @@ testRule('no-rest-parameter', {
     invalid: [
         {
             code: `function foo(a, ...rest) { console.log(a, rest); }`,
+            errors: [
+                {
+                    message: 'Invalid usage of rest parameter.',
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('no-rest-parameter', {
+    valid: [
+        {
+            code: `function foo(a: string, b: number) { console.log(a, b); }`,
+        },
+        {
+            code: `function foo() { console.log(arguments); }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `function foo(a: any, ...rest: unknown[]) { console.log(a, rest); }`,
             errors: [
                 {
                     message: 'Invalid usage of rest parameter.',

@@ -6,7 +6,7 @@
  */
 'use strict';
 
-const { testRule } = require('../shared');
+const { testRule, testTypeScript } = require('../shared');
 
 testRule('no-for-of', {
     valid: [
@@ -20,6 +20,27 @@ testRule('no-for-of', {
     invalid: [
         {
             code: `for (let item of obj) {}`,
+            errors: [
+                {
+                    message: 'Invalid usage of for-of.',
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('no-for-of', {
+    valid: [
+        {
+            code: `for (let i: number = 0; i < 10; i++) { console.log(i); }`,
+        },
+        {
+            code: `for (let key: string in obj) { console.log(key); }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `for (let item: any of (obj as object)) {}`,
             errors: [
                 {
                     message: 'Invalid usage of for-of.',

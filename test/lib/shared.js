@@ -25,9 +25,12 @@ const tsTester = new RuleTester({
     parserOptions: {
         requireConfigFile: false,
         babelOptions: {
-            presets: ['@babel/preset-typescript'],
             parserOpts: {
-                plugins: ['classProperties', ['decorators', { decoratorsBeforeExport: false }]],
+                plugins: [
+                    'classProperties',
+                    ['decorators', { decoratorsBeforeExport: false }],
+                    'typescript',
+                ],
             },
         },
     },
@@ -36,9 +39,15 @@ const tsTester = new RuleTester({
 const testRule = (name, tests) => {
     const rule = require(`../../lib/rules/${name}`);
     jsTester.run(`[JS] ${name}`, rule, tests);
-    tsTester.run(`[Babel+TS] ${name}`, rule, tests);
+    tsTester.run(`[TS] ${name}`, rule, tests);
+};
+
+const testTypeScript = (name, tests) => {
+    const rule = require(`../../lib/rules/${name}`);
+    tsTester.run(`[TS] ${name}`, rule, tests);
 };
 
 module.exports = {
     testRule,
+    testTypeScript,
 };

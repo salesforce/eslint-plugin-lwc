@@ -6,7 +6,7 @@
  */
 'use strict';
 
-const { testRule } = require('../shared');
+const { testRule, testTypeScript } = require('../shared');
 
 testRule('valid-track', {
     valid: [
@@ -57,6 +57,54 @@ testRule('valid-track', {
             class Foo {
                 @track({ param: true })
                 state
+            }`,
+            errors: [{ message: `"@track" decorators don't support argument` }],
+        },
+    ],
+});
+
+testTypeScript('valid-track', {
+    valid: [
+        {
+            code: 'track() satisfies any;',
+        },
+        {
+            code: `import { track } from 'lwc';
+        class Foo {
+            @track state: object
+        }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `import { track } from 'lwc';
+            class Foo {
+                @track
+                handleClick(): void {}
+            }`,
+            errors: [{ message: '"@track" decorators can only be applied to class fields' }],
+        },
+        {
+            code: `import { track } from 'lwc';
+            class Foo {
+                @track
+                get state(): object {}
+            }`,
+            errors: [{ message: '"@track" decorators can only be applied to class fields' }],
+        },
+        {
+            code: `import { track } from 'lwc';
+            class Foo {
+                @track
+                static state: object;
+            }`,
+            errors: [{ message: '"@track" decorators can only be applied to class fields' }],
+        },
+        {
+            code: `import { track } from 'lwc';
+            class Foo {
+                @track({ param: true })
+                state: object
             }`,
             errors: [{ message: `"@track" decorators don't support argument` }],
         },
