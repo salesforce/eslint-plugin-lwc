@@ -9,11 +9,9 @@
 const semver = require('semver');
 const eslint = require('eslint');
 const assert = require('assert');
+const { testRule } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
 const rule = require('../../../lib/rules/no-dupe-class-members');
-
-const ruleTester = new eslint.RuleTester(ESLINT_TEST_CONFIG);
 
 const isEslint7 = semver.satisfies(eslint.ESLint.version, '^7');
 
@@ -21,7 +19,7 @@ it('no-dupe-class-member should be deprecated', () => {
     assert.equal(rule.meta.deprecated, true);
 });
 
-ruleTester.run('no-dupe-class-members', rule, {
+testRule('no-dupe-class-members', {
     valid: [
         // Original rule tests:
         // https://github.com/eslint/eslint/blob/2c7431d6b32063f74e3837ee727f26af215eada7/tests/lib/rules/no-dupe-class-members.js#L23

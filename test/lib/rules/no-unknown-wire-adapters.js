@@ -6,10 +6,7 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
-
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-unknown-wire-adapters');
+const { testRule } = require('../shared');
 
 const DEFAULT_OPTIONS = [
     {
@@ -17,9 +14,7 @@ const DEFAULT_OPTIONS = [
     },
 ];
 
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-unknown-wire-adapters', rule, {
+testRule('no-unknown-wire-adapters', {
     valid: [
         {
             // "valid-wire" rule already covers invalid @wires decorators. We need to make sure that

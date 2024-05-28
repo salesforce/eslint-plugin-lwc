@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-unexpected-wire-adapter-usages');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-unexpected-wire-adapter-usages', rule, {
+testRule('no-unexpected-wire-adapter-usages', {
     valid: [
         {
             code: `import { wire } from 'lwc';

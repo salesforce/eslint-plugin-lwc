@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/valid-graphql-wire-adapter-callback-parameters');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('valid-graphql-wire-adapter-callback-parameters', rule, {
+testRule('valid-graphql-wire-adapter-callback-parameters', {
     valid: [
         {
             code: `import { LightningElement, api } from 'lwc';

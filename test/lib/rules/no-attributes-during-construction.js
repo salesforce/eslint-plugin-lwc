@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-attributes-during-construction');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-attributes-during-construction', rule, {
+testRule('no-attributes-during-construction', {
     valid: [
         {
             code: `

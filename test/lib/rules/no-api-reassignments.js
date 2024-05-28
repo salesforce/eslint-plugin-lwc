@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-api-reassignments');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-api-reassignments', rule, {
+testRule('no-api-reassignments', {
     valid: [
         {
             code: `this.foo = 1;`,

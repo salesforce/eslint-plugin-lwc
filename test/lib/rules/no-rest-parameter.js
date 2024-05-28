@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-rest-parameter');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-rest-parameter', rule, {
+testRule('no-rest-parameter', {
     valid: [
         {
             code: `function foo(a, b) { console.log(a, b); }`,
