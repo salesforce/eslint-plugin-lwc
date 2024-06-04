@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule, testTypeScript } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/valid-track');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('valid-track', rule, {
+testRule('valid-track', {
     valid: [
         {
             code: 'track();',
@@ -62,6 +57,54 @@ ruleTester.run('valid-track', rule, {
             class Foo {
                 @track({ param: true })
                 state
+            }`,
+            errors: [{ message: `"@track" decorators don't support argument` }],
+        },
+    ],
+});
+
+testTypeScript('valid-track', {
+    valid: [
+        {
+            code: 'track() satisfies any;',
+        },
+        {
+            code: `import { track } from 'lwc';
+        class Foo {
+            @track state: object
+        }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `import { track } from 'lwc';
+            class Foo {
+                @track
+                handleClick(): void {}
+            }`,
+            errors: [{ message: '"@track" decorators can only be applied to class fields' }],
+        },
+        {
+            code: `import { track } from 'lwc';
+            class Foo {
+                @track
+                get state(): object {}
+            }`,
+            errors: [{ message: '"@track" decorators can only be applied to class fields' }],
+        },
+        {
+            code: `import { track } from 'lwc';
+            class Foo {
+                @track
+                static state: object;
+            }`,
+            errors: [{ message: '"@track" decorators can only be applied to class fields' }],
+        },
+        {
+            code: `import { track } from 'lwc';
+            class Foo {
+                @track({ param: true })
+                state: object
             }`,
             errors: [{ message: `"@track" decorators don't support argument` }],
         },

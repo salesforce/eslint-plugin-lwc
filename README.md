@@ -36,6 +36,28 @@ Example of `.eslintrc`:
 }
 ```
 
+### Usage with TypeScript
+
+To enable working with TypeScript projects, install `@babel/preset-typescript` as a dependency add `"typescript"` to `parserOptions.babelOptions.parserOpts.plugins` in your `.eslintrc`.
+
+Example:
+
+```json
+{
+    "parserOptions": {
+        "babelOptions": {
+            "parserOpts": {
+                "plugins": [
+                    "classProperties",
+                    ["decorators", { "decoratorsBeforExport": false }],
+                    "typescript"
+                ]
+            }
+        }
+    }
+}
+```
+
 For more details about configuration please refer to the dedicated section in the ESLint documentation: https://eslint.org/docs/user-guide/configuring
 
 ## Configurations

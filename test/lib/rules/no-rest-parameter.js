@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule, testTypeScript } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-rest-parameter');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-rest-parameter', rule, {
+testRule('no-rest-parameter', {
     valid: [
         {
             code: `function foo(a, b) { console.log(a, b); }`,
@@ -25,6 +20,27 @@ ruleTester.run('no-rest-parameter', rule, {
     invalid: [
         {
             code: `function foo(a, ...rest) { console.log(a, rest); }`,
+            errors: [
+                {
+                    message: 'Invalid usage of rest parameter.',
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('no-rest-parameter', {
+    valid: [
+        {
+            code: `function foo(a: string, b: number) { console.log(a, b); }`,
+        },
+        {
+            code: `function foo() { console.log(arguments); }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `function foo(a: any, ...rest: unknown[]) { console.log(a, rest); }`,
             errors: [
                 {
                     message: 'Invalid usage of rest parameter.',

@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule, testTypeScript } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/valid-graphql-wire-adapter-callback-parameters');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('valid-graphql-wire-adapter-callback-parameters', rule, {
+testRule('valid-graphql-wire-adapter-callback-parameters', {
     valid: [
         {
             code: `import { LightningElement, api } from 'lwc';
@@ -63,6 +58,67 @@ ruleTester.run('valid-graphql-wire-adapter-callback-parameters', rule, {
             class Test {
                 @wire(graphql, {})
                 wiredMethod({error, errors, data}) {}
+            }`,
+            errors: [
+                {
+                    message:
+                        '@wire graphql callback function object must use "errors" instead of "error"',
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('valid-graphql-wire-adapter-callback-parameters', {
+    valid: [
+        {
+            code: `import { LightningElement, api } from 'lwc';
+            export default class Foo extends LightningElement {
+                @api bar_Foo(): void {}
+            }`,
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import getFoo from 'adapter';
+            
+            class Test {
+                @wire(getFoo)
+                wiredMethod(): void {}
+            }`,
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+            
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({errors, data}: Record<string, any>): void {}
+            }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+            
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({error, data}: Record<string, any>): void {}
+            }`,
+            errors: [
+                {
+                    message:
+                        '@wire graphql callback function object must use "errors" instead of "error"',
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+            
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({error, errors, data}: Record<string, any>): void {}
             }`,
             errors: [
                 {
