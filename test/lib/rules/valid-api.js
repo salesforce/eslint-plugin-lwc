@@ -16,6 +16,12 @@ testRule('valid-api', {
         {
             code: `import { api } from 'lwc';
         class Foo {
+            @api data
+        }`,
+        },
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
             @api foo
         }`,
         },
@@ -128,18 +134,6 @@ testRule('valid-api', {
         {
             code: `import { api } from 'lwc';
             class Foo {
-                @api data;
-            }`,
-            errors: [
-                {
-                    message:
-                        'Invalid public property "data". Properties starting with "data" are reserved properties.',
-                },
-            ],
-        },
-        {
-            code: `import { api } from 'lwc';
-            class Foo {
                 @api dataFooBar;
             }`,
             errors: [
@@ -192,6 +186,18 @@ testRule('valid-api', {
                 {
                     message:
                         'Invalid public property "part". This property name is a reserved property.',
+                },
+            ],
+        },
+        {
+            code: `import { api } from 'lwc';
+            class Foo {
+                @api dataset;
+            }`,
+            errors: [
+                {
+                    message:
+                        'Invalid public property "dataset". This property name is a reserved property.',
                 },
             ],
         },
@@ -295,6 +301,12 @@ testRule('valid-api', {
 
 testTypeScript('valid-api', {
     valid: [
+        {
+            code: `import { api } from 'lwc';
+        class Foo {
+            @api data: string
+        }`,
+        },
         {
             code: `import { api } from 'lwc';
         class Foo {
@@ -410,12 +422,12 @@ testTypeScript('valid-api', {
         {
             code: `import { api } from 'lwc';
             class Foo {
-                @api data: string;
+                @api dataset: string;
             }`,
             errors: [
                 {
                     message:
-                        'Invalid public property "data". Properties starting with "data" are reserved properties.',
+                        'Invalid public property "dataset". This property name is a reserved property.',
                 },
             ],
         },
