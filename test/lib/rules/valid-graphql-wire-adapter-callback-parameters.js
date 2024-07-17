@@ -34,6 +34,15 @@ testRule('valid-graphql-wire-adapter-callback-parameters', {
                 wiredMethod({errors, data}) {}
             }`,
         },
+        {
+            code: `
+                class C {
+                    f({ error }) {
+                        return error;
+                    }
+                }
+            `,
+        },
     ],
     invalid: [
         {
@@ -94,6 +103,15 @@ testTypeScript('valid-graphql-wire-adapter-callback-parameters', {
                 @wire(graphql, {})
                 wiredMethod({errors, data}: Record<string, any>): void {}
             }`,
+        },
+        {
+            code: `
+                class C {
+                    f({ error }) {
+                        return error;
+                    }
+                }
+            `,
         },
     ],
     invalid: [
