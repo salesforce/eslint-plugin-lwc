@@ -6,12 +6,7 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
-
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-leaky-event-listeners');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
+const { testRule } = require('../shared');
 
 function buildCases({ handlers }) {
     const targets = [
@@ -57,7 +52,7 @@ const basicInvalidCases = buildCases({
     };
 });
 
-ruleTester.run('no-leaky-event-listeners', rule, {
+testRule('no-leaky-event-listeners', {
     valid: [
         ...basicValidCases,
 

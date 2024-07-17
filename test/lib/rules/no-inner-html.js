@@ -6,15 +6,10 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule, testTypeScript } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-inner-html');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-inner-html', rule, {
-    valid: ['var innerHTML = 1'],
+testRule('no-inner-html', {
+    valid: ['var innerHTML = 1', 'let innerHTML = 1', 'const innerHTML = 1'],
     invalid: [
         {
             code: "element.innerHTML = '...'",
@@ -68,6 +63,71 @@ ruleTester.run('no-inner-html', rule, {
                     type: 'Literal',
                     line: 1,
                     column: 9,
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('no-inner-html', {
+    valid: [
+        'var innerHTML: number = 1',
+        'let innerHTML: number = 1',
+        'const innerHTML: number = 1',
+    ],
+    invalid: [
+        {
+            code: "(element as any).innerHTML = '...'",
+            errors: [
+                {
+                    message: "Using 'innerHTML/outputHTML/insertAdjacentHTML' is not allowed",
+                    type: 'Identifier',
+                    line: 1,
+                    column: 18,
+                },
+            ],
+        },
+        {
+            code: "(element as any).outerHTML = '...'",
+            errors: [
+                {
+                    message: "Using 'innerHTML/outputHTML/insertAdjacentHTML' is not allowed",
+                    type: 'Identifier',
+                    line: 1,
+                    column: 18,
+                },
+            ],
+        },
+        {
+            code: "(element as any).insertAdjacentHTML = '...'",
+            errors: [
+                {
+                    message: "Using 'innerHTML/outputHTML/insertAdjacentHTML' is not allowed",
+                    type: 'Identifier',
+                    line: 1,
+                    column: 18,
+                },
+            ],
+        },
+        {
+            code: "(document as any).getElementById('demo').innerHTML = '...'",
+            errors: [
+                {
+                    message: "Using 'innerHTML/outputHTML/insertAdjacentHTML' is not allowed",
+                    type: 'Identifier',
+                    line: 1,
+                    column: 42,
+                },
+            ],
+        },
+        {
+            code: "(element as any)['innerHTML'] = '...'",
+            errors: [
+                {
+                    message: "Using 'innerHTML/outputHTML/insertAdjacentHTML' is not allowed",
+                    type: 'Literal',
+                    line: 1,
+                    column: 18,
                 },
             ],
         },

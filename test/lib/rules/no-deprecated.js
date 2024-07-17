@@ -6,14 +6,9 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule, testTypeScript } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-deprecated');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-deprecated', rule, {
+testRule('no-deprecated', {
     valid: [
         {
             code: `class Component {
@@ -69,6 +64,72 @@ ruleTester.run('no-deprecated', rule, {
             code: `import { LightningElement } from 'lwc';
                 export default class extends LightningElement {
                     attributeChangedCallback(name, prev, next) {}
+                }`,
+            errors: [
+                {
+                    message: /^"attributeChangedCallback" has been deprecated./,
+                },
+            ],
+        },
+    ],
+});
+
+testTypeScript('no-deprecated', {
+    valid: [
+        {
+            code: `class Component {
+                    static observedAttributes: any[] = [];
+                }`,
+        },
+        {
+            code: `class Component {
+                    static get observedAttributes(): any[] {
+                        return [];
+                    }
+                }`,
+        },
+        {
+            code: `import { LightningElement } from 'lwc';
+                export default class extends LightningElement {
+                    observedAttributes: unknown[];
+                }`,
+        },
+        {
+            code: `import { LightningElement } from 'lwc';
+                export default class extends LightningElement {
+                    attributeChangedCallback: Function;
+                }`,
+        },
+    ],
+    invalid: [
+        {
+            code: `import { LightningElement } from 'lwc';
+                export default class extends LightningElement {
+                    static observedAttributes: unknown[] = [];
+                }`,
+            errors: [
+                {
+                    message: /^"observedAttributes" has been deprecated./,
+                },
+            ],
+        },
+        {
+            code: `import { LightningElement } from 'lwc';
+                export default class extends LightningElement {
+                    static get observedAttributes(): unknown[] {
+                        return [];
+                    }
+                }`,
+            errors: [
+                {
+                    message: /^"observedAttributes" has been deprecated./,
+                },
+            ],
+        },
+        {
+            code: `import { LightningElement } from 'lwc';
+                export default class extends LightningElement {
+                    attributeChangedCallback(name, prev, next): void {}
                 }`,
             errors: [
                 {

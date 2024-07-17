@@ -6,12 +6,7 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
-
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-disallowed-lwc-imports');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
+const { testRule } = require('../shared');
 
 const invalidCases = [
     {
@@ -450,7 +445,7 @@ const validCases = [
     },
 ];
 
-ruleTester.run('no-disallowed-lwc-imports', rule, {
+testRule('no-disallowed-lwc-imports', {
     valid: validCases,
     invalid: invalidCases,
 });

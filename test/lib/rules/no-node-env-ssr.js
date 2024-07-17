@@ -5,14 +5,12 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
  */
 'use strict';
-const { RuleTester } = require('eslint');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-node-env-in-ssr');
+const { testRule } = require('../shared');
 
-const tester = new RuleTester(ESLINT_TEST_CONFIG);
+// TODO: Type assertions break this rule
 
-tester.run('no-node-env-in-ssr', rule, {
+testRule('no-node-env-in-ssr', {
     valid: [
         {
             code: `

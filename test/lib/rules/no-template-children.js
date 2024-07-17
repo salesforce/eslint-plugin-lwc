@@ -6,12 +6,7 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
-
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-template-children');
-
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
+const { testRule } = require('../shared');
 
 function makeCode(property, style) {
     switch (style) {
@@ -89,7 +84,7 @@ const validCases = [
     }).map(({ code }) => ({ code })),
 ];
 
-ruleTester.run('no-template-children', rule, {
+testRule('no-template-children', {
     valid: validCases,
     invalid: invalidCases,
 });

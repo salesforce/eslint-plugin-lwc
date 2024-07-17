@@ -6,14 +6,11 @@
  */
 'use strict';
 
-const { RuleTester } = require('eslint');
+const { testRule, testTypeScript } = require('../shared');
 
-const { ESLINT_TEST_CONFIG } = require('../shared');
-const rule = require('../../../lib/rules/no-async-operation');
+// TODO: Type assertions break this rule
 
-const ruleTester = new RuleTester(ESLINT_TEST_CONFIG);
-
-ruleTester.run('no-async-operations', rule, {
+testRule('no-async-operation', {
     valid: [
         {
             code: 'obj.setTimeout();',
@@ -80,6 +77,81 @@ ruleTester.run('no-async-operations', rule, {
         {
             code: `
                 function foo() {
+                    setTimeout();
+                }
+            `,
+            errors: [{ message: 'Restricted async operation "setTimeout"' }],
+        },
+    ],
+});
+
+testTypeScript('no-async-operation', {
+    valid: [
+        {
+            code: 'obj.setTimeout();',
+        },
+        {
+            code: `
+                const obj: object = {}; 
+                obj.setTimeout();
+            `,
+        },
+        {
+            code: `
+                const setTimeout: Function = () => {}; 
+                setTimeout();
+            `,
+        },
+        {
+            code: `
+                const setTimeout: Function = () => {}; 
+
+                function foo() {
+                    setTimeout();
+                }
+            `,
+        },
+    ],
+    invalid: [
+        {
+            code: `
+                setTimeout() satisfies number;
+                setInterval() satisfies number;
+                requestAnimationFrame() satisfies number;
+            `,
+            errors: [
+                { message: 'Restricted async operation "setTimeout"' },
+                { message: 'Restricted async operation "setInterval"' },
+                { message: 'Restricted async operation "requestAnimationFrame"' },
+            ],
+        },
+        // {
+        //     code: `
+        //         (window as any).setTimeout();
+        //         (window as any).setInterval();
+        //         (window as any).requestAnimationFrame();
+        //     `,
+        //     errors: [
+        //         { message: 'Restricted async operation "setTimeout"' },
+        //         { message: 'Restricted async operation "setInterval"' },
+        //         { message: 'Restricted async operation "requestAnimationFrame"' },
+        //     ],
+        // },
+        // {
+        //     code: `
+        //         (window as any)["setTimeout"]();
+        //         (window as any)["setInterval"]();
+        //         (window as any)["requestAnimationFrame"]();
+        //     `,
+        //     errors: [
+        //         { message: 'Restricted async operation "setTimeout"' },
+        //         { message: 'Restricted async operation "setInterval"' },
+        //         { message: 'Restricted async operation "requestAnimationFrame"' },
+        //     ],
+        // },
+        {
+            code: `
+                function foo(): void {
                     setTimeout();
                 }
             `,
