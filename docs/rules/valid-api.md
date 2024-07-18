@@ -5,7 +5,8 @@ The following restrictions apply to the `@api` decorator:
 -   Apply to class fields and class methods only.
 -   Fields and methods should be unique per class.
 -   Fields and methods can't start with `on`. The `on` prefix is reserved to bind event handlers.
--   Fields and methods can't start with `data`, `slot` or `part`. These names are reserved by LWC.
+-   Fields and methods can't be named `slot`, `part` or `dataset`. These names are reserved by LWC.
+-   Fields and methods can't start with `data[A-Z]`. These are mapped to the reflected property `this.dataset.*`.
 -   Boolean properties must be initialized with `false`. By initializing a public property to `true`, the consumer component can't set its value to `false` via the template.
 
 ## Rule details
