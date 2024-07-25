@@ -139,7 +139,7 @@ testRule('valid-api', {
             errors: [
                 {
                     message:
-                        'Invalid public property "dataFooBar". Properties starting with "data" are reserved properties.',
+                        'Invalid public property "dataFooBar". Properties starting with "data" correspond to data-* HTML attributes, which are not allowed.',
                 },
             ],
         },
@@ -439,7 +439,7 @@ testTypeScript('valid-api', {
             errors: [
                 {
                     message:
-                        'Invalid public property "dataFooBar". Properties starting with "data" are reserved properties.',
+                        'Invalid public property "dataFooBar". Properties starting with "data" correspond to data-* HTML attributes, which are not allowed.',
                 },
             ],
         },
