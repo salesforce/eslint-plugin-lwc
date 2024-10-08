@@ -86,6 +86,7 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/no-unsupported-ssr-properties](./docs/rules/no-unsupported-ssr-properties.md)                                   | disallow access of unsupported properties in SSR                   |         |
 | [lwc/no-node-env-in-ssr](./docs/rules/no-node-env-in-ssr.md)                                                         | disallow usage of process.env.NODE_ENV in SSR                      |         |
 | [lwc/valid-graphql-wire-adapter-callback-parameters](./docs/rules/valid-graphql-wire-adapter-callback-parameters.md) | ensure graphql wire adapters are using 'errors' instead of 'error' |         |
+| [lwc/no-import-of-scoped-modules-during-ssr](./docs/rules/no-import-of-scoped-modules-during-ssr.md)                 | disallow imports of scoped modules in SSR                          |         |
 
 ### Best practices
 
