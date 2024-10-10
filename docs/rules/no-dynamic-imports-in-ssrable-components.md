@@ -1,4 +1,4 @@
-# Disallow dynamic import in SSR-able components (`lwc/no-dynamic-imports-in-ssrable-components`)
+# Disallow dynamic imports in SSR-able components (`lwc/no-dynamic-imports-in-ssrable-components`)
 
 Dynamic imports are not processed on the server and do not affect server-side rendered output.
 
