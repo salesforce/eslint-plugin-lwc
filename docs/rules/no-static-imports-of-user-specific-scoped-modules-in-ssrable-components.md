@@ -11,7 +11,7 @@ The following Salesforce scoped modules are deprecated when using Server-Side Re
 -   `@salesforce/customPermission/*`
 -   `@salesforce/featureFlag/*`
 
-To replace these deprecated modules, it is recommended to use a **[data provider](https://github.com/salesforce-experience-platform-emu/lwr/blob/main/packages/%40lwrjs/lwc-ssr/best_practices.md#data-providers)** to fetch the required information declaratively. Avoid using the dynamic import pattern as shown below, as it is considered an **anti-pattern**.
+To replace these deprecated modules, it is recommended to use a **data provider** to fetch the required information declaratively. Avoid using the dynamic import pattern as shown below, as it is considered an **anti-pattern**.
 
 ### Handling Deprecation in Components
 
