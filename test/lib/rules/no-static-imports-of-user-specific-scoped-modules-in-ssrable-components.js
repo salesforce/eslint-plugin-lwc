@@ -32,7 +32,7 @@ testRule('no-static-imports-of-user-specific-scoped-modules-in-ssrable-component
             errors: [
                 {
                     message:
-                        'Static import of @salesforce user-specific scoped modules is not allowed in SSR-able components. The recommended declarative solution is to use a data provider to fetch this information. The dynamic import approach is an anti-pattern and should be avoided.',
+                        'Static import of @salesforce user-specific scoped modules is not allowed in SSR-able components. The recommended declarative solution is to use a data provider to fetch this information.',
                 },
             ],
         },
@@ -63,7 +63,7 @@ testTypeScript('no-static-imports-of-user-specific-scoped-modules-in-ssrable-com
             errors: [
                 {
                     message:
-                        'Static import of @salesforce user-specific scoped modules is not allowed in SSR-able components. The recommended declarative solution is to use a data provider to fetch this information. The dynamic import approach is an anti-pattern and should be avoided.',
+                        'Static import of @salesforce user-specific scoped modules is not allowed in SSR-able components. The recommended declarative solution is to use a data provider to fetch this information.',
                 },
             ],
         },
