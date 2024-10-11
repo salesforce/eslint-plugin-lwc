@@ -32,8 +32,7 @@ testRule('no-form-factor-in-ssrable-components', {
             `,
             errors: [
                 {
-                    message:
-                        "Avoid using '@salesforce/client/formFactor' in SSR-able components. For best practices, refer to: https://github.com/salesforce-experience-platform-emu/lwr/blob/main/packages/%40lwrjs/lwc-ssr/best_practices.md#form-factor.",
+                    message: "Avoid using '@salesforce/client/formFactor' in SSR-able components.",
                 },
             ],
         },
