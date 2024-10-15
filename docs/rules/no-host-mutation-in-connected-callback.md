@@ -1,10 +1,10 @@
 # Avoiding host element mutation in connected callback
 
-To ensure proper hydration during server-side rendering, it's essential to avoid mutating the host element within the `connectedCallback` of LWC components. Mutations can lead to inconsistencies and unexpected behavior during the hydration process.
+To ensure consistent behavior in Lightning Web Components (LWC), it is important to avoid mutating the host element within the `connectedCallback` method. Mutations can lead to unpredictable outcomes and inconsistencies in component behavior.
 
 ## Rule details
 
-To avoid problems during hydration, do not mutate the host element in connectedCallback. This includes:
+To prevent issues with component lifecycle consistency, avoid mutating the host element in `connectedCallback`. This includes:
 
 -   `this.setAttribute`
 -   `this.classList.add`
