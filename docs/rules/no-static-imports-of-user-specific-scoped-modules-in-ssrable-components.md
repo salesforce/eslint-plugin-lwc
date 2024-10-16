@@ -9,11 +9,10 @@ The following Salesforce scoped modules are deprecated when using Server-Side Re
 -   `@salesforce/user/*`
 -   `@salesforce/userPermission/*`
 -   `@salesforce/customPermission/*`
--   `@salesforce/featureFlag/*`
 
-To replace these deprecated modules, it is recommended to use a **data provider** to fetch the required information declaratively. Avoid using the dynamic import pattern as shown below, as it is considered an **anti-pattern**.
+To replace these deprecated modules, it is recommended to use dynamic imports to fetch the required information on-demand.
 
-### Handling Deprecation in Components
+### Handling Deprecation in components
 
 If your component relies on one of these scoped modules, follow these best practices:
 
