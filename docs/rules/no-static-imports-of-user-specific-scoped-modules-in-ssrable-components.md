@@ -10,7 +10,7 @@ The following Salesforce scoped modules are deprecated when using Server-Side Re
 -   `@salesforce/userPermission/*`
 -   `@salesforce/customPermission/*`
 
-To replace these deprecated modules, it is recommended to use dynamic imports to fetch the required information on-demand.
+To replace these deprecated modules, it is recommended to use dynamic imports to fetch the required information on-demand \*\*[Add Dynamic Data to LWR Sites](https://developer.salesforce.com/docs/atlas.en-us.exp_cloud_lwr.meta/exp_cloud_lwr/advanced_expressions.htm).
 
 ### Handling Deprecation in components
 
