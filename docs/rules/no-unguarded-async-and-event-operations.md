@@ -4,7 +4,7 @@ Unguarded async operations and event listeners can lead to unexpected behaviors 
 
 ### Rule Details
 
-This rule disallows the use of unguarded async operations (such as fetch calls and async functions) and unguarded event listeners (such as addEventListener). It requires that these constructs be wrapped in a check to determine whether the code is running in a browser environment.
+This rule disallows the use of unguarded async operations (such as fetch calls and async functions) and unguarded event listeners (such as addEventListener). It requires that these constructs be wrapped in an SSR check to determine whether the code is running in a browser environment.
 
 #### Examples of Incorrect Code
 
