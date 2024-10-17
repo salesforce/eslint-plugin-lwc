@@ -1,4 +1,4 @@
-## Disallow Unguarded Async Operations and Event Listeners (no-unguarded-async-and-event)
+## Disallow Unguarded Async Operations and Event Listeners during SSR (no-unguarded-async-and-event)
 
 The unguarded async operations and event listeners can lead to unexpected behaviors, especially in environments like Server-Side Rendering (SSR) where the execution context may differ. To ensure that code runs safely and correctly in various environments, it is crucial to guard async operations and event listeners with an environment check.
 
