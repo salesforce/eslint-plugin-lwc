@@ -51,6 +51,37 @@ testRule('no-unsupported-node-api-in-ssrable-components', {
                 },
             ],
         },
+        {
+            code: `
+                const fs = require('node:fs');
+
+                // Unsupported Node API call with node: prefix
+                fs.writeFileSync('file.txt', 'data');
+            `,
+            errors: [
+                {
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
+                    line: 2,
+                },
+                {
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
+                    line: 5,
+                },
+            ],
+        },
+        {
+            code: `
+                require('node:child_process');
+            `,
+            errors: [
+                {
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
+                },
+            ],
+        },
     ],
 });
 
@@ -88,7 +119,27 @@ testTypeScript('no-unsupported-node-api-in-ssrable-components', {
         },
         {
             code: `
-                    require('something');
+                const fs = require('node:fs');
+
+                // the unsupported Node API call with node: prefix in TypeScript
+                fs.writeFileSync('file.txt', 'data');
+            `,
+            errors: [
+                {
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
+                    line: 2,
+                },
+                {
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
+                    line: 5,
+                },
+            ],
+        },
+        {
+            code: `
+                require('node:child_process');
             `,
             errors: [
                 {
