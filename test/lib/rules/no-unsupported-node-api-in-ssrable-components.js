@@ -8,11 +8,11 @@
 
 const { testRule, testTypeScript } = require('../shared');
 
-testRule('no-risky-node-api-in-ssrable-components', {
+testRule('no-unsupported-node-api-in-ssrable-components', {
     valid: [
         {
             code: `
-                // Safe code without the risky Node API calls
+                // Safe code without the unsupported Node API calls
                 if (import.meta.env.SSR) {
                     // Safe code
                 }
@@ -24,16 +24,18 @@ testRule('no-risky-node-api-in-ssrable-components', {
             code: `
                 const fs = require('fs');
 
-                // the risky Node API call
+                // the unsupported Node API call
                 fs.writeFileSync('file.txt', 'data');
             `,
             errors: [
                 {
-                    message: 'The risky Node API calls are not allowed in SSR-able components.',
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
                     line: 2,
                 },
                 {
-                    message: 'The risky Node API calls are not allowed in SSR-able components.',
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
                     line: 5,
                 },
             ],
@@ -44,18 +46,19 @@ testRule('no-risky-node-api-in-ssrable-components', {
             `,
             errors: [
                 {
-                    message: 'The risky Node API calls are not allowed in SSR-able components.',
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
                 },
             ],
         },
     ],
 });
 
-testTypeScript('no-risky-node-api-in-ssrable-components', {
+testTypeScript('no-unsupported-node-api-in-ssrable-components', {
     valid: [
         {
             code: `
-                // Safe code without the risky Node API calls
+                // Safe code without the unsupported Node API calls
                 if (import.meta.env.SSR) {
                     // Safe code
                 }
@@ -67,16 +70,18 @@ testTypeScript('no-risky-node-api-in-ssrable-components', {
             code: `
                 const fs = require('fs');
 
-                // the risky Node API call
+                // the unsupported Node API call
                 fs.writeFileSync('file.txt', 'data');
             `,
             errors: [
                 {
-                    message: 'The risky Node API calls are not allowed in SSR-able components.',
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
                     line: 2,
                 },
                 {
-                    message: 'The risky Node API calls are not allowed in SSR-able components.',
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
                     line: 5,
                 },
             ],
@@ -87,7 +92,8 @@ testTypeScript('no-risky-node-api-in-ssrable-components', {
             `,
             errors: [
                 {
-                    message: 'The risky Node API calls are not allowed in SSR-able components.',
+                    message:
+                        'The unsupported Node API calls are not allowed in SSR-able components.',
                 },
             ],
         },

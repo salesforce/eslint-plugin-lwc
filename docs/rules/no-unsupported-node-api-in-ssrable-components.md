@@ -1,6 +1,6 @@
-# Disallow Node API Calls in SSR Context (`lwc/no-risky-node-api-in-ssrable-components`)
+# Disallow Node API Calls in SSR Context (`lwc/no-unsupported-node-api-in-ssrable-components`)
 
-This rule disallows the use of risky Node API calls within components that may run during server-side rendering. These APIs are not available in client-side rendering environments and can lead to serious issues when used without proper safeguards. To avoid unexpected behavior and security vulnerabilities, certain problematic Node APIs should not be used in SSR contexts.
+This rule disallows the use of unsupported Node API calls within components that may run during server-side rendering. These APIs are not available in client-side rendering environments and can lead to serious issues when used without proper safeguards. To avoid unexpected behavior and security vulnerabilities, certain problematic Node APIs should not be used in SSR contexts.
 
 ## Blocked Node APIs
 
@@ -22,7 +22,7 @@ The purpose of this rule is to prevent the use of dangerous Node API calls in SS
 const fs = require('fs');
 
 if (import.meta.env.SSR) {
-    // Risky Node API call within SSR context
+    // unsupported Node API call within SSR context
     fs.writeFileSync('file.txt', 'data');
 }
 ```
