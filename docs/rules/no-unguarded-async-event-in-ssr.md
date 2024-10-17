@@ -1,4 +1,4 @@
-## Disallow Unguarded Async Operations and Event Listeners during SSR (no-unguarded-async-and-event)
+## Disallow Unguarded Async Operations and Event Listeners during SSR (no-unguarded-async-event-in-ssr)
 
 Unguarded async operations and event listeners can lead to unexpected behaviors in Server-Side Rendering (SSR) environments. To ensure that code runs safely and correctly, it is crucial to guard async operations and event listeners with an environment check.
 
@@ -8,7 +8,7 @@ This rule disallows the use of unguarded async operations (such as fetch calls a
 
 #### Examples of Incorrect Code
 
-Here are examples of code that violate the no-unguarded-async-and-event rule:
+Here are examples of code that violate the no-unguarded-async-event-in-ssr rule:
 
 ```js
 // Incorrect: Unguarded fetch call
@@ -30,14 +30,14 @@ Here are examples of how to properly guard async operations and event listeners:
 ```js
 // Correct: Fetch call guarded by environment check
 async function fetchData() {
-    if (typeof window !== 'undefined') {
+    if (!import.meta.env.SSR) {
         const response = await fetch('/api/data');
         console.log(response);
     }
 }
 
 // Correct: Event listener guarded by environment check
-if (typeof window !== 'undefined') {
+if (!import.meta.env.SSR) {
     window.addEventListener('click', () => {
         console.log('Clicked');
     });
@@ -46,7 +46,7 @@ if (typeof window !== 'undefined') {
 
 ### Rule Options
 
-The `no-unguarded-async-and-event` rule can be customized using options to specify additional async operations and event operations that should be monitored for unguarded usage.
+The `no-unguarded-async-event-in-ssr` rule can be customized using options to specify additional async operations and event operations that should be monitored for unguarded usage.
 
 #### Options Structure
 
@@ -67,7 +67,7 @@ It is recommended to enable this rule to ensure that async operations and event 
 ```json
 {
     "rules": {
-        "no-unguarded-async-and-event": [
+        "no-unguarded-async-event-in-ssr": [
             "error",
             {
                 "additional-async-operations": ["myCustomAsyncFunction"],

@@ -8,7 +8,7 @@
 
 const { testRule, testTypeScript } = require('../shared');
 
-testRule('no-unguarded-async-and-event-operations', {
+testRule('no-unguarded-async-event-in-ssr', {
     valid: [
         {
             code: `if (!import.meta.env.SSR) { fetch('/api/data'); }`,
@@ -33,6 +33,18 @@ testRule('no-unguarded-async-and-event-operations', {
         },
         {
             code: `if (!import.meta.env.SSR) { this.dispatchEvent(new CustomEvent('myevent')); }`,
+        },
+        {
+            code: `
+                try {
+                        // Synchronous operation
+                        const data = JSON.parse('{ "key": "value" }');
+                        console.log(data.key); // This is just synchronous processing
+                    } catch (e) {
+                        console.error('Error parsing JSON:', e); // Regular error handling, no async operation
+                    } finally {
+                        console.log('Done processing'); // Synchronous cleanup, no async operation
+                }`,
         },
     ],
     invalid: [
@@ -71,7 +83,7 @@ testRule('no-unguarded-async-and-event-operations', {
     ],
 });
 
-testTypeScript('no-unguarded-async-and-event-operations', {
+testTypeScript('no-unguarded-async-event-in-ssr', {
     valid: [
         {
             code: `if (!import.meta.env.SSR) { fetch('/api/data'); }`,
