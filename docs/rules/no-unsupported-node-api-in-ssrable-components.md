@@ -14,7 +14,7 @@ The following Node APIs are disallowed in SSR contexts:
 
 ## Rule Details
 
-The purpose of this rule is to prevent the use of dangerous Node API calls in SSR contexts. Any Node operations should be restricted to safe contexts (such as client-side execution). If you must perform these operations, ensure they are only executed in environments where they are supported.
+The purpose of this rule is to prevent the use of dangerous Node API calls in SSR contexts. If you must perform these operations, ensure they are only executed in environments where they are supported.
 
 ### Example of **incorrect** code:
 
