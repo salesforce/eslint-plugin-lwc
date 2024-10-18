@@ -106,8 +106,8 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/no-node-env-in-ssr](./docs/rules/no-node-env-in-ssr.md)                                                                                                           | disallow usage of process.env.NODE_ENV in SSR                                  |         |
 | [lwc/valid-graphql-wire-adapter-callback-parameters](./docs/rules/valid-graphql-wire-adapter-callback-parameters.md)                                                   | ensure graphql wire adapters are using 'errors' instead of 'error'             |         |
 | [lwc/no-host-mutation-in-connected-callback](./docs/rules/no-host-mutation-in-connected-callback.md)                                                                   | disallow the host element mutation in 'connectedCallback'                      |         |
-| [lwc/no-static-imports-of-user-specific-scoped-modules-in-ssrable-components](./docs/rules/no-static-imports-of-user-specific-scoped-modules-in-ssrable-components.md) | disallow static imports of user-specific scoped modules in SSR-able components |         |
-| [lwc/no-form-factor-in-ssrable-components](./docs/rules/no-form-factor-in-ssrable-components.md)                                                                       | disallow formFactor in SSR-able components                                     |         |
+| [lwc/ssr-no-static-imports-of-user-specific-scoped-modules](./docs/rules/ssr-no-static-imports-of-user-specific-scoped-modules.md)                                     | disallow static imports of user-specific scoped modules in SSR-able components |         |
+| [lwc/ssr-no-form-factor](./docs/rules/ssr-no-form-factor.md)                                                                                                           | disallow formFactor in SSR-able components                                     |         |
 
 ### Best practices
 

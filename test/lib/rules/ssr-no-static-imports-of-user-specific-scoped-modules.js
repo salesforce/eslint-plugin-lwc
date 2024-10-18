@@ -8,7 +8,7 @@
 
 const { testRule, testTypeScript } = require('../shared');
 
-testRule('no-static-imports-of-user-specific-scoped-modules-in-ssrable-components', {
+testRule('ssr-no-static-imports-of-user-specific-scoped-modules', {
     valid: [
         {
             code: `import { LightningElement } from 'lwc';
@@ -39,7 +39,7 @@ testRule('no-static-imports-of-user-specific-scoped-modules-in-ssrable-component
     ],
 });
 
-testTypeScript('no-static-imports-of-user-specific-scoped-modules-in-ssrable-components', {
+testTypeScript('ssr-no-static-imports-of-user-specific-scoped-modules', {
     valid: [
         {
             code: `import { LightningElement } from 'lwc';
