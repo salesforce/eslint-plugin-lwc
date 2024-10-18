@@ -8,7 +8,7 @@
 
 const { testRule, testTypeScript } = require('../shared');
 
-testRule('no-unsupported-node-api-in-ssrable-components', {
+testRule('ssr-no-unsupported-node-api', {
     valid: [
         {
             code: `
@@ -85,7 +85,7 @@ testRule('no-unsupported-node-api-in-ssrable-components', {
     ],
 });
 
-testTypeScript('no-unsupported-node-api-in-ssrable-components', {
+testTypeScript('ssr-no-unsupported-node-api', {
     valid: [
         {
             code: `
