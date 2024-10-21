@@ -8,7 +8,7 @@
 
 const { testRule, testTypeScript } = require('../shared');
 
-testRule('no-unguarded-async-event-in-ssr', {
+testRule('ssr-no-unguarded-async-event', {
     valid: [
         {
             code: `if (!import.meta.env.SSR) { fetch('/api/data'); }`,
@@ -83,7 +83,7 @@ testRule('no-unguarded-async-event-in-ssr', {
     ],
 });
 
-testTypeScript('no-unguarded-async-event-in-ssr', {
+testTypeScript('ssr-no-unguarded-async-event', {
     valid: [
         {
             code: `if (!import.meta.env.SSR) { fetch('/api/data'); }`,

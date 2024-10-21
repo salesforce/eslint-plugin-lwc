@@ -1,4 +1,4 @@
-## Disallow Unguarded Async Operations and Event Listeners during SSR (no-unguarded-async-event-in-ssr)
+## Disallow Unguarded Async Operations and Event Listeners during SSR (ssr-no-unguarded-async-event)
 
 Unguarded async operations and event listeners can lead to unexpected behaviors in Server-Side Rendering (SSR) environments. To ensure that code runs safely and correctly, it is crucial to guard async operations and event listeners with an environment check.
 
@@ -8,7 +8,7 @@ This rule disallows the use of unguarded async operations (such as fetch calls a
 
 #### Examples of Incorrect Code
 
-Here are examples of code that violate the no-unguarded-async-event-in-ssr rule:
+Here are examples of code that violate the ssr-no-unguarded-async-event rule:
 
 ```js
 // Incorrect: Unguarded fetch call
@@ -46,7 +46,7 @@ if (!import.meta.env.SSR) {
 
 ### Rule Options
 
-The `no-unguarded-async-event-in-ssr` rule can be customized using options to specify additional async operations and event operations that should be monitored for unguarded usage.
+The `ssr-no-unguarded-async-event` rule can be customized using options to specify additional async operations and event operations that should be monitored for unguarded usage.
 
 #### Options Structure
 
@@ -67,7 +67,7 @@ It is recommended to enable this rule to ensure that async operations and event 
 ```json
 {
     "rules": {
-        "no-unguarded-async-event-in-ssr": [
+        "ssr-no-unguarded-async-event": [
             "error",
             {
                 "additional-async-operations": ["myCustomAsyncFunction"],
