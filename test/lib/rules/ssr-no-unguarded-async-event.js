@@ -106,6 +106,15 @@ testTypeScript('ssr-no-unguarded-async-event', {
         {
             code: `if (!import.meta.env.SSR) { dispatchEvent(new CustomEvent('myEvent', { detail: { key: 'value' } })); }`,
         },
+        {
+            code: `
+            const asyncOp = async (): Promise<string> => {
+            if (!import.meta.env.SSR) {
+                return await Promise.resolve('test');
+            }
+            return 'SSR case handled'; 
+            };`,
+        },
     ],
     invalid: [
         {
@@ -114,7 +123,7 @@ testTypeScript('ssr-no-unguarded-async-event', {
         },
         {
             code: `const asyncOp = async (): Promise<string> => { return await Promise.resolve('test'); };`,
-            errors: [{ messageId: 'unguardedAwait' }],
+            errors: [{ messageId: 'unguardedAwait' }, { messageId: 'unguardedAsyncOperation' }],
         },
         {
             code: `class TestClass { async testMethod(): Promise<void> { await fetch('/api/data'); } }`,
