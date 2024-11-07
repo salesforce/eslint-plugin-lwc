@@ -32,7 +32,7 @@ Example of `.eslintrc`:
         "@lwc/lwc/no-deprecated": "error",
         "@lwc/lwc/valid-api": "error",
         "@lwc/lwc/no-document-query": "error",
-        "@lwc/lwc/ssr/no-unsupported-ssr-properties": "error"
+        "@lwc/lwc/ssr/no-unsupported-properties": "error"
     }
 }
 ```
@@ -87,7 +87,7 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/no-unsupported-ssr-properties](./docs/rules/no-unsupported-ssr-properties.md)                       | disallow access of unsupported properties in SSR                  |         |
 | [lwc/no-node-env-in-ssr](./docs/rules/no-node-env-in-ssr.md)                                             | disallow usage of process.env.NODE_ENV in SSR                     |         |
 | [lwc/ssr/no-restricted-browser-globals](./docs/rules/ssr/no-restricted-browser-globals.md)               | disallow access to global browser APIs during SSR                 |         |
-| [lwc/ssr/no-unsupported-ssr-properties](./docs/rules/ssr/no-unsupported-ssr-properties.md)               | disallow access of unsupported properties in SSR                  |         |
+| [lwc/ssr/no-unsupported-properties](./docs/rules/ssr/no-unsupported-properties.md)                       | disallow access of unsupported properties in SSR                  |         |
 | [lwc/ssr/no-node-env](./docs/rules/ssr/no-node-env.md)                                                   | disallow usage of process.env.NODE_ENV in SSR                     |         |
 
 | [lwc/valid-graphql-wire-adapter-callback-parameters](./docs/rules/valid-graphql-wire-adapter-callback-parameters.md) | ensure graphql wire adapters are using 'errors' instead of 'error' | |
@@ -107,7 +107,7 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/valid-track](./docs/rules/valid-track.md) | validate `track` decorator usage | |
 | [lwc/valid-wire](./docs/rules/valid-wire.md) | validate `wire` decorator usage | |
 | [lwc/ssr/no-restricted-browser-globals](./docs/rules/ssr/no-restricted-browser-globals.md) | disallow access to global browser APIs during SSR | |
-| [lwc/ssr/no-unsupported-ssr-properties](./docs/rules/ssr/no-unsupported-ssr-properties.md) | disallow access of unsupported properties in SSR | |
+| [lwc/ssr/no-unsupported-properties](./docs/rules/ssr/no-unsupported-properties.md) | disallow access of unsupported properties in SSR | |
 | [lwc/ssr/no-node-env](./docs/rules/ssr/no-node-env.md) | disallow usage of process.env.NODE_ENV in SSR | |
 | [lwc/valid-graphql-wire-adapter-callback-parameters](./docs/rules/valid-graphql-wire-adapter-callback-parameters.md) | ensure graphql wire adapters are using 'errors' instead of 'error' | |
 | [lwc/ssr/no-host-mutation-in-connected-callback](./docs/rules/ssr/no-host-mutation-in-connected-callback.md) | disallow the host element mutation in 'connectedCallback' | |
@@ -142,5 +142,5 @@ Older browsers like IE11 run LWC in compatibility mode. For more information abo
 | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md)                                       | [no-dupe-class-members](https://eslint.org/docs/rules/no-dupe-class-members)               |
 | [lwc/no-restricted-browser-globals-during-ssr](./docs/rules/no-restricted-browser-globals-during-ssr.md) | [lwc/ssr/no-restricted-browser-globals](./docs/rules/ssr/no-restricted-browser-globals.md) |
-| [lwc/no-unsupported-ssr-properties](./docs/rules/no-unsupported-ssr-properties.md)                       | [lwc/ssr/no-unsupported-ssr-properties](./docs/rules/ssr/no-unsupported-ssr-properties.md) |
+| [lwc/no-unsupported-ssr-properties](./docs/rules/no-unsupported-ssr-properties.md)                       | [lwc/ssr/no-unsupported-properties](./docs/rules/ssr/no-unsupported-properties.md)         |
 | [lwc/no-node-env-in-ssr](./docs/rules/no-node-en-in-ssr.md)                                              | [lwc/ssr/no-node-env](./docs/rules/ssr/no-node-env.md)                                     |
