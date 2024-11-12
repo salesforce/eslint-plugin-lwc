@@ -6,9 +6,9 @@
  */
 'use strict';
 
-const { testRule, testTypeScript } = require('../shared');
+const { testRule, testTypeScript } = require('../../shared');
 
-testRule('no-host-mutation-in-connected-callback', {
+testRule('ssr/no-host-mutation-in-connected-callback', {
     valid: [
         {
             code: `
@@ -28,6 +28,18 @@ testRule('no-host-mutation-in-connected-callback', {
                     @api fromOutside;
                     get customAttributes() {
                         return { class: \`my-child-\${this.fromOutside}\` };
+                    }
+                }
+            `,
+        },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                export default class Cmp extends LightningElement {
+                    connectedCallback() {
+                        if(!import.meta.env.SSR){
+                            this.setAttribute('class', \`my-child-\${this.fromOutside}\`);
+                        }
                     }
                 }
             `,
@@ -67,7 +79,7 @@ testRule('no-host-mutation-in-connected-callback', {
     ],
 });
 
-testTypeScript('no-host-mutation-in-connected-callback', {
+testTypeScript('ssr/no-host-mutation-in-connected-callback', {
     valid: [
         {
             code: `

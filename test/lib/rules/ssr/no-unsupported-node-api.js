@@ -6,9 +6,9 @@
  */
 'use strict';
 
-const { testRule, testTypeScript } = require('../shared');
+const { testRule, testTypeScript } = require('../../shared');
 
-testRule('ssr-no-unsupported-node-api', {
+testRule('ssr/no-unsupported-node-api', {
     valid: [
         {
             code: `
@@ -16,6 +16,14 @@ testRule('ssr-no-unsupported-node-api', {
                 if (import.meta.env.SSR) {
                     // Safe code
                 }
+            `,
+        },
+        {
+            code: `
+            if (!import.meta.env.SSR) {
+                const fs = require('node:fs');
+                fs.writeFileSync('file.txt', 'data');
+            }
             `,
         },
     ],
@@ -85,7 +93,7 @@ testRule('ssr-no-unsupported-node-api', {
     ],
 });
 
-testTypeScript('ssr-no-unsupported-node-api', {
+testTypeScript('ssr/no-unsupported-node-api', {
     valid: [
         {
             code: `

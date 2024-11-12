@@ -1,4 +1,4 @@
-# Disallow Node API Calls in SSR Context (`lwc/ssr-no-unsupported-node-api`)
+# Disallow Node API Calls in SSR Context (`lwc/ssr/no-unsupported-node-api`)
 
 This rule disallows the use of unsupported Node API calls within components that may run during server-side rendering. These APIs are not available in client-side rendering environments and can lead to serious issues when used without proper safeguards. To avoid unexpected behavior and security vulnerabilities, certain problematic Node APIs should not be used in SSR contexts.
 

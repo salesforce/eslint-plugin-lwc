@@ -1,4 +1,4 @@
-# Using @salesforce/client/formFactor in SSR-able components is not the best practice(`lwc/ssr-no-form-factor`)
+# Using @salesforce/client/formFactor in SSR-able components is not the best practice(`lwc/ssr/no-form-factor`)
 
 ## Rule details
 
