@@ -32,6 +32,18 @@ testRule('ssr/no-host-mutation-in-connected-callback', {
                 }
             `,
         },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                export default class Cmp extends LightningElement {
+                    connectedCallback() {
+                        if(!import.meta.env.SSR){
+                            this.setAttribute('class', \`my-child-\${this.fromOutside}\`);
+                        }
+                    }
+                }
+            `,
+        },
     ],
     invalid: [
         {
