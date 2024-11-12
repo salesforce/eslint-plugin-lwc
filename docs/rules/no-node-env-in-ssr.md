@@ -1,6 +1,6 @@
 # Disallow use of `process.env.NODE_ENV` during SSR (`lwc/no-node-env-in-ssr`)
 
-Using process.env.NODE_ENV during server-side rendering in JavaScript is not recommended because it can introduce unexpected behavior and bugs in your application. This environment variable is typically used for conditional logic related to development or production builds, which is more relevant on the client side.
+Using `process.env.NODE_ENV` during server-side rendering in JavaScript is not recommended because it can introduce unexpected behavior and bugs in your application. This environment variable is typically used for conditional logic related to development or production builds, which is more relevant on the client side.
 
 ## Rule Details
 

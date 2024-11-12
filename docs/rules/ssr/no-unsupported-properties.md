@@ -1,4 +1,4 @@
-# Disallow access of properties on this during SSR (`lwc/no-unsupported-properties`)
+# Disallow access of properties on this during SSR (`lwc/ssr/no-unsupported-properties`)
 
 Browser APIs must not be accessed when SSR is being done. This rule prevents usage of browser APIs like `querySelector`,
 `dispatchEvent`, on `this` in `connectedCallback` (and in methods called from `connectedCallback` or anywhere when
