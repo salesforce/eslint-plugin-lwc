@@ -22,8 +22,6 @@ testRule('ssr/no-unsupported-node-api', {
             code: `
             if (!import.meta.env.SSR) {
                 const fs = require('node:fs');
-
-                // Unsupported Node API call with node: prefix
                 fs.writeFileSync('file.txt', 'data');
             }
             `,
