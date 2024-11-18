@@ -121,7 +121,7 @@ testRule('no-unsupported-ssr-properties', {
             `,
         },
         {
-          code: `
+            code: `
               import { LightningElement } from 'lwc';
               
               export default class Foo extends LightningElement {
@@ -134,7 +134,7 @@ testRule('no-unsupported-ssr-properties', {
           `,
         },
         {
-          code: `
+            code: `
               import { LightningElement } from 'lwc';
               
               export default class Foo extends LightningElement {
@@ -147,7 +147,7 @@ testRule('no-unsupported-ssr-properties', {
           `,
         },
         {
-          code: `
+            code: `
               import { LightningElement } from 'lwc';
               
               export default class Foo extends LightningElement {
@@ -160,7 +160,7 @@ testRule('no-unsupported-ssr-properties', {
           `,
         },
         {
-          code: `
+            code: `
               import { LightningElement } from 'lwc';
 
               export default class Foo extends LightningElement {
