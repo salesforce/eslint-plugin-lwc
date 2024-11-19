@@ -413,5 +413,23 @@ testRule('no-unsupported-ssr-properties', {
                 },
             ],
         },
+        {
+          code: `
+            import { LightningElement } from 'lwc';
+            
+            export default class Foo extends LightningElement {
+              connectedCallback() {
+                if (!a && b && !c && d) {
+                  this.querySelector('span').getAttribute('role');
+                }
+              }
+            }
+          `,
+          errors: [
+              {
+                  messageId: 'propertyAccessFound',
+              }
+          ]
+        },
     ],
 });
