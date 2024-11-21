@@ -162,6 +162,19 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
               import { LightningElement } from 'lwc';
+              
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (a && (b && !import.meta.env.SSR)) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
 
               export default class Foo extends LightningElement {
                 connectedCallback() {
@@ -429,6 +442,60 @@ testRule('no-unsupported-ssr-properties', {
               {
                   messageId: 'propertyAccessFound',
               }
+          ]
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (a && (b || !import.meta.env.SSR)) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+          errors: [
+            {
+                messageId: 'propertyAccessFound',
+            }
+          ]
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (a || (b || !import.meta.env.SSR)) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+          errors: [
+            {
+                messageId: 'propertyAccessFound',
+            }
+          ]
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (a || (b && !import.meta.env.SSR)) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+          errors: [
+            {
+                messageId: 'propertyAccessFound',
+            }
           ]
         },
     ],
