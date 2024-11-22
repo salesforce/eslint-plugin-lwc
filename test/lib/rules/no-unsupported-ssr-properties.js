@@ -324,6 +324,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.querySelector?.('span').foo();
@@ -339,6 +340,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.querySelector?.('span')?.getAttribute('role');
@@ -354,6 +356,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.querySelector?.('span')?.firstElementChild?.id;
@@ -369,6 +372,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.querySelector?.('span').getAttribute('role');
@@ -384,6 +388,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
+                
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.querySelector?.('span').getAttribute?.('role').startsWith('button');
@@ -399,6 +404,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.querySelector?.('span')?.children?.item?.(0);
@@ -414,6 +420,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
+                
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.childNodes.item(0).textContent = 'foo';
