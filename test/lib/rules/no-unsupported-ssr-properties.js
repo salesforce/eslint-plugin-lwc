@@ -189,6 +189,7 @@ testRule('no-unsupported-ssr-properties', {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.querySelector('span')?.foo();
@@ -205,6 +206,7 @@ testRule('no-unsupported-ssr-properties', {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.foo();
@@ -224,6 +226,7 @@ testRule('no-unsupported-ssr-properties', {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.foo();
@@ -243,6 +246,7 @@ testRule('no-unsupported-ssr-properties', {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     doSomethingWith(this.dispatchEvent);
@@ -259,6 +263,7 @@ testRule('no-unsupported-ssr-properties', {
             code: `
                 import { LightningElement } from 'lwc';
                 import tmplA from './a.html';
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.foo();
@@ -281,6 +286,7 @@ testRule('no-unsupported-ssr-properties', {
             code: `
               import { LightningElement } from 'lwc';
               import tmplA from './a.html';
+              
               export default class Foo extends LightningElement {
                 connectedCallback() {
                   this.foo();
@@ -303,6 +309,7 @@ testRule('no-unsupported-ssr-properties', {
             code: `
               import { LightningElement } from 'lwc';
               import tmplA from './a.html';
+
               export default class Foo extends LightningElement {
                 connectedCallback() {
                   this.foo();
@@ -420,7 +427,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
-                
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.childNodes.item(0).textContent = 'foo';
