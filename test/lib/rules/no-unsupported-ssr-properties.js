@@ -286,7 +286,7 @@ testRule('no-unsupported-ssr-properties', {
             code: `
               import { LightningElement } from 'lwc';
               import tmplA from './a.html';
-              
+
               export default class Foo extends LightningElement {
                 connectedCallback() {
                   this.foo();
@@ -395,7 +395,7 @@ testRule('no-unsupported-ssr-properties', {
         {
             code: `
                 import { LightningElement } from 'lwc';
-                
+
                 export default class Foo extends LightningElement {
                   connectedCallback() {
                     this.querySelector?.('span').getAttribute?.('role').startsWith('button');
