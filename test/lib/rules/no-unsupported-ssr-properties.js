@@ -183,6 +183,19 @@ testRule('no-unsupported-ssr-properties', {
               }
           `,
         },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+              
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (randomOtherCheck && typeof window !== 'undefined') {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+            `,
+        },
     ],
     invalid: [
         {
@@ -505,6 +518,24 @@ testRule('no-unsupported-ssr-properties', {
                   }
                 }
               }
+          `,
+          errors: [
+            {
+                messageId: 'propertyAccessFound',
+            }
+          ]
+        },
+        {
+          code: `
+            import { LightningElement } from 'lwc';
+            
+            export default class Foo extends LightningElement {
+              connectedCallback() {
+                if (randomOtherCheck && typeof window == 'undefined') {
+                  this.querySelector('span').getAttribute('role');
+                }
+              }
+            }
           `,
           errors: [
             {
