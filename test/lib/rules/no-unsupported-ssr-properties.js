@@ -454,7 +454,7 @@ testRule('no-unsupported-ssr-properties', {
             ],
         },
         {
-          code: `
+            code: `
             import { LightningElement } from 'lwc';
             
             export default class Foo extends LightningElement {
@@ -465,11 +465,11 @@ testRule('no-unsupported-ssr-properties', {
               }
             }
           `,
-          errors: [
-              {
-                  messageId: 'propertyAccessFound',
-              }
-          ]
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
         },
         {
             code: `
@@ -483,11 +483,11 @@ testRule('no-unsupported-ssr-properties', {
                 }
               }
           `,
-          errors: [
-            {
-                messageId: 'propertyAccessFound',
-            }
-          ]
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
         },
         {
             code: `
@@ -501,11 +501,11 @@ testRule('no-unsupported-ssr-properties', {
                 }
               }
           `,
-          errors: [
-            {
-                messageId: 'propertyAccessFound',
-            }
-          ]
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
         },
         {
             code: `
@@ -519,14 +519,14 @@ testRule('no-unsupported-ssr-properties', {
                 }
               }
           `,
-          errors: [
-            {
-                messageId: 'propertyAccessFound',
-            }
-          ]
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
         },
         {
-          code: `
+            code: `
             import { LightningElement } from 'lwc';
             
             export default class Foo extends LightningElement {
@@ -537,11 +537,11 @@ testRule('no-unsupported-ssr-properties', {
               }
             }
           `,
-          errors: [
-            {
-                messageId: 'propertyAccessFound',
-            }
-          ]
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
         },
     ],
 });
