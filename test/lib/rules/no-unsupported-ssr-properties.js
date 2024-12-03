@@ -116,7 +116,7 @@ testRule('no-unsupported-ssr-properties', {
 
                 export default class Foo extends LightningElement {
                   connectedCallback() {
-                    this.querySelector('span')?.foo();
+                    this.template.querySelector('span')?.foo();
                   }
                 }
             `,
