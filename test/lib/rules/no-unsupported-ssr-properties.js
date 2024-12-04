@@ -178,7 +178,7 @@ testRule('no-unsupported-ssr-properties', {
 
               export default class Foo extends LightningElement {
                 connectedCallback() {
-                  return isCSR ? this.template.querySelector('button') : null;
+                  return !import.meta.env.SSR ? this.querySelector('button') : null;
                 }
               }
           `,
