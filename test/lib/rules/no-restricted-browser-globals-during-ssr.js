@@ -319,6 +319,17 @@ testRule('no-restricted-browser-globals-during-ssr', {
                 }
             `,
         },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                handleFocus() {
+                  console.log(window.location.href);
+                }
+              }
+            `,
+        },
     ],
     invalid: [
         {

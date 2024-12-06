@@ -196,6 +196,17 @@ testRule('no-unsupported-ssr-properties', {
               }
             `,
         },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                handleFocus() {
+                  this.dispatchEvent(new CustomEvent('focus'));
+                }
+              }
+            `,
+        },
     ],
     invalid: [
         {
