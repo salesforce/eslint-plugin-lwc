@@ -7,30 +7,35 @@
 'use strict';
 
 const { RuleTester } = require('eslint');
+const babelParser = require('@babel/eslint-parser');
 
 const jsTester = new RuleTester({
-    parser: require.resolve('@babel/eslint-parser'),
-    parserOptions: {
-        requireConfigFile: false,
-        babelOptions: {
-            parserOpts: {
-                plugins: ['classProperties', ['decorators', { decoratorsBeforeExport: false }]],
+    languageOptions: {
+        parser: babelParser,
+        parserOptions: {
+            requireConfigFile: false,
+            babelOptions: {
+                parserOpts: {
+                    plugins: ['classProperties', ['decorators', { decoratorsBeforeExport: false }]],
+                },
             },
         },
     },
 });
 
 const tsTester = new RuleTester({
-    parser: require.resolve('@babel/eslint-parser'),
-    parserOptions: {
-        requireConfigFile: false,
-        babelOptions: {
-            parserOpts: {
-                plugins: [
-                    'classProperties',
-                    ['decorators', { decoratorsBeforeExport: false }],
-                    'typescript',
-                ],
+    languageOptions: {
+        parser: babelParser,
+        parserOptions: {
+            requireConfigFile: false,
+            babelOptions: {
+                parserOpts: {
+                    plugins: [
+                        'classProperties',
+                        ['decorators', { decoratorsBeforeExport: false }],
+                        'typescript',
+                    ],
+                },
             },
         },
     },
