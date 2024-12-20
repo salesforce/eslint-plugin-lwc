@@ -6,6 +6,7 @@
  */
 'use strict';
 
+const globals = require('globals');
 const { testRule } = require('../shared');
 
 function buildCases({ handlers }) {
@@ -94,8 +95,10 @@ testRule('no-leaky-event-listeners', {
             code: `
                 addEventListener('test', () => handleTest());
             `,
-            env: {
-                browser: true,
+            languageOptions: {
+                globals: {
+                    ...globals.browser,
+                },
             },
             errors: [
                 {

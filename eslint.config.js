@@ -12,7 +12,6 @@ module.exports = [
                 ...globals.node,
             },
 
-            ecmaVersion: 9,
             sourceType: 'commonjs',
         },
 
