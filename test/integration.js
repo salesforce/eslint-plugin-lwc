@@ -6,39 +6,16 @@
  */
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const assert = require('assert');
 const eslint = require('eslint');
 
-const SCOPE_DIRECTORY = path.resolve(__dirname, '../node_modules/@lwc');
-const PACKAGE_DIRECTORY = path.resolve(SCOPE_DIRECTORY, 'eslint-plugin-lwc');
-
-before(() => {
-    if (!fs.existsSync(SCOPE_DIRECTORY)) {
-        fs.mkdirSync(SCOPE_DIRECTORY);
-    }
-
-    if (!fs.existsSync(PACKAGE_DIRECTORY)) {
-        fs.symlinkSync(path.resolve(__dirname, '..'), PACKAGE_DIRECTORY, 'dir');
-    }
-});
-
-after(() => {
-    if (fs.existsSync(PACKAGE_DIRECTORY)) {
-        fs.unlinkSync(PACKAGE_DIRECTORY);
-    }
-
-    if (fs.existsSync(SCOPE_DIRECTORY)) {
-        fs.rmdirSync(SCOPE_DIRECTORY);
-    }
-});
+const local = require('../lib/index');
 
 it('should resolve plugin rules', async () => {
     const cli = new eslint.ESLint({
-        useEslintrc: false,
+        overrideConfigFile: true,
         overrideConfig: {
-            plugins: ['@lwc/eslint-plugin-lwc'],
+            plugins: { '@lwc/lwc': local },
             rules: {
                 '@lwc/lwc/no-document-query': 'error',
                 '@lwc/lwc/no-inner-html': 'warn',
