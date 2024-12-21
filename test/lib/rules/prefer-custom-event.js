@@ -6,6 +6,7 @@
  */
 'use strict';
 
+const globals = require('globals');
 const { testRule } = require('../shared');
 
 testRule('prefer-custom-event', {
@@ -32,8 +33,10 @@ testRule('prefer-custom-event', {
         },
         {
             code: `new Event('test');`,
-            env: {
-                browser: true,
+            languageOptions: {
+                globals: {
+                    ...globals.browser,
+                },
             },
             errors: [
                 {
