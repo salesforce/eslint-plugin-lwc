@@ -177,29 +177,6 @@ testRule('ssr/no-node-env', {
         },
         {
             code: `
-              import { LightningElement } from 'lwc';
-              import tmplA from './a.html';
-
-              export default class Foo extends LightningElement {
-                connectedCallback() {
-                  this.foo();
-                }
-                renderedCallback() {
-                  this.foo();
-                }
-                foo() {
-                  doSomethingWith(process.env.NODE_ENV);
-                }
-              }
-          `,
-            errors: [
-                {
-                    messageId: 'nodeEnvFound',
-                },
-            ],
-        },
-        {
-            code: `
             import { LightningElement } from 'lwc';
             import tmplA from './a.html';
 

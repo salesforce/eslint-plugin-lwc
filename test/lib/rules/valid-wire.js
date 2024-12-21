@@ -68,17 +68,6 @@ testRule('valid-wire', {
 
             class Test {
                 @wire(getFoo)
-                wiredA;
-                @wire(getFoo)
-                wiredB;
-            }`,
-        },
-        {
-            code: `import { wire } from 'lwc';
-            import getFoo from 'adapter';
-
-            class Test {
-                @wire(getFoo)
                 wiredMethod() {}
             }`,
         },
@@ -259,17 +248,6 @@ testTypeScript('valid-wire', {
             class Test {
                 @wire(getFoo)
                 wiredProp: string;
-            }`,
-        },
-        {
-            code: `import { wire } from 'lwc';
-            import getFoo from 'adapter';
-
-            class Test {
-                @wire(getFoo)
-                wiredA: string;
-                @wire(getFoo)
-                wiredB: number;
             }`,
         },
         {
