@@ -65,9 +65,9 @@ For more details about configuration please refer to the dedicated section in th
 
 To choose from three configuration settings, install the [`eslint-config-lwc`](https://github.com/salesforce/eslint-config-lwc) sharable configuration package.
 
-### Processor Rules
+### Processors
 
-| Rule ID                             | Description                                       |
+| Processor ID                        | Description                                       |
 | ----------------------------------- | ------------------------------------------------- |
 | [lwc/ssr](./docs/processors/ssr.md) | Lint only JavaScript files of SSR-able components |
 
