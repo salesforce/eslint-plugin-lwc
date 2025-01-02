@@ -9,7 +9,7 @@
 const { expect } = require('chai');
 const fs = require('fs');
 const sinon = require('sinon');
-const { ssrProcessor } = require('../../../lib/processors/ssr');
+const ssrProcessor = require('../../../lib/processors/ssr');
 
 describe('JS Meta XML Processor with Capabilities Check', () => {
     let fsExistsSync;
