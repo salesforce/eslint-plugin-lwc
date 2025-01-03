@@ -12,12 +12,12 @@ const sinon = require('sinon');
 const ssrProcessor = require('../../../lib/processors/ssr');
 
 describe('JS Meta XML Processor with Capabilities Check', () => {
-    let fsExistsSync;
     let fsReadFileSync;
+    let fsReadDirSync;
 
     beforeEach(() => {
-        fsExistsSync = sinon.stub(fs, 'existsSync');
         fsReadFileSync = sinon.stub(fs, 'readFileSync');
+        fsReadDirSync = sinon.stub(fs, 'readdirSync'); // Corrected method name
     });
 
     afterEach(() => {
@@ -37,8 +37,9 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
                 </LightningComponentBundle>
             `;
 
-            fsExistsSync.returns(true);
             fsReadFileSync.returns(validMetaXML);
+            fsReadDirSync.returns(['test.js-meta.xml']);
+
             const result = ssrProcessor.preprocess(input, filename);
 
             expect(result).to.have.lengthOf(1);
@@ -57,8 +58,8 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
                 </LightningComponentBundle>
             `;
 
-            fsExistsSync.returns(true);
             fsReadFileSync.returns(invalidMetaXML);
+            fsReadDirSync.returns(['test.js-meta.xml']);
 
             const result = ssrProcessor.preprocess(input, filename);
 
@@ -78,8 +79,8 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
                 </LightningComponentBundle>
             `;
 
-            fsExistsSync.returns(true);
             fsReadFileSync.returns(multipleCapabilitiesXML);
+            fsReadDirSync.returns(['test.js-meta.xml']); // Corrected method name
 
             const result = ssrProcessor.preprocess(input, filename);
 
