@@ -27,13 +27,12 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
     describe('preprocess', () => {
         it('should process file when meta exists and has ssr capability', () => {
             const input = 'const x = 1;';
-            const filename = '/path/to/file/script.js';
+            const filename = 'test.js';
             const validMetaXML = `
                 <?xml version="1.0" encoding="UTF-8"?>
                 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
                 <capabilities>
                     <capability>lightning__ServerRenderable</capability>
-                    <capability>lightning__ServerRenderableWithHydration</capability>
                 </capabilities>
                 </LightningComponentBundle>
             `;
@@ -51,7 +50,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
         it('should skip file when meta exists but does not have ssr capability', () => {
             const input = 'const x = 1;';
-            const filename = '/path/to/file/script.js';
+            const filename = 'test.js';
             const invalidMetaXML = `
                 <?xml version="1.0" encoding="UTF-8"?>
                 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
@@ -68,12 +67,12 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
         it('should handle array of capabilities', () => {
             const input = 'const x = 1;';
-            const filename = '/path/to/file/script.js';
+            const filename = 'test.js';
             const multipleCapabilitiesXML = `
                 <?xml version="1.0" encoding="UTF-8"?>
                 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
                     <capabilities>
-                        <capability>lightning__ServerRenderable</capability>
+                        <capability>lightning__dynamicComponent</capability>
                         <capability>lightning__ServerRenderableWithHydration</capability>
                     </capabilities>
                 </LightningComponentBundle>
