@@ -8,7 +8,7 @@
 
 const { testRule, testTypeScript } = require('../../shared');
 
-testRule('ssr/no-form-factor', {
+testRule('ssr/ssr-no-form-factor', {
     valid: [
         {
             code: `import { LightningElement } from 'lwc';
@@ -40,7 +40,7 @@ testRule('ssr/no-form-factor', {
     ],
 });
 
-testTypeScript('ssr/no-form-factor', {
+testTypeScript('ssr/ssr-no-form-factor', {
     valid: [
         {
             code: `import { LightningElement } from 'lwc';

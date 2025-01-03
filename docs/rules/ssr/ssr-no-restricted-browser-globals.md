@@ -1,4 +1,4 @@
-# Disallow access to global browser APIs during SSR (`lwc/ssr/no-restricted-browser-globals`)
+# Disallow access to global browser APIs during SSR (`lwc/ssr-no-restricted-browser-globals`)
 
 Browser APIs must not be accessed when SSR is being done. This rule prevents usage of browser APIs like `DOMParser`, `DocumentFragment` etc.
 in `connectedCallback` (and in methods called from `connectedCallback` or anywhere when SSR is being done).

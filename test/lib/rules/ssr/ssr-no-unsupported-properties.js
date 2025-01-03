@@ -10,7 +10,7 @@ const { testRule } = require('../../shared');
 
 // TODO: Type assertions break this rule
 
-testRule('ssr/no-unsupported-properties', {
+testRule('ssr/ssr-no-unsupported-properties', {
     valid: [
         {
             code: `

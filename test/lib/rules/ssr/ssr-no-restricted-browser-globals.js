@@ -10,7 +10,7 @@ const { testRule } = require('../../shared');
 
 // TODO: Type assertions break this rule
 
-testRule('ssr/no-restricted-browser-globals', {
+testRule('ssr/ssr-no-restricted-browser-globals', {
     valid: [
         {
             code: `
