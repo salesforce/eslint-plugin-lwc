@@ -10,7 +10,7 @@ const { testRule } = require('../../shared');
 
 // TODO: Type assertions break this rule
 
-testRule('ssr/no-node-env', {
+testRule('ssr/ssr-no-node-env', {
     valid: [
         {
             code: `

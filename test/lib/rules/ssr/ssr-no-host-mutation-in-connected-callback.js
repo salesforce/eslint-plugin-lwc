@@ -8,7 +8,7 @@
 
 const { testRule, testTypeScript } = require('../../shared');
 
-testRule('ssr/no-host-mutation-in-connected-callback', {
+testRule('ssr/ssr-no-host-mutation-in-connected-callback', {
     valid: [
         {
             code: `
@@ -79,7 +79,7 @@ testRule('ssr/no-host-mutation-in-connected-callback', {
     ],
 });
 
-testTypeScript('ssr/no-host-mutation-in-connected-callback', {
+testTypeScript('ssr/ssr-no-host-mutation-in-connected-callback', {
     valid: [
         {
             code: `
