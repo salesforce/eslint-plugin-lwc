@@ -17,7 +17,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
     beforeEach(() => {
         fsReadFileSync = sinon.stub(fs, 'readFileSync');
-        fsReadDirSync = sinon.stub(fs, 'readdirSync'); // Corrected method name
+        fsReadDirSync = sinon.stub(fs, 'readdirSync');
     });
 
     afterEach(() => {
@@ -27,7 +27,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
     describe('preprocess', () => {
         it('should process file when meta exists and has ssr capability', () => {
             const input = 'const x = 1;';
-            const filename = 'test.js';
+            const filename = 'test/test.js';
             const validMetaXML = `
                 <?xml version="1.0" encoding="UTF-8"?>
                 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
@@ -51,7 +51,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
         it('should skip file when meta exists but does not have ssr capability', () => {
             const input = 'const x = 1;';
-            const filename = 'test.js';
+            const filename = 'test1/test.js';
             const invalidMetaXML = `
                 <?xml version="1.0" encoding="UTF-8"?>
                 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
@@ -68,7 +68,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
         it('should handle array of capabilities', () => {
             const input = 'const x = 1;';
-            const filename = 'test.js';
+            const filename = 'test2/test.js';
             const multipleCapabilitiesXML = `
                 <?xml version="1.0" encoding="UTF-8"?>
                 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
@@ -80,10 +80,17 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
             `;
 
             fsReadFileSync.returns(multipleCapabilitiesXML);
-            fsReadDirSync.returns(['test.js-meta.xml']); // Corrected method name
+            fsReadDirSync.returns(['test.js-meta.xml']);
 
             const result = ssrProcessor.preprocess(input, filename);
 
+            expect(result).to.have.lengthOf(1);
+        });
+
+        it('should use cached result for file in same directory', () => {
+            const input = 'const x = 1;';
+            const filename = 'test/test.js';
+            const result = ssrProcessor.preprocess(input, filename);
             expect(result).to.have.lengthOf(1);
         });
     });

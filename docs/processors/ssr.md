@@ -12,7 +12,7 @@ The processor reads the metadata of a component, particularly the `js-meta.xml` 
 
 ### **Usage**
 
-The processor onlyt lints js files of ssrable components i.e component has the appropriate capabilities defiend in metadata (`js-meta.xml`) file.
+The processor only lints JS files of SSR-capable components, i.e components that have the appropriate capabilities defined in metadata (`js-meta.xml` file).
 
 **Example:**
 
@@ -39,23 +39,26 @@ In this example, the capabilities tag is used to define whether the component is
 To configure the processor, ensure your ESLint configuration includes @lwc/eslint-plugin-lwc/ssr as a processor:
 
 ```
-module.exports = {
-  parser: "@babel/eslint-parser",
-  parserOptions: {
-    ecmaVersion: 2021,
-    sourceType: "module",
-    requireConfigFile: false,
-  },
-  plugins: ["@lwc/lwc"],    // You need to install @lwc/eslint-plugin-lwc in your project
-  overrides: [
-    {
-      files: ["**/modules/**/*.js"],
-      processor: "@lwc/lwc/ssr",
-      rules: {
-        "no-console": "error",
+import lwcPlugin from '@lwc/eslint-plugin-lwc';
+export default [
+  {
+    files: ['**/modules/**/*.js'],
+    languageOptions: {
+      parser: babelParser,
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        requireConfigFile: false,
       },
     },
-  ],
-};
+    plugins: {
+      lwcPlugin
+    },
+    processor: 'lwcPlugin/ssr',
+    rules: {
+      'no-console': 'error',
+    },
+  },
+];
 
 ```
