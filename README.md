@@ -32,7 +32,7 @@ Example of `.eslintrc`:
         "@lwc/lwc/no-deprecated": "error",
         "@lwc/lwc/valid-api": "error",
         "@lwc/lwc/no-document-query": "error",
-        "@lwc/lwc/ssr/no-unsupported-properties": "error"
+        "@lwc/lwc/ssr-no-unsupported-properties": "error"
     }
 }
 ```
@@ -92,9 +92,9 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/no-restricted-browser-globals-during-ssr](./docs/rules/no-restricted-browser-globals-during-ssr.md)                                                               | disallow access to global browser APIs during SSR                              |         |
 | [lwc/no-unsupported-ssr-properties](./docs/rules/no-unsupported-ssr-properties.md)                                                                                     | disallow access of unsupported properties in SSR                               |         |
 | [lwc/no-node-env-in-ssr](./docs/rules/no-node-env-in-ssr.md)                                                                                                           | disallow usage of process.env.NODE_ENV in SSR                                  |         |
-| [lwc/ssr/no-restricted-browser-globals](./docs/rules/ssr/no-restricted-browser-globals.md)                                                                             | disallow access to global browser APIs during SSR                              |         |
-| [lwc/ssr/no-unsupported-properties](./docs/rules/ssr/no-unsupported-properties.md)                                                                                     | disallow access of unsupported properties in SSR                               |         |
-| [lwc/ssr/no-node-env](./docs/rules/ssr/no-node-env.md)                                                                                                                 | disallow usage of process.env.NODE_ENV in SSR                                  |         |
+| [lwc/ssr-no-restricted-browser-globals](./docs/rules/ssr/ssr-no-restricted-browser-globals.md)                                                                         | disallow access to global browser APIs during SSR                              |         |
+| [lwc/ssr-no-unsupported-properties](./docs/rules/ssr/ssr-no-unsupported-properties.md)                                                                                 | disallow access of unsupported properties in SSR                               |         |
+| [lwc/ssr-no-node-env](./docs/rules/ssr/ssr-no-node-env.md)                                                                                                             | disallow usage of process.env.NODE_ENV in SSR                                  |         |
 | [lwc/valid-graphql-wire-adapter-callback-parameters](./docs/rules/valid-graphql-wire-adapter-callback-parameters.md)                                                   | ensure graphql wire adapters are using 'errors' instead of 'error'             |         |
 | [lwc/no-host-mutation-in-connected-callback](./docs/rules/no-host-mutation-in-connected-callback.md)                                                                   | disallow the host element mutation in 'connectedCallback'                      |         |
 | Rule ID                                                                                                                                                                | Description                                                                    | Fixable |
@@ -111,25 +111,25 @@ To choose from three configuration settings, install the [`eslint-config-lwc`](h
 | [lwc/valid-api](./docs/rules/valid-api.md)                                                                                                                             | validate `api` decorator usage                                                 |         |
 | [lwc/valid-track](./docs/rules/valid-track.md)                                                                                                                         | validate `track` decorator usage                                               |         |
 | [lwc/valid-wire](./docs/rules/valid-wire.md)                                                                                                                           | validate `wire` decorator usage                                                |         |
-| [lwc/ssr/no-restricted-browser-globals](./docs/rules/ssr/no-restricted-browser-globals.md)                                                                             | disallow access to global browser APIs during SSR                              |         |
-| [lwc/ssr/no-unsupported-properties](./docs/rules/ssr/no-unsupported-properties.md)                                                                                     | disallow access of unsupported properties in SSR                               |         |
-| [lwc/ssr/no-node-env](./docs/rules/ssr/no-node-env.md)                                                                                                                 | disallow usage of process.env.NODE_ENV in SSR                                  |         |
+| [lwc/ssr-no-restricted-browser-globals](./docs/rules/ssr/ssr-no-restricted-browser-globals.md)                                                                         | disallow access to global browser APIs during SSR                              |         |
+| [lwc/ssr-no-unsupported-properties](./docs/rules/ssr/ssr-no-unsupported-properties.md)                                                                                 | disallow access of unsupported properties in SSR                               |         |
+| [lwc/ssr-no-node-env](./docs/rules/ssr/ssr-no-node-env.md)                                                                                                             | disallow usage of process.env.NODE_ENV in SSR                                  |         |
 | [lwc/valid-graphql-wire-adapter-callback-parameters](./docs/rules/valid-graphql-wire-adapter-callback-parameters.md)                                                   | ensure graphql wire adapters are using 'errors' instead of 'error'             |         |
-| [lwc/ssr/no-host-mutation-in-connected-callback](./docs/rules/ssr/no-host-mutation-in-connected-callback.md)                                                           | disallow the host element mutation in 'connectedCallback'                      |         |
-| [lwc/ssr/no-static-imports-of-user-specific-scoped-modules](./docs/rules/ssr/no-static-imports-of-user-specific-scoped-modules.md)                                     | disallow static imports of user-specific scoped modules in SSR-able components |         |
-| [lwc/ssr/no-form-factor](./docs/rules/ssr/no-form-factor.md)                                                                                                           | disallow formFactor in SSR-able components                                     |         |
+| [lwc/ssr-no-host-mutation-in-connected-callback](./docs/rules/ssr/ssr-no-host-mutation-in-connected-callback.md)                                                       | disallow the host element mutation in 'connectedCallback'                      |         |
+| [lwc/ssr-no-static-imports-of-user-specific-scoped-modules](./docs/rules/ssr/ssr-no-static-imports-of-user-specific-scoped-modules.md)                                 | disallow static imports of user-specific scoped modules in SSR-able components |         |
+| [lwc/ssr-no-form-factor](./docs/rules/ssr/ssr-no-form-factor.md)                                                                                                       | disallow formFactor in SSR-able components                                     |         |
 
 ### Best practices
 
-| Rule ID                                                                        | Description                                                | Fixable |
-| ------------------------------------------------------------------------------ | ---------------------------------------------------------- | ------- |
-| [lwc/no-async-operation](./docs/rules/no-async-operation.md)                   | restrict usage of async operations                         |         |
-| [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md)             | disallow duplicate class members                           |         |
-| [lwc/no-inner-html](./docs/rules/no-inner-html.md)                             | disallow usage of `innerHTML`                              |         |
-| [lwc/no-template-children](./docs/rules/no-template-children.md)               | prevent accessing the immediate children of this.template  |         |
-| [lwc/no-leaky-event-listeners](./docs/rules/no-leaky-event-listeners.md)       | prevent event listeners from leaking memory                |         |
-| [lwc/prefer-custom-event](./docs/rules/prefer-custom-event.md)                 | suggest usage of `CustomEvent` over `Event` constructor    |         |
-| [lwc/ssr/no-unsupported-node-api](./docs/rules/ssr/no-unsupported-node-api.md) | disallow unsupported Node API calls in SSR-able components |         |
+| Rule ID                                                                            | Description                                                | Fixable |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------- |
+| [lwc/no-async-operation](./docs/rules/no-async-operation.md)                       | restrict usage of async operations                         |         |
+| [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md)                 | disallow duplicate class members                           |         |
+| [lwc/no-inner-html](./docs/rules/no-inner-html.md)                                 | disallow usage of `innerHTML`                              |         |
+| [lwc/no-template-children](./docs/rules/no-template-children.md)                   | prevent accessing the immediate children of this.template  |         |
+| [lwc/no-leaky-event-listeners](./docs/rules/no-leaky-event-listeners.md)           | prevent event listeners from leaking memory                |         |
+| [lwc/prefer-custom-event](./docs/rules/prefer-custom-event.md)                     | suggest usage of `CustomEvent` over `Event` constructor    |         |
+| [lwc/ssr-no-unsupported-node-api](./docs/rules/ssr/ssr-no-unsupported-node-api.md) | disallow unsupported Node API calls in SSR-able components |         |
 
 ### Compat performance
 
@@ -146,6 +146,6 @@ Older browsers like IE11 run LWC in compatibility mode. For more information abo
 | Rule ID                                                                                                  | Replaced by                                                                                    |
 | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | [lwc/no-dupe-class-members](./docs/rules/no-dupe-class-members.md)                                       | [no-dupe-class-members](https://eslint.org/docs/rules/no-dupe-class-members)(base eslint rule) |
-| [lwc/no-restricted-browser-globals-during-ssr](./docs/rules/no-restricted-browser-globals-during-ssr.md) | [lwc/ssr/no-restricted-browser-globals](./docs/rules/ssr/no-restricted-browser-globals.md)     |
-| [lwc/no-unsupported-ssr-properties](./docs/rules/no-unsupported-ssr-properties.md)                       | [lwc/ssr/no-unsupported-properties](./docs/rules/ssr/no-unsupported-properties.md)             |
-| [lwc/no-node-env-in-ssr](./docs/rules/no-node-en-in-ssr.md)                                              | [lwc/ssr/no-node-env](./docs/rules/ssr/no-node-env.md)                                         |
+| [lwc/no-restricted-browser-globals-during-ssr](./docs/rules/no-restricted-browser-globals-during-ssr.md) | [lwc/ssr-no-restricted-browser-globals](./docs/rules/ssr/ssr-no-restricted-browser-globals.md) |
+| [lwc/no-unsupported-ssr-properties](./docs/rules/no-unsupported-ssr-properties.md)                       | [lwc/ssr-no-unsupported-properties](./docs/rules/ssr/ssr-no-unsupported-properties.md)         |
+| [lwc/no-node-env-in-ssr](./docs/rules/no-node-en-in-ssr.md)                                              | [lwc/ssr-no-node-env](./docs/rules/ssr/ssr-no-node-env.md)                                     |

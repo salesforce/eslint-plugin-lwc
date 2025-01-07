@@ -82,11 +82,9 @@ describe('rules documentation', () => {
 describe('SSR rules exports', () => {
     SSR_RULE_FILES.forEach((ruleFile) => {
         const ruleName = path.basename(ruleFile, '.js');
-        const ssrRulePath = `ssr/${ruleName}`;
-
         it(`should export SSR rule "${ruleFile}"`, () => {
             assert.equal(
-                plugin.rules[ssrRulePath],
+                plugin.rules[ruleName],
                 require(path.join(SSR_RULES_FOLDER, ruleFile)),
                 `SSR Rule "${ruleName}" is not exported.`,
             );
@@ -108,7 +106,7 @@ describe('SSR rules documentation', () => {
 
         it(`should have an entry in README.md for SSR rule "${ruleName}"`, () => {
             assert(
-                README_CONTENT.includes(`| [lwc/${ssrRulePath}](./docs/rules/${ssrRulePath}.md)`),
+                README_CONTENT.includes(`| [lwc/${ruleName}](./docs/rules/${ssrRulePath}.md)`),
                 `SSR Rule "${ruleName}" is not listed in the README.md.`,
             );
         });
