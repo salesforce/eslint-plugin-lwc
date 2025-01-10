@@ -25,7 +25,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
     });
 
     describe('preprocess', () => {
-        it('should process file when meta exists and has ssr capability', () => {
+        it('should process and create a new file with ssrjs extension if file is ssrable', () => {
             const input = 'const x = 1;';
             const filename = 'test/test.js';
             const validMetaXML = `
@@ -42,14 +42,14 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
             const result = ssrProcessor.preprocess(input, filename);
 
-            expect(result).to.have.lengthOf(1);
-            expect(result[0]).to.deep.equal({
-                text: input,
-                filename: filename,
+            expect(result).to.have.lengthOf(2);
+            expect(result[1]).to.deep.equal({
+                filename: 'test.ssrjs',
+                text: 'const x = 1;',
             });
         });
 
-        it('should skip file when meta exists but does not have ssr capability', () => {
+        it('should skip creating new virtual file with ssrjs extension when meta exists but does not have ssr capability', () => {
             const input = 'const x = 1;';
             const filename = 'test1/test.js';
             const invalidMetaXML = `
@@ -63,7 +63,11 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
             const result = ssrProcessor.preprocess(input, filename);
 
-            expect(result).to.have.lengthOf(0);
+            expect(result).to.have.lengthOf(1);
+            expect(result[0]).to.deep.equal({
+                text: input,
+                filename: filename,
+            });
         });
 
         it('should handle array of capabilities', () => {
@@ -84,14 +88,14 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
             const result = ssrProcessor.preprocess(input, filename);
 
-            expect(result).to.have.lengthOf(1);
+            expect(result).to.have.lengthOf(2);
         });
 
         it('should use cached result for file in same directory', () => {
             const input = 'const x = 1;';
             const filename = 'test/test.js';
             const result = ssrProcessor.preprocess(input, filename);
-            expect(result).to.have.lengthOf(1);
+            expect(result).to.have.lengthOf(2);
         });
     });
 });

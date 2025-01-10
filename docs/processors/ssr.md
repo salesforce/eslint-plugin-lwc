@@ -2,18 +2,11 @@
 
 ## Overview
 
-The `ssr` processor is responsible for validating and applying linting to files that are SSR (Server-Side Rendering) capable in the Lightning Web Component ecosystem. It ensures that the component code adheres to SSR best practices, applying linting rules and transformations only when the component is verified to have SSR capabilities.
-
-## Processor Details
-
-### **How It Works**
-
-The processor reads the metadata of a component, particularly the `js-meta.xml` file, to determine whether it has SSR capabilities. If the component is SSR-capable, it proceeds with linting and applying relevant rules for SSR compliance. If the component is not SSR-capable, it is skipped.
+The `ssr` processor reads the metadata of a component, particularly the `js-meta.xml` file, to determine whether it has SSR capabilities. If the component is SSR-capable, processor creates a new virtual file in memory with .srrjs extension which you can target using configs to specifically apply ssr rules to these files.
 
 ### **Usage**
 
-The processor only lints JS files of SSR-capable components, i.e components that have the appropriate capabilities defined in metadata (`js-meta.xml` file).
-
+The processor helps to specifically target ssr js files to apply ssr specific rules.
 **Example:**
 
 ```xml
@@ -26,13 +19,12 @@ The processor only lints JS files of SSR-capable components, i.e components that
         <target>lightning__RecordPage</target>
     </targets>
     <capabilities>
-        <capability>lightning__ServerRenderable</capability>
         <capability>lightning__ServerRenderableWithHydration</capability> <!-- Indicate SSR capability here -->
     </capabilities>
 </LightningComponentBundle>
 ```
 
-In this example, the capabilities tag is used to define whether the component is SSR-capable. If any of above two defined capapbilities is listed, the processor will proceed to apply rules and transformations to the associated .js file.
+In this example, the capabilities tag is used to define whether the component is SSR-capable. If any of above two defined capapbilities is listed, the processor will process the component js files and add a new virtual file for every js file of ssrable component with .ssrjs extension.
 
 ### Configuration Example
 
@@ -54,11 +46,26 @@ export default [
     plugins: {
       lwcPlugin
     },
-    processor: 'lwcPlugin/ssr',
-    rules: {
-      'no-console': 'error',
-    },
+    processor: lwcPlugin.processors.ssr
   },
+  {
+    files: ['**/modules/**/*.ssrjs'],
+    languageOptions: {
+      parser: babelParser,
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        requireConfigFile: false,
+      },
+    },
+    plugins: {
+      lwcPlugin
+    },
+    rules: {
+          "no-console" : "error",
+          "lwc/ssr-no-node-env": "error"
+        }
+  }
 ];
 
 ```
