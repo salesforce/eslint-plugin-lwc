@@ -2,11 +2,20 @@
 
 ## Overview
 
-The `ssr` processor reads the metadata of a component, particularly the `js-meta.xml` file, to determine whether it has SSR capabilities. If the component is SSR-capable, processor creates a new virtual file in memory with .srrjs extension which you can target using configs to specifically apply ssr rules to these files.
+The `ssr` processor is designed to streamline the linting of SSR-capable Lightning Web Components (LWCs). By reading the metadata in the `js-meta.xml` file, the processor identifies whether a component supports Server-Side Rendering (SSR). For SSR-capable components, the processor generates virtual files in memory with a .ssrjs extension. These virtual files allow you to apply SSR-specific linting rules in a targeted manner.
+
+## Key Features
+
+-   SSR Capability Detection: The processor identifies components with SSR capabilities based on the js-meta.xml file.
+
+-   Virtual File Creation: For each SSR-capable component, the processor creates corresponding .ssrjs virtual files.
+
+-   Targeted Linting: These .ssrjs files can be processed with SSR-specific ESLint rules.
 
 ### **Usage**
 
-The processor helps to specifically target ssr js files to apply ssr specific rules.
+The processor helps to specifically target ssr js files to apply ssr specific rules by reading `js-meta.xml` files of components.
+
 **Example:**
 
 ```xml
@@ -24,7 +33,12 @@ The processor helps to specifically target ssr js files to apply ssr specific ru
 </LightningComponentBundle>
 ```
 
-In this example, the capabilities tag is used to define whether the component is SSR-capable. If any of above two defined capapbilities is listed, the processor will process the component js files and add a new virtual file for every js file of ssrable component with .ssrjs extension.
+In this example, the capabilities tag indicates whether the component supports SSR. If either of the following capabilities is defined:
+
+-   lightning\_\_ServerRenderable
+-   lightning\_\_ServerRenderableWithHydration
+
+The processor will generate a `${filename}.ssrjs` virtual file for each js file associated with the component.
 
 ### Configuration Example
 
@@ -67,5 +81,14 @@ export default [
         }
   }
 ];
-
 ```
+
+### Explanation of Configuration
+
+-   Processor Configuration:
+
+The processor key applies the ssr processor to all `**/modules/**/*.js` files.The processor then created a virtual files for all js files of ssrable components with `.ssrjs` extension/
+
+-   Targeted Linting for .ssrjs Files:
+
+A separate configuration block applies specific rules to these virtual `.ssrjs` files, ensuring SSR-specific rules like `lwc/ssr-no-node-env` are only applied SSR capable components.
