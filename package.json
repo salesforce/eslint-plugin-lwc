@@ -29,9 +29,12 @@
     "mocha": "^10.4.0",
     "nyc": "^15.1.0",
     "prettier": "^3.2.5",
-    "semver": "^7.6.0"
+    "semver": "^7.6.0",
+    "sinon": "^19.0.2",
+    "chai": "4.3.7"
   },
   "dependencies": {
+    "fast-xml-parser": "^4.5.1",
     "globals": "^13.24.0",
     "minimatch": "^9.0.4"
   },
