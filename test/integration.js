@@ -59,7 +59,7 @@ it('should resolve plugin rules', async () => {
     assert.equal(messages[1].severity, 1);
 });
 
-it('should resolve processor', async () => {
+it('should resolve ssr processor', async () => {
     const cli = new eslint.ESLint({
         useEslintrc: false,
         overrideConfig: {

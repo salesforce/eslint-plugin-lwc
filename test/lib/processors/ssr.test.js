@@ -47,6 +47,10 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
                 filename: 'test.ssrjs',
                 text: 'const x = 1;',
             });
+            expect(result[0]).to.deep.equal({
+                filename: filename,
+                text: input,
+            });
         });
 
         it('should skip creating new virtual file with ssrjs extension when meta exists but does not have ssr capability', () => {
@@ -93,9 +97,46 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
         it('should use cached result for file in same directory', () => {
             const input = 'const x = 1;';
-            const filename = 'test/test.js';
+            const filename = 'tests/test.js';
+            const validMetaXML = `
+                <?xml version="1.0" encoding="UTF-8"?>
+                <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+                <capabilities>
+                    <capability>lightning__ServerRenderable</capability>
+                </capabilities>
+                </LightningComponentBundle>
+            `;
+
+            fsReadFileSync.returns(validMetaXML);
+            fsReadDirSync.returns(['test.js-meta.xml']);
+
             const result = ssrProcessor.preprocess(input, filename);
+
             expect(result).to.have.lengthOf(2);
+            expect(fsReadFileSync.callCount).to.equal(1);
+            expect(fsReadDirSync.callCount).to.equal(1);
+
+            // Second call with different file in same directory
+            const input2 = 'const y = 2;';
+            const filename2 = 'tests/test2.js';
+
+            const result2 = ssrProcessor.preprocess(input2, filename2);
+
+            // Verify second call
+            expect(result2).to.have.lengthOf(2);
+            // Verify fs functions weren't called again, i.e ssr check data for `tests` dir is picked from cached data from last run
+            expect(fsReadFileSync.callCount).to.equal(1, 'readFileSync should not be called again');
+            expect(fsReadDirSync.callCount).to.equal(1, 'readdirSync should not be called again');
+
+            // Verify results structure
+            expect(result2[0]).to.deep.equal({
+                text: input2,
+                filename: filename2,
+            });
+            expect(result2[1]).to.deep.equal({
+                text: input2,
+                filename: 'test2.ssrjs',
+            });
         });
     });
 });

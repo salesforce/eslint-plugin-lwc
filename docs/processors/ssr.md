@@ -44,6 +44,8 @@ The processor will generate a `${filename}.ssrjs` virtual file for each js file 
 
 To configure the processor, ensure your ESLint configuration includes @lwc/eslint-plugin-lwc/ssr as a processor:
 
+Flat config:
+
 ```
 import lwcPlugin from '@lwc/eslint-plugin-lwc';
 export default [
@@ -77,10 +79,44 @@ export default [
     },
     rules: {
           "no-console" : "error",
-          "lwc/ssr-no-node-env": "error"
+          "lwcPlugin/ssr-no-node-env": "error"
         }
   }
 ];
+```
+
+Non-flat config:
+
+```
+module.exports = {
+  overrides: [
+    {
+      files: ['**/modules/**/*.js'],
+      parser: '@babel/eslint-parser',
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        requireConfigFile: false,
+      },
+      plugins: ['lwc'],
+      processor: 'lwc/ssr'
+    },
+    {
+      files: ['**/modules/**/*.ssrjs'],
+      parser: '@babel/eslint-parser',
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        requireConfigFile: false,
+      },
+      plugins: ['lwc'],
+      rules: {
+        "no-console": "error",
+        "lwc/ssr-no-node-env": "error"
+      }
+    }
+  ]
+};
 ```
 
 ### Explanation of Configuration
