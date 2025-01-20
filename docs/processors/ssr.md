@@ -98,8 +98,8 @@ module.exports = {
         sourceType: 'module',
         requireConfigFile: false,
       },
-      plugins: ['lwc'],
-      processor: 'lwc/ssr'
+      plugins: ['@lwc/lwc'],
+      processor: '@lwc/lwc/ssr'
     },
     {
       files: ['**/modules/**/*.ssrjs'],
@@ -109,10 +109,10 @@ module.exports = {
         sourceType: 'module',
         requireConfigFile: false,
       },
-      plugins: ['lwc'],
+      plugins: ['@lwc/lwc'],
       rules: {
         "no-console": "error",
-        "lwc/ssr-no-node-env": "error"
+        "@lwc/lwc/ssr-no-node-env": "error"
       }
     }
   ]
