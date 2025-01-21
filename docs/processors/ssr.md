@@ -123,7 +123,7 @@ module.exports = {
 
 -   Processor Configuration:
 
-The processor key applies the ssr processor to all `**/modules/**/*.js` files.The processor then created a virtual files for all js files of ssrable components with `.ssrjs` extension/
+The processor key applies the ssr processor to all `**/modules/**/*.js` files. The processor then created a virtual files for all js files of ssrable components with `.ssrjs` extension/
 
 -   Targeted Linting for .ssrjs Files:
 
