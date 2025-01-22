@@ -50,7 +50,7 @@ Example:
             "parserOpts": {
                 "plugins": [
                     "classProperties",
-                    ["decorators", { "decoratorsBeforExport": false }],
+                    ["decorators", { "decoratorsBeforeExport": false }],
                     "typescript"
                 ]
             }
