@@ -47,10 +47,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
                 filename: 'test.ssrjs',
                 text: 'const x = 1;',
             });
-            expect(result[0]).to.deep.equal({
-                filename: filename,
-                text: input,
-            });
+            expect(result[0]).to.deep.equal(input);
         });
 
         it('should skip creating new virtual file with ssrjs extension when meta exists but does not have ssr capability', () => {
@@ -68,10 +65,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
             const result = ssrProcessor.preprocess(input, filename);
 
             expect(result).to.have.lengthOf(1);
-            expect(result[0]).to.deep.equal({
-                text: input,
-                filename: filename,
-            });
+            expect(result[0]).to.deep.equal(input);
         });
 
         it('should handle array of capabilities', () => {
@@ -129,14 +123,29 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
             expect(fsReadDirSync.callCount).to.equal(1, 'readdirSync should not be called again');
 
             // Verify results structure
-            expect(result2[0]).to.deep.equal({
-                text: input2,
-                filename: filename2,
-            });
+            expect(result2[0]).to.deep.equal(input2);
             expect(result2[1]).to.deep.equal({
                 text: input2,
                 filename: 'test2.ssrjs',
             });
+        });
+        it('should return same file for virtual file .ssrjs extension', () => {
+            const input = 'const x = 1;';
+            const filename = 'test2/test.ssrjs';
+            const testXML = `
+                <?xml version="1.0" encoding="UTF-8"?>
+                <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+                    <capabilities>
+                        <capability>lightning__ServerRenderableWithHydration</capability>
+                    </capabilities>
+                </LightningComponentBundle>
+            `;
+
+            fsReadFileSync.returns(testXML);
+            fsReadDirSync.returns(['test.js-meta.xml']);
+
+            const result = ssrProcessor.preprocess(input, filename);
+            expect(result).to.deep.equal(input);
         });
     });
 });

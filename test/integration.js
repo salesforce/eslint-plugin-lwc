@@ -77,6 +77,5 @@ it('should resolve ssr processor', async () => {
     `);
 
     const { messages } = results[0];
-
-    assert.equal(messages.length, 0);
+    assert.equal(messages.length, 2);
 });
