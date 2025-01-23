@@ -145,7 +145,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
             fsReadDirSync.returns(['test.js-meta.xml']);
 
             const result = ssrProcessor.preprocess(input, filename);
-            expect(result).to.deep.equal(input);
+            expect(result[0]).to.deep.equal(input);
         });
     });
 });
