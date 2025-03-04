@@ -107,6 +107,106 @@ testRule('ssr/ssr-no-unsupported-properties', {
                 }
             `,
         },
+        {
+            code: `
+                import { LightningElement } from 'lwc';
+                
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    if (!import.meta.env.SSR && !randomOtherCheck) {
+                      this.querySelector('span').getAttribute('role');
+                    }
+                  }
+                }
+            `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+              
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (!import.meta.env.SSR && randomOtherCheck) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+              
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (randomOtherCheck && !import.meta.env.SSR) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+              
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (!a && b && !c && d && !import.meta.env.SSR) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+              
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (a && (b && !import.meta.env.SSR)) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  return !import.meta.env.SSR ? this.querySelector('button') : null;
+                }
+              }
+          `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+              
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (randomOtherCheck && typeof window !== 'undefined') {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+            `,
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                handleFocus() {
+                  this.dispatchEvent(new CustomEvent('focus'));
+                }
+              }
+            `,
+        },
     ],
     invalid: [
         {
@@ -358,6 +458,96 @@ testRule('ssr/ssr-no-unsupported-properties', {
                   }
                 }
             `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+            
+            export default class Foo extends LightningElement {
+              connectedCallback() {
+                if (!a && b && !c && d) {
+                  this.querySelector('span').getAttribute('role');
+                }
+              }
+            }
+          `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (a && (b || !import.meta.env.SSR)) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (a || (b || !import.meta.env.SSR)) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+              import { LightningElement } from 'lwc';
+
+              export default class Foo extends LightningElement {
+                connectedCallback() {
+                  if (a || (b && !import.meta.env.SSR)) {
+                    this.querySelector('span').getAttribute('role');
+                  }
+                }
+              }
+          `,
+            errors: [
+                {
+                    messageId: 'propertyAccessFound',
+                },
+            ],
+        },
+        {
+            code: `
+            import { LightningElement } from 'lwc';
+            
+            export default class Foo extends LightningElement {
+              connectedCallback() {
+                if (randomOtherCheck && typeof window == 'undefined') {
+                  this.querySelector('span').getAttribute('role');
+                }
+              }
+            }
+          `,
             errors: [
                 {
                     messageId: 'propertyAccessFound',
