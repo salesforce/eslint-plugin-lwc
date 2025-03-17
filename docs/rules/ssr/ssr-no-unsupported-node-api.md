@@ -27,8 +27,17 @@ if (import.meta.env.SSR) {
 }
 ```
 
-### Example of **incorrect** code:
+### Example of **correct** code:
 
 ```js
-// Do not use Node APIs
+if (!import.meta.env.SSR) {
+    // Client-side code: Safe to use Node APIs here if necessary
+    const fs = require('fs'); // Example of a Node API (e.g., for file operations)
+
+    // Your Node API logic goes here, which will only run on the client-side
+    fs.writeFileSync('file.txt', 'client-side data');
+} else {
+    // SSR : Do not use Node APIs here
+    console.log('Running in SSR context, Node APIs are not available.');
+}
 ```
