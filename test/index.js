@@ -14,6 +14,7 @@ const plugin = require('../lib');
 
 const RULES_FOLDER = path.resolve(__dirname, '../lib/rules');
 const SSR_RULES_FOLDER = path.resolve(RULES_FOLDER, 'ssr');
+const PROCESSORS_FOLDER = path.resolve(__dirname, '../lib/processors'); // Add processor folder path
 
 // Utility function to get only files from a directory (excluding subdirectories)
 function getRuleFiles(dir) {
@@ -27,6 +28,8 @@ function getRuleFiles(dir) {
 const RULE_FILES = getRuleFiles(RULES_FOLDER);
 const SSR_RULE_FILES = getRuleFiles(SSR_RULES_FOLDER);
 const DOC_FILES = fs.readdirSync(path.resolve(__dirname, '../docs/rules'));
+const PROCESSOR_FILES = getRuleFiles(PROCESSORS_FOLDER);
+const PROCESSOR_DOC_FILES = fs.readdirSync(path.resolve(__dirname, '../docs/processors'));
 const SSR_DOC_FILES = fs.readdirSync(path.resolve(__dirname, '../docs/rules/ssr'));
 const README_CONTENT = fs.readFileSync(path.resolve(__dirname, '../README.md'), 'utf-8');
 
@@ -115,6 +118,28 @@ describe('SSR rules documentation', () => {
             assert(
                 typeof ruleModule.meta.docs.url === 'string',
                 `SSR Rule "${ruleName}" doesn't have a documentation url.`,
+            );
+        });
+    });
+});
+
+describe('processor documentation', () => {
+    PROCESSOR_FILES.forEach((processorFile) => {
+        const processorName = path.basename(processorFile, '.js');
+
+        it(`should have a documentation file for processor "${processorName}"`, () => {
+            assert(
+                PROCESSOR_DOC_FILES.includes(`${processorName}.md`),
+                `No associated documentation for processor "${processorName}".`,
+            );
+        });
+
+        it(`should have an entry in README.md for processor "${processorName}"`, () => {
+            assert(
+                README_CONTENT.includes(
+                    `| [lwc/${processorName}](./docs/processors/${processorName}.md)`,
+                ),
+                `Processor "${processorName}" is not listed in the README.md.`,
             );
         });
     });

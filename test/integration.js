@@ -35,3 +35,24 @@ it('should resolve plugin rules', async () => {
     assert.equal(messages[1].ruleId, '@lwc/lwc/no-inner-html');
     assert.equal(messages[1].severity, 1);
 });
+
+it('should resolve ssr processor', async () => {
+    const cli = new eslint.ESLint({
+        useEslintrc: false,
+        overrideConfig: {
+            plugins: ['@lwc/eslint-plugin-lwc'],
+            processor: '@lwc/lwc/ssr',
+            rules: {
+                '@lwc/lwc/no-document-query': 'error',
+                '@lwc/lwc/no-inner-html': 'warn',
+            },
+        },
+    });
+
+    const results = await cli.lintText(`
+        document.querySelectorAll("a").innerHTML = 'Hello'
+    `);
+
+    const { messages } = results[0];
+    assert.equal(messages.length, 2);
+});
