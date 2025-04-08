@@ -38,9 +38,9 @@ it('should resolve plugin rules', async () => {
 
 it('should resolve ssr processor', async () => {
     const cli = new eslint.ESLint({
-        useEslintrc: false,
+        overrideConfigFile: true,
         overrideConfig: {
-            plugins: ['@lwc/eslint-plugin-lwc'],
+            plugins: { '@lwc/lwc': local },
             processor: '@lwc/lwc/ssr',
             rules: {
                 '@lwc/lwc/no-document-query': 'error',
