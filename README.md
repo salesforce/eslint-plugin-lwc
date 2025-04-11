@@ -10,53 +10,74 @@ $ npm install eslint @babel/core @babel/eslint-parser @lwc/eslint-plugin-lwc --s
 
 ## Usage
 
-Add `@lwc/eslint-plugin-lwc` to the `plugins` section of your configuration. Then configure the desired rules in the `rules` sections. Some of the syntax used in Lightning Web Components is not yet stage 4 (eg. class fields or decorators), and the out-of-the-box parser from ESLint doesn't support this syntax yet. In order to parse the LWC files properly, set the `parser` field to [`@babel/eslint-parser`](https://github.com/babel/babel/tree/main/eslint/babel-eslint-parser).
+_Starting with v3.0.0, @lwc/eslint-plugin-lwc only supports eslint@v9. Use @lwc/eslint-plugin-lwc@v1.x for older versions of eslint._
 
-Example of `.eslintrc`:
+Import `@lwc/eslint-plugin-lwc` and use it in the `plugins` section of your configuration as shown below. Then configure the desired rules in the `rules` sections. Some of the syntax used in Lightning Web Components is not yet stage 4 (eg. class fields or decorators), and the out-of-the-box parser from ESLint doesn't support this syntax yet. In order to parse the LWC files properly, set the `parser` field to [`@babel/eslint-parser`](https://github.com/babel/babel/tree/main/eslint/babel-eslint-parser) in the `languageOptions` section of the eslint config.
 
-```json
-{
-    "parser": "@babel/eslint-parser",
-    "parserOptions": {
-        "requireConfigFile": false,
-        "babelOptions": {
-            "parserOpts": {
-                "plugins": ["classProperties", ["decorators", { "decoratorsBeforeExport": false }]]
-            }
-        }
+Example of `eslint.config.js`:
+
+```js
+const eslintPluginLwc = require('@lwc/eslint-plugin-lwc');
+const babelParser = require('@babel/eslint-parser');
+
+module.exports = [
+    {
+        languageOptions: {
+            parser: babelParser,
+            parserOptions: {
+                requireConfigFile: false,
+                babelOptions: {
+                    parserOpts: {
+                        plugins: [
+                            'classProperties',
+                            ['decorators', { decoratorsBeforeExport: false }],
+                        ],
+                    },
+                },
+            },
+        },
+        plugins: {
+            '@lwc/lwc': eslintPluginLwc, // https://github.com/salesforce/eslint-plugin-lwc
+        },
+        rules: {
+            '@lwc/lwc/no-deprecated': 'error',
+            '@lwc/lwc/valid-api': 'error',
+            '@lwc/lwc/no-document-query': 'error',
+            '@lwc/lwc/ssr-no-unsupported-properties': 'error',
+        },
     },
-
-    "plugins": ["@lwc/eslint-plugin-lwc"],
-
-    "rules": {
-        "@lwc/lwc/no-deprecated": "error",
-        "@lwc/lwc/valid-api": "error",
-        "@lwc/lwc/no-document-query": "error",
-        "@lwc/lwc/ssr-no-unsupported-properties": "error"
-    }
-}
+];
 ```
 
 ### Usage with TypeScript
 
-To enable working with TypeScript projects, install `@babel/preset-typescript` as a dependency add `"typescript"` to `parserOptions.babelOptions.parserOpts.plugins` in your `.eslintrc`.
+To enable working with TypeScript projects, install `@babel/preset-typescript` as a dependency add `"typescript"` to `languageOptions.parserOptions.babelOptions.parserOpts.plugins` in your `eslint.config.js`.
 
 Example:
 
-```json
-{
-    "parserOptions": {
-        "babelOptions": {
-            "parserOpts": {
-                "plugins": [
-                    "classProperties",
-                    ["decorators", { "decoratorsBeforeExport": false }],
-                    "typescript"
-                ]
-            }
-        }
-    }
-}
+```js
+const eslintPluginLwc = require('@lwc/eslint-plugin-lwc');
+const babelParser = require('@babel/eslint-parser');
+
+module.exports = [
+    {
+        languageOptions: {
+            parser: babelParser,
+            parserOptions: {
+                requireConfigFile: false,
+                babelOptions: {
+                    parserOpts: {
+                        plugins: [
+                            'classProperties',
+                            ['decorators', { decoratorsBeforeExport: false }],
+                            'typescript',
+                        ],
+                    },
+                },
+            },
+        },
+    },
+];
 ```
 
 For more details about configuration please refer to the dedicated section in the ESLint documentation: https://eslint.org/docs/user-guide/configuring
