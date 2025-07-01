@@ -40,8 +40,8 @@
     "minimatch": "~9.0.4"
   },
   "peerDependencies": {
-    "@babel/eslint-parser": "^7",
-    "eslint": "^9"
+    "@babel/eslint-parser": "^7.x",
+    "eslint": "^9.x"
   },
   "repository": {
     "type": "git",
