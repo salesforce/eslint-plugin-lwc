@@ -148,4 +148,134 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
             expect(result[0]).to.deep.equal(input);
         });
     });
+
+    describe('postprocess', () => {
+        it('should filter out unused eslint-disable directive warnings for SSR rules', () => {
+            const messages = [
+                [
+                    // Messages from original file
+                    {
+                        ruleId: null,
+                        message:
+                            "Unused eslint-disable directive (no problems were reported from '@lwc/lwc/ssr-no-node-env')",
+                        line: 1,
+                        column: 1,
+                        severity: 1,
+                    },
+                    {
+                        ruleId: 'no-console',
+                        message: 'Unexpected console statement.',
+                        line: 2,
+                        column: 1,
+                        severity: 2,
+                    },
+                ],
+                [
+                    // Messages from virtual .ssrjs file
+                    {
+                        ruleId: '@lwc/lwc/ssr-no-node-env',
+                        message: 'process.env usage is not allowed',
+                        line: 3,
+                        column: 1,
+                        severity: 2,
+                    },
+                ],
+            ];
+
+            const result = ssrProcessor.postprocess(messages);
+
+            expect(result).to.have.lengthOf(2);
+            // Should keep non-SSR messages
+            expect(result[0]).to.deep.include({ ruleId: 'no-console' });
+            expect(result[1]).to.deep.include({ ruleId: '@lwc/lwc/ssr-no-node-env' });
+            // Should filter out SSR unused disable directive warning
+            expect(
+                result.some(
+                    (msg) => msg.message && msg.message.includes("'@lwc/lwc/ssr-no-node-env'"),
+                ),
+            ).to.be.false;
+        });
+
+        it('should keep unused eslint-disable directive warnings for non-SSR rules', () => {
+            const messages = [
+                [
+                    // Messages from original file
+                    {
+                        ruleId: null,
+                        message:
+                            "Unused eslint-disable directive (no problems were reported from 'no-console')",
+                        line: 1,
+                        column: 1,
+                        severity: 1,
+                    },
+                    {
+                        ruleId: null,
+                        message:
+                            "Unused eslint-disable directive (no problems were reported from '@lwc/lwc/ssr-no-node-env')",
+                        line: 2,
+                        column: 1,
+                        severity: 1,
+                    },
+                ],
+            ];
+
+            const result = ssrProcessor.postprocess(messages);
+
+            expect(result).to.have.lengthOf(1);
+            // Should keep non-SSR unused disable directive warning
+            expect(result[0].message).to.include("'no-console'");
+            // Should filter out SSR unused disable directive warning
+            expect(
+                result.some(
+                    (msg) => msg.message && msg.message.includes("'@lwc/lwc/ssr-no-node-env'"),
+                ),
+            ).to.be.false;
+        });
+
+        it('should handle mixed SSR rules in unused disable directive warnings', () => {
+            const messages = [
+                [
+                    {
+                        ruleId: null,
+                        message:
+                            "Unused eslint-disable directive (no problems were reported from '@lwc/lwc/ssr-no-node-env', '@lwc/lwc/ssr-no-form-factor')",
+                        line: 1,
+                        column: 1,
+                        severity: 1,
+                    },
+                ],
+            ];
+
+            const result = ssrProcessor.postprocess(messages);
+
+            expect(result).to.have.lengthOf(0);
+            // Should filter out the entire message since it only contains SSR rules
+        });
+
+        it('should pass through all other types of messages unchanged', () => {
+            const messages = [
+                [
+                    {
+                        ruleId: 'no-console',
+                        message: 'Unexpected console statement.',
+                        line: 1,
+                        column: 1,
+                        severity: 2,
+                    },
+                    {
+                        ruleId: '@lwc/lwc/valid-api',
+                        message: 'Invalid API usage.',
+                        line: 2,
+                        column: 1,
+                        severity: 2,
+                    },
+                ],
+            ];
+
+            const result = ssrProcessor.postprocess(messages);
+
+            expect(result).to.have.lengthOf(2);
+            expect(result).to.deep.equal(messages.flat());
+        });
+    });
 });
