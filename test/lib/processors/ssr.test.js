@@ -232,7 +232,7 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
             ).to.be.false;
         });
 
-        it('should handle mixed SSR rules in unused disable directive warnings', () => {
+        it('should handle multiple SSR rules in unused disable directive warnings', () => {
             const messages = [
                 [
                     {
@@ -250,6 +250,83 @@ describe('JS Meta XML Processor with Capabilities Check', () => {
 
             expect(result).to.have.lengthOf(0);
             // Should filter out the entire message since it only contains SSR rules
+        });
+
+        it('should preserve unused disable directive warnings when mixed with non-SSR rules', () => {
+            const messages = [
+                [
+                    {
+                        ruleId: null,
+                        message:
+                            "Unused eslint-disable directive (no problems were reported from '@lwc/lwc/ssr-no-node-env', 'no-console')",
+                        line: 1,
+                        column: 1,
+                        severity: 1,
+                    },
+                ],
+            ];
+
+            const result = ssrProcessor.postprocess(messages);
+
+            expect(result).to.have.lengthOf(1);
+            // Should keep the entire message unchanged - once developer fixes non-SSR rule, SSR rule gets handled automatically
+            expect(result[0].message).to.equal(
+                "Unused eslint-disable directive (no problems were reported from '@lwc/lwc/ssr-no-node-env', 'no-console')",
+            );
+        });
+
+        it('should handle mixed ordering of SSR and non-SSR rules', () => {
+            const messages = [
+                [
+                    {
+                        ruleId: null,
+                        message:
+                            "Unused eslint-disable directive (no problems were reported from '@lwc/lwc/ssr-no-node-env', 'no-console', '@lwc/lwc/ssr-no-form-factor')",
+                        line: 1,
+                        column: 1,
+                        severity: 1,
+                    },
+                ],
+            ];
+
+            const result = ssrProcessor.postprocess(messages);
+
+            expect(result).to.have.lengthOf(1);
+            // Should keep the entire message unchanged regardless of rule order
+            expect(result[0].message).to.equal(
+                "Unused eslint-disable directive (no problems were reported from '@lwc/lwc/ssr-no-node-env', 'no-console', '@lwc/lwc/ssr-no-form-factor')",
+            );
+        });
+
+        it('should handle complex mixed rule scenarios', () => {
+            const messages = [
+                [
+                    {
+                        ruleId: null,
+                        message:
+                            "Unused eslint-disable directive (no problems were reported from 'no-unused-vars', '@lwc/lwc/ssr-no-node-env', 'prefer-const')",
+                        line: 1,
+                        column: 1,
+                        severity: 1,
+                    },
+                    {
+                        ruleId: null,
+                        message:
+                            "Unused eslint-disable directive (no problems were reported from '@lwc/lwc/ssr-no-restricted-browser-globals')",
+                        line: 2,
+                        column: 1,
+                        severity: 1,
+                    },
+                ],
+            ];
+
+            const result = ssrProcessor.postprocess(messages);
+
+            expect(result).to.have.lengthOf(1);
+            // Should keep the first message (mixed rules) unchanged and filter out the second (SSR only)
+            expect(result[0].message).to.equal(
+                "Unused eslint-disable directive (no problems were reported from 'no-unused-vars', '@lwc/lwc/ssr-no-node-env', 'prefer-const')",
+            );
         });
 
         it('should pass through all other types of messages unchanged', () => {
