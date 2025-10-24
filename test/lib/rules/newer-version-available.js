@@ -8,7 +8,7 @@
 
 const { testRule, testTypeScript } = require('../shared');
 
-testRule('no-deprecated-module-imports', {
+testRule('newer-version-available', {
     valid: [
         {
             code: `import { gql, graphql } from 'lightning/graphql';`,
@@ -23,9 +23,9 @@ testRule('no-deprecated-module-imports', {
             code: `const module = 'lightning/uiGraphQLApi'; // just a string, not an import`,
         },
         {
-            code: `// This is allowed with empty deprecated modules list
+            code: `// This is allowed with empty modules with newer versions list
                    import something from 'some/module';`,
-            options: [{ deprecatedModules: {} }],
+            options: [{ modulesWithNewerVersions: {} }],
         },
     ],
     invalid: [
@@ -34,7 +34,7 @@ testRule('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'Prefer "lightning/graphql" over "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
+                        'A newer version is available: use "lightning/graphql" instead of "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
                 },
             ],
             output: `import { gql, graphql } from 'lightning/graphql';`,
@@ -44,7 +44,7 @@ testRule('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'Prefer "lightning/graphql" over "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
+                        'A newer version is available: use "lightning/graphql" instead of "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
                 },
             ],
             output: `import { gql } from 'lightning/graphql';`,
@@ -54,7 +54,7 @@ testRule('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'Prefer "lightning/graphql" over "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
+                        'A newer version is available: use "lightning/graphql" instead of "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
                 },
             ],
             output: `import { graphql } from 'lightning/graphql';`,
@@ -64,7 +64,7 @@ testRule('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'Prefer "lightning/graphql" over "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
+                        'A newer version is available: use "lightning/graphql" instead of "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
                 },
             ],
             output: `import graphqlApi from 'lightning/graphql';`,
@@ -74,7 +74,7 @@ testRule('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'Prefer "lightning/graphql" over "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
+                        'A newer version is available: use "lightning/graphql" instead of "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
                 },
             ],
             output: `import * as graphqlApi from 'lightning/graphql';`,
@@ -85,7 +85,7 @@ testRule('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'Prefer "lightning/graphql" over "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
+                        'A newer version is available: use "lightning/graphql" instead of "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
                 },
                 {
                     message:
@@ -100,7 +100,7 @@ testRule('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'Prefer "lightning/graphql" over "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
+                        'A newer version is available: use "lightning/graphql" instead of "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
                 },
                 {
                     message:
@@ -110,15 +110,15 @@ testRule('no-deprecated-module-imports', {
             output: null, // No auto-fix because refreshGraphQL doesn't exist in replacement
         },
         {
-            // Test custom deprecated modules through options
+            // Test custom modules with newer versions through options
             code: `import something from 'old/deprecated/module';`,
             options: [
                 {
-                    deprecatedModules: {
+                    modulesWithNewerVersions: {
                         'old/deprecated/module': {
                             replacement: 'new/modern/module',
                             message:
-                                'The old/deprecated/module is deprecated. Use new/modern/module instead.',
+                                'A newer version is available: use new/modern/module instead of old/deprecated/module.',
                         },
                     },
                 },
@@ -126,7 +126,7 @@ testRule('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'The old/deprecated/module is deprecated. Use new/modern/module instead.',
+                        'A newer version is available: use new/modern/module instead of old/deprecated/module.',
                 },
             ],
             output: `import something from 'new/modern/module';`,
@@ -134,7 +134,7 @@ testRule('no-deprecated-module-imports', {
     ],
 });
 
-testTypeScript('no-deprecated-module-imports', {
+testTypeScript('newer-version-available', {
     valid: [
         {
             code: `import { gql, graphql } from 'lightning/graphql';
@@ -152,7 +152,7 @@ testTypeScript('no-deprecated-module-imports', {
             errors: [
                 {
                     message:
-                        'Prefer "lightning/graphql" over "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
+                        'A newer version is available: use "lightning/graphql" instead of "lightning/uiGraphQLApi" for non Mobile-Offline use cases.',
                 },
             ],
             output: `import { gql, graphql } from 'lightning/graphql';
