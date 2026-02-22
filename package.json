@@ -37,7 +37,7 @@
   "dependencies": {
     "fast-xml-parser": "^4.5.1",
     "globals": "~15.14.0",
-    "minimatch": "~9.0.4"
+    "minimatch": "~10.2.1"
   },
   "peerDependencies": {
     "@babel/eslint-parser": "^7",
