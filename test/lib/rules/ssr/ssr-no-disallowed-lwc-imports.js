@@ -6,9 +6,9 @@
  */
 'use strict';
 
-const { testRule } = require('../../shared');
+const { testSsrRule } = require('../../shared');
 
-testRule('ssr/ssr-no-disallowed-lwc-imports', {
+testSsrRule('ssr/ssr-no-disallowed-lwc-imports', {
     valid: [
         {
             code: `import { LightningElement } from 'lwc';`,
