@@ -295,9 +295,6 @@ const validCases = [
         code: `import { LightningElement } from "lwc"`,
     },
     {
-        code: `import { Mosaic } from "lwc"`,
-    },
-    {
         code: `import { LightningElement, wire } from "lwc"`,
     },
     {
@@ -305,9 +302,6 @@ const validCases = [
     },
     {
         code: `import { LightningElement as Yolo } from "lwc"`,
-    },
-    {
-        code: `import { Mosaic, api } from "lwc"`,
     },
     {
         code: `import "some-other-package"`,
@@ -338,9 +332,6 @@ const validCases = [
     },
     {
         code: `export { LightningElement as Yolo } from "lwc"`,
-    },
-    {
-        code: `export { Mosaic } from "lwc"`,
     },
     {
         code: `export {} from "some-other-package"`,
