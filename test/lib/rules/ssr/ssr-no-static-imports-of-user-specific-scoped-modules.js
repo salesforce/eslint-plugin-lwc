@@ -6,9 +6,9 @@
  */
 'use strict';
 
-const { testRule, testTypeScript } = require('../../shared');
+const { testSsrRule, testSsrTypeScript } = require('../../shared');
 
-testRule('ssr/ssr-no-static-imports-of-user-specific-scoped-modules', {
+testSsrRule('ssr/ssr-no-static-imports-of-user-specific-scoped-modules', {
     valid: [
         {
             code: `import { LightningElement } from 'lwc';
@@ -39,7 +39,7 @@ testRule('ssr/ssr-no-static-imports-of-user-specific-scoped-modules', {
     ],
 });
 
-testTypeScript('ssr/ssr-no-static-imports-of-user-specific-scoped-modules', {
+testSsrTypeScript('ssr/ssr-no-static-imports-of-user-specific-scoped-modules', {
     valid: [
         {
             code: `import { LightningElement } from 'lwc';

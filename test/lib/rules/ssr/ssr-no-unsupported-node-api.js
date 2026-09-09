@@ -6,9 +6,9 @@
  */
 'use strict';
 
-const { testRule, testTypeScript } = require('../../shared');
+const { testSsrRule, testSsrTypeScript } = require('../../shared');
 
-testRule('ssr/ssr-no-unsupported-node-api', {
+testSsrRule('ssr/ssr-no-unsupported-node-api', {
     valid: [
         {
             code: `
@@ -93,7 +93,7 @@ testRule('ssr/ssr-no-unsupported-node-api', {
     ],
 });
 
-testTypeScript('ssr/ssr-no-unsupported-node-api', {
+testSsrTypeScript('ssr/ssr-no-unsupported-node-api', {
     valid: [
         {
             code: `

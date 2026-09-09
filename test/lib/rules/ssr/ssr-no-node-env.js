@@ -6,12 +6,28 @@
  */
 'use strict';
 
-const { testRule } = require('../../shared');
+const { testSsrRule, SSR_DISABLED_FILE } = require('../../shared');
 
 // TODO: Type assertions break this rule
 
-testRule('ssr/ssr-no-node-env', {
+testSsrRule('ssr/ssr-no-node-env', {
     valid: [
+        {
+            // A component without an SSR capability is not linted, even when it would
+            // otherwise report: the meta-xml gate keeps the rule from running.
+            filename: SSR_DISABLED_FILE,
+            code: `
+                import { LightningElement } from 'lwc';
+
+                export default class Foo extends LightningElement {
+                  connectedCallback() {
+                    if (process.env.NODE_ENV === 'development') {
+                      console.log('test');
+                    }
+                  }
+                }
+            `,
+        },
         {
             code: `
                 import { LightningElement } from 'lwc';

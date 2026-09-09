@@ -1,0 +1,2 @@
+# This path intentionally matches *.js-meta.xml but is a directory, so reading it as a
+# meta file fails. It exercises the parse/read error handling in ssr-capable.js.

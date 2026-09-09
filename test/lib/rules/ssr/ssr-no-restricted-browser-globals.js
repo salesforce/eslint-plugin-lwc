@@ -6,11 +6,11 @@
  */
 'use strict';
 
-const { testRule } = require('../../shared');
+const { testSsrRule } = require('../../shared');
 
 // TODO: Type assertions break this rule
 
-testRule('ssr/ssr-no-restricted-browser-globals', {
+testSsrRule('ssr/ssr-no-restricted-browser-globals', {
     valid: [
         {
             code: `

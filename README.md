@@ -86,11 +86,14 @@ For more details about configuration please refer to the dedicated section in th
 
 To choose from three configuration settings, install the [`eslint-config-lwc`](https://github.com/salesforce/eslint-config-lwc) sharable configuration package.
 
-### Processors
+### SSR rules
 
-| Processor ID                        | Description                                       |
-| ----------------------------------- | ------------------------------------------------- |
-| [lwc/ssr](./docs/processors/ssr.md) | Lint only JavaScript files of SSR-able components |
+The `ssr-*` rules apply only to server-renderable components. Each rule reads the
+component's `*.js-meta.xml` and runs only when it declares an SSR capability
+(`lightning__ServerRenderable` or `lightning__ServerRenderableWithHydration`). No
+processor or separate configuration block is required — enable the rules (or use the
+`ssr` config from [`eslint-config-lwc`](https://github.com/salesforce/eslint-config-lwc))
+and they self-gate per component.
 
 ## Rules
 
