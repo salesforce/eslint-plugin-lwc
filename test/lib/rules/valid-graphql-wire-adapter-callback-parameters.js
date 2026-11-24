@@ -43,6 +43,24 @@ testRule('valid-graphql-wire-adapter-callback-parameters', {
                 }
             `,
         },
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({errors, data, ...rest}) {}
+            }`,
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({errors: error, data}) {}
+            }`,
+        },
     ],
     invalid: [
         {
@@ -67,6 +85,51 @@ testRule('valid-graphql-wire-adapter-callback-parameters', {
             class Test {
                 @wire(graphql, {})
                 wiredMethod({error, errors, data}) {}
+            }`,
+            errors: [
+                {
+                    message:
+                        '@wire graphql callback function object must use "errors" instead of "error"',
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({error: err, data}) {}
+            }`,
+            errors: [
+                {
+                    message:
+                        '@wire graphql callback function object must use "errors" instead of "error"',
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({error = null, data}) {}
+            }`,
+            errors: [
+                {
+                    message:
+                        '@wire graphql callback function object must use "errors" instead of "error"',
+                },
+            ],
+        },
+        {
+            code: `import { wire } from 'lwc';
+            import { gql, graphql } from 'lightning/uiGraphQLApi';
+
+            class Test {
+                @wire(graphql, {})
+                wiredMethod({'error': err, data}) {}
             }`,
             errors: [
                 {
